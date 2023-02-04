@@ -10,8 +10,8 @@ import { RecipeItemComponent } from './components/recipes/recipe-list/recipe-ite
 import { ShoppingListComponent } from './components/shopping-list/shopping-list.component';
 import { ShoppingEditComponent } from './components/shopping-list/shopping-edit/shopping-edit.component';
 import { FormsModule } from '@angular/forms';
-import { DropdownDirective } from './shared/directives/dropdown.directive';
 import { IngredientsListComponent } from './shared/components/ingredients/ingredients-list/ingredients-list.component';
+import { ShellComponent } from './shell/shell.component';
 
 @NgModule({
   declarations: [
@@ -23,8 +23,8 @@ import { IngredientsListComponent } from './shared/components/ingredients/ingred
     RecipeItemComponent,
     ShoppingListComponent,
     ShoppingEditComponent,
-    DropdownDirective,
-    IngredientsListComponent
+    IngredientsListComponent,
+    ShellComponent
   ],
   imports: [
     BrowserModule,

@@ -1,5 +1,7 @@
-import { Component, ElementRef, EventEmitter, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, HostListener, Output, ViewChild } from '@angular/core';
 import { constants } from 'src/app/constants/constants';
+import { UtilitieService } from 'src/app/services/utilities/utilitie.service';
+import { Util } from 'src/app/shared/utils/util';
 
 
 @Component({
@@ -11,22 +13,36 @@ export class HeaderComponent {
   
   @Output() linkSelected = new EventEmitter<string>(); 
   @ViewChild('dropdownRef', {read: ElementRef}) dropdownRef: ElementRef;
-  @ViewChild('burgerRef', {read: ElementRef}) burgerRef: ElementRef;
 
   constant = constants;
-  
+  burger: HTMLInputElement;
+
+  constructor(
+    private _headerCompRef: ElementRef,
+    private utilitieService: UtilitieService) { 
+
+    }
+
+  ngOnInit() {
+      this.utilitieService.documentClickedTarget.subscribe(target => this.documentClickListener(target));
+      this.burger = (<HTMLInputElement>document.getElementById("burger"));
+  }
+
   onSelect(link: string) {
     this.linkSelected.emit(link);
   }
 
-  toggleOpen(type: string = 'dropdown') {
-    switch (type){
-      case 'dropdown':
-        this.dropdownRef.nativeElement.click();
-        break;
-      case 'burger':
-        this.burgerRef.nativeElement.click();
-        break;
+  toggleOpen() {
+    Util.toggleClass(this.burger, 'show');
+  }
+
+  documentClickListener(target: any): void {
+    this.utilitieService.documentClickListener(this._headerCompRef, this.dropdownRef, target);
+  }
+
+  @HostListener('window:resize') onResize() {
+    if(window.innerWidth >= 992) {
+      this.burger.classList.remove("show");
     }
   }
 }
