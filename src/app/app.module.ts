@@ -13,6 +13,10 @@ import { RecipesComponent } from './components/app/recipes/recipes.component';
 import { RecipeListComponent } from './components/app/recipes/recipe-list/recipe-list.component';
 import { RecipeDetailComponent } from './components/app/recipes/recipe-detail/recipe-detail.component';
 import { RecipeItemComponent } from './components/app/recipes/recipe-list/recipe-item/recipe-item.component';
+import { NotAuthorizedComponent } from './components/auth/not-authorized/not-authorized.component';
+import { RouteModule } from './routes/route.module';
+import { RecipeStartComponent } from './components/app/recipes/recipe-start/recipe-start.component';
+import { RecipeEditComponent } from './components/app/recipes/recipe-edit/recipe-edit.component';
 
 @NgModule({
   declarations: [
@@ -26,12 +30,15 @@ import { RecipeItemComponent } from './components/app/recipes/recipe-list/recipe
     ShoppingEditComponent,
     IngredientsListComponent,
     ShellComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    NotAuthorizedComponent,
+    RecipeStartComponent,
+    RecipeEditComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    // RouteModule
+    RouteModule
   ],
   providers: [],
   bootstrap: [AppComponent]

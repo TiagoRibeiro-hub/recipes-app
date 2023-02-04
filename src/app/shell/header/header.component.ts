@@ -1,5 +1,5 @@
-import { Component, ElementRef, EventEmitter, HostListener, Output, ViewChild } from '@angular/core';
-import { constants } from 'src/app/constants/constants';
+import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
+import { route } from 'src/app/constants/constants';
 import { UtilitieService } from 'src/app/services/utilities/utilitie.service';
 import { Util } from 'src/app/shared/utils/util';
 
@@ -11,10 +11,9 @@ import { Util } from 'src/app/shared/utils/util';
 })
 export class HeaderComponent {
   
-  @Output() linkSelected = new EventEmitter<string>(); 
   @ViewChild('dropdownRef', {read: ElementRef}) dropdownRef: ElementRef;
 
-  constant = constants;
+  route = route;
   burger: HTMLInputElement;
 
   constructor(
@@ -26,10 +25,6 @@ export class HeaderComponent {
   ngOnInit() {
       this.utilitieService.documentClickedTarget.subscribe(target => this.documentClickListener(target));
       this.burger = (<HTMLInputElement>document.getElementById("burger"));
-  }
-
-  onSelect(link: string) {
-    this.linkSelected.emit(link);
   }
 
   toggleOpen() {
