@@ -1,0 +1,6 @@
+<ul class="list-group" *ngFor="let ingredient of ingredients">
+    <a class="list-group-item d-flex justify-content-between align-items-center mb-2">
+        {{ingredient.name}} 
+        <span class="badge rounded-pill text-bg-secondary fs-6">{{ingredient.amount}}</span>
+    </a>
+</ul>

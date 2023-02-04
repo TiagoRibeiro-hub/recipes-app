@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { constants } from './constants/constants';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'food-app';
+
+  componentToShow = constants.RECIPE;
+  constant = constants;
+
+  onNavigate(link: string) {
+    this.componentToShow = link;
+  }
 }
