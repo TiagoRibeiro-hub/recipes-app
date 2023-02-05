@@ -1,6 +1,8 @@
 // https://unsplash.com/images/food
+// https://academind.com/
 :root {
     --spinner-top: 56px;
+    --light-grey: rgb(199, 199, 199)
 }
 
 body{
@@ -13,11 +15,35 @@ a {
     color: inherit !important;
 }
 
-a, button {
+a, button, .form-select {
     cursor: pointer;
 }
 
 :disabled {
    cursor: not-allowed;
 }
+
+.dropdown-item {
+    &:active {
+        background-color: var(--light-grey) !important;
+    }
+    &:focus-visible {
+        outline: none !important;
+    }
+}
+
+.form-check-input,.form-select {
+    &:checked {
+        background-color: var(--light-grey);
+        border-color: var(--light-grey);
+    }
+    &:focus {
+        box-shadow: none !important;
+        border: 1.5px solid black;
+        outline-offset: 2px;
+        outline: 1.5px solid black;
+    }
+}
+
+
 

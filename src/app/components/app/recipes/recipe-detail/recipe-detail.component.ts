@@ -1,5 +1,6 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnDestroy, ViewChild } from '@angular/core';
 import { ActivatedRoute, Data } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { appResolvers, appRoute } from 'src/app/constants/constants';
 import { Ingredient } from 'src/app/models/recipes/ingredient.model';
 import { Recipe } from 'src/app/models/recipes/recipe.model';
@@ -14,9 +15,10 @@ import { Util } from 'src/app/shared/utils/util';
   templateUrl: './recipe-detail.component.html',
   styleUrls: ['./recipe-detail.component.scss']
 })
-export class RecipeDetailComponent {
+export class RecipeDetailComponent implements OnDestroy {
   recipe: Recipe
   selectedIngredients: Ingredient[] = [];
+  documentClickedTarget$: Subscription = undefined;
 
   @ViewChild('dropdownRef', {read: ElementRef}) dropdownRef: ElementRef;
   
@@ -28,10 +30,16 @@ export class RecipeDetailComponent {
     private activatedRoute: ActivatedRoute) {
 
   }
+  
+  ngOnDestroy(): void {
+    if(this.documentClickedTarget$ !== undefined) {
+      this.documentClickedTarget$.unsubscribe();
+    }
+  }
 
   ngOnInit() {
     this.activatedRoute.data.subscribe((data: Data) => { this.recipe = data[appResolvers.RECIPE_DETAIL]; });
-    this.utilitieService.documentClickedTarget.subscribe(target => this.documentClickListener(target))
+    this.documentClickedTarget$ = this.utilitieService.documentClickedTarget.subscribe(target => this.documentClickListener(target))
   }
 
   toggleOpen(): void {

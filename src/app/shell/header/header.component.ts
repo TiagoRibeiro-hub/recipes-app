@@ -1,4 +1,5 @@
-import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, OnDestroy, ViewChild } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { appRoute } from 'src/app/constants/constants';
 import { UtilitieService } from 'src/app/services/utilities/utilitie.service';
 import { Util } from 'src/app/shared/utils/util';
@@ -9,18 +10,24 @@ import { Util } from 'src/app/shared/utils/util';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnDestroy {
   
   @ViewChild('dropdownRef', {read: ElementRef}) dropdownRef: ElementRef;
 
   appRoute = appRoute;
   burger: HTMLInputElement;
-
+  documentClickedTarget$: Subscription = undefined;
   constructor(
     private _headerCompRef: ElementRef,
     private utilitieService: UtilitieService) { 
 
     }
+
+  ngOnDestroy(): void {
+    if(this.documentClickedTarget$ !== undefined) {
+      this.documentClickedTarget$.unsubscribe();
+    }
+  }
 
   ngOnInit() {
       this.utilitieService.documentClickedTarget.subscribe(target => this.documentClickListener(target));

@@ -1,4 +1,4 @@
-import { EventEmitter, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Ingredient, MetricUnit } from 'src/app/models/recipes/ingredient.model';
 import { Recipe } from 'src/app/models/recipes/recipe.model';
 import { ShoppingListService } from '../shopping-list/shopping-list.service';
@@ -15,8 +15,6 @@ export class RecipeService {
       new Ingredient('2', 'Bread', 1, MetricUnit.KILOGRAM), new Ingredient('1', 'Egg Yolk', 2, MetricUnit.UNIT), new Ingredient('4', 'Seafood broth', 150, MetricUnit.LITER)
     ]),
   ];
-
-  recipeSelected = new EventEmitter<Recipe>();
   
   constructor(
     private shoppingListService: ShoppingListService) { }

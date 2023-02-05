@@ -15,7 +15,7 @@ export class UtilitieService {
         dropdownRef.nativeElement.classList.remove('show');
       }
     }
-    else if (target.classList.contains('dropdown-toggle')) {
+    else if (target.classList.contains('dropdown-toggle') || target.classList.contains('dropdown-item')) {
       Util.css.toggleClass(dropdownRef.nativeElement, 'show');
     }
  }
