@@ -11,12 +11,20 @@
                     <label for="amount">Amount</label>
                     <input type="number" id="amount" class="form-control" #amountInput>
                 </div>
+                <div class="col-sm-2 form-goup">
+                    <label for="amount">Metric Unit</label>
+                    <select class="form-select" #metricUnitOption>
+                        <option *ngFor="let _metricUnit of this.metricUnitEnums" [value]="_metricUnit">
+                          {{ this.metricUnitMapping[_metricUnit] }}
+                        </option>
+                      </select>
+                </div>
             </div>
             <div class="row mt-2">
                 <div class="col-xs-12">
                     <button class="btn btn-success me-2" type="submit" (click)="onAddItem()">Add</button>
-                    <button class="btn btn-danger me-2" type="button">Delete</button>
-                    <button class="btn btn-primary" type="button">Clear</button>
+                    <button class="btn btn-danger me-2" type="button" (click)="onDeleteItem()">Delete</button>
+                    <button class="btn btn-primary" type="button" (click)="onClearItem()">Clear</button>
                 </div>
             </div>
         </form>

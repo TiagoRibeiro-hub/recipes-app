@@ -1,9 +1,9 @@
-<ul class="list-group" *ngFor="let ingredient of ingredients">
+<ul class="list-group" *ngFor="let _ingredient of this.ingredients">
     <a class="list-group-item d-flex justify-content-between align-items-center mb-2">
-        {{ingredient.name}} 
+        {{ _ingredient.name }} 
         <div>
-            <span class="badge rounded-pill text-bg-secondary fs-6">{{ingredient.amount}}</span>
-            <input class="form-check-input me-1 ms-2" type="checkbox" value="{{ingredient.id}}" (change)="onChanged($event)">
+            <span class="badge rounded-pill text-bg-secondary fs-6">{{ _ingredient.amount }} {{ this.metricUnitMapping[_ingredient.metricUnit] }}</span>
+            <input class="form-check-input me-1 ms-2" type="checkbox" value="{{_ingredient.id}}" (change)="onChanged($event)">
         </div>
     </a>
 </ul>

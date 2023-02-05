@@ -6,7 +6,7 @@ import { Recipe } from 'src/app/models/recipes/recipe.model';
 import { NavigationService } from 'src/app/services/navigation/navigation.service';
 import { RecipeService } from 'src/app/services/recipes/recipe.service';
 import { UtilitieService } from 'src/app/services/utilities/utilitie.service';
-import { AddIngredient } from 'src/app/shared/components/ingredients/ingredients-list/shared-ingredients-list.component';
+import { AddIngredientToList } from 'src/app/shared/components/ingredients/ingredients-list/shared-ingredients-list.component';
 import { Util } from 'src/app/shared/utils/util';
 
 @Component({
@@ -38,7 +38,7 @@ export class RecipeDetailComponent {
     this.dropdownRef.nativeElement.click();
   }
 
-  onSelectedIngredients(ingredient: AddIngredient): void {
+  onSelectedIngredients(ingredient: AddIngredientToList): void {
     this.selectedIngredients = Util.arrays.insertOrRemoveItem(this.recipe.ingredients, obj => obj.id === ingredient.id, ingredient.add, this.selectedIngredients);
   }
 
