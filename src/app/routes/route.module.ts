@@ -10,25 +10,30 @@ import { ShoppingListComponent } from '../components/app/shopping-list/shopping-
 import { NotAuthorizedComponent } from '../components/auth/not-authorized/not-authorized.component';
 import { NotFoundComponent } from '../components/auth/not-found/not-found.component';
 import { appRoute } from '../constants/constants';
-
-const appRoutes : Routes = [
-  {path: '', redirectTo: '/' + appRoute.RECIPES, pathMatch: 'full'},
-  // RECIPES
-  {path: appRoute.RECIPES, component: RecipesComponent, 
+// RECIPES
+const recipeRoutes = {
+    path: appRoute.RECIPES, component: RecipesComponent, 
     children: [
       {path: '', component: RecipeStartComponent},
       {path: appRoute.NEW, component: RecipeEditComponent},
       {path: ':id', component: RecipeDetailComponent, resolve: {recipeDetail: RecipeDetailResolver}},
       {path: ':id/' + appRoute.EDIT, component: RecipeEditComponent, resolve: {recipeEdit: RecipeEditResolver}},
     ]
-  },
-  // SHOPPING LIST
-  {path: appRoute.SHOPPING_LIST, component: ShoppingListComponent},
-  // AUTH appRouteS
+  };
+// SHOPPING LIST
+const shoppingListRoutes = {path: appRoute.SHOPPING_LIST, component: ShoppingListComponent};
+// APP ROUTES
+let appRoutes : Routes = [
+  {path: '', redirectTo: '/' + appRoute.RECIPES, pathMatch: 'full'},
+  // AUTH 
   {path: appRoute.NOT_AUTHORIZED, component: NotAuthorizedComponent},
   {path: appRoute.NOT_FOUND, component: NotFoundComponent},
+];
+appRoutes.push(
+  recipeRoutes, 
+  shoppingListRoutes,
   {path: '**', redirectTo: '/' + appRoute.NOT_FOUND}
-]
+  );
 
 @NgModule({
   imports: [

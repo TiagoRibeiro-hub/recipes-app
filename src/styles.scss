@@ -1,8 +1,13 @@
 // https://unsplash.com/images/food
-// loader intercept -> https://zoaibkhan.com/blog/how-to-add-loading-spinner-in-angular-with-rxjs/
+:root {
+    --spinner-top: 56px;
+}
+
 body{
     margin: 0;
+    padding: 0;
 }
+
 a {
     text-decoration: none !important;
     color: inherit !important;
@@ -15,3 +20,4 @@ a, button {
 :disabled {
    cursor: not-allowed;
 }
+

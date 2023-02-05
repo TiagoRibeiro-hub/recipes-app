@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './shell/header/header.component';
 import { ShoppingListComponent } from './components/app/shopping-list/shopping-list.component';
 import { ShoppingEditComponent } from './components/app/shopping-list/shopping-edit/shopping-edit.component';
 import { FormsModule } from '@angular/forms';
@@ -17,30 +16,34 @@ import { NotAuthorizedComponent } from './components/auth/not-authorized/not-aut
 import { RouteModule } from './routes/route.module';
 import { RecipeStartComponent } from './components/app/recipes/recipe-start/recipe-start.component';
 import { RecipeEditComponent } from './components/app/recipes/recipe-edit/recipe-edit.component';
+import { HeaderComponent } from './shell/header/header.component';
+import { SpinnerComponent } from './shell/spinner/spinner.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HeaderComponent,
-    RecipesComponent,
-    RecipeListComponent,
-    RecipeDetailComponent,
-    RecipeItemComponent,
-    ShoppingListComponent,
-    ShoppingEditComponent,
-    IngredientsListComponent,
-    ShellComponent,
-    NotFoundComponent,
-    NotAuthorizedComponent,
-    RecipeStartComponent,
-    RecipeEditComponent
-  ],
-  imports: [
-    BrowserModule,
-    FormsModule,
-    RouteModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        RecipesComponent,
+        RecipeListComponent,
+        RecipeDetailComponent,
+        RecipeItemComponent,
+        ShoppingListComponent,
+        ShoppingEditComponent,
+        IngredientsListComponent,
+        ShellComponent,
+        NotFoundComponent,
+        NotAuthorizedComponent,
+        RecipeStartComponent,
+        RecipeEditComponent,
+        SpinnerComponent,
+        HeaderComponent,
+    ],
+    providers: [],
+    bootstrap: [AppComponent],
+    imports: [
+        BrowserModule,
+        FormsModule,
+        RouteModule,
+        // ShellModule
+    ]
 })
 export class AppModule { }

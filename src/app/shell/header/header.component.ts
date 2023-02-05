@@ -29,15 +29,24 @@ export class HeaderComponent {
 
   toggleOpen() {
     Util.toggleClass(this.burger, 'show');
+    this.setSpinarTop();
   }
 
   documentClickListener(target: any): void {
     this.utilitieService.documentClickListener(this._headerCompRef, this.dropdownRef, target);
   }
 
-  @HostListener('window:resize') onResize() {
+  @HostListener('window:resize') onResize() {   
     if(window.innerWidth >= 992) {
       this.burger.classList.remove("show");
     }
+    else if(window.innerWidth <= 992) {
+      this.setSpinarTop();
+    }
+    
+  }
+
+  private setSpinarTop() {
+    document.documentElement.style.setProperty('--spinner-top', (<HTMLInputElement>document.getElementById('navBar')).offsetHeight.toString());
   }
 }
