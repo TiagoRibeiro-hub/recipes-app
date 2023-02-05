@@ -1,5 +1,5 @@
 import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
-import { route } from 'src/app/constants/constants';
+import { appRoute } from 'src/app/constants/constants';
 import { UtilitieService } from 'src/app/services/utilities/utilitie.service';
 import { Util } from 'src/app/shared/utils/util';
 
@@ -13,7 +13,7 @@ export class HeaderComponent {
   
   @ViewChild('dropdownRef', {read: ElementRef}) dropdownRef: ElementRef;
 
-  route = route;
+  appRoute = appRoute;
   burger: HTMLInputElement;
 
   constructor(

@@ -1,4 +1,4 @@
-export const route = {
+export const appRoute = {
     RECIPES: 'recipes',
     SHOPPING_LIST: 'shopping-list',
     NOT_FOUND: 'not-found',
@@ -6,3 +6,9 @@ export const route = {
     NEW: 'new',
     EDIT: 'edit'
 };
+
+export const appResolvers = {
+    RECIPE_DETAIL: 'recipeDetail',
+    RECIPE_EDIT: 'recipeEdit',
+}
+

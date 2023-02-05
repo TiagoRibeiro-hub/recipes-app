@@ -1,24 +1,26 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
-import { RecipeService } from 'src/app/services/recipes/recipe.service';
+import { ActivatedRoute, Data, Params } from '@angular/router';
+import { appResolvers } from 'src/app/constants/constants';
+import { RecipeEdit } from './resolver/recipe-edit-resolver';
 
 @Component({
   selector: 'app-recipe-edit',
   templateUrl: './recipe-edit.component.html',
   styleUrls: ['./recipe-edit.component.scss']
 })
-export class RecipeEditComponent implements OnInit{
-  id: string;
-  editMode = false;
+export class RecipeEditComponent implements OnInit {
+
+  recipeEdit: RecipeEdit;
 
   constructor(
-    private route: ActivatedRoute) {
+    private activatedRoute: ActivatedRoute) {
 
   }
   ngOnInit(): void {
-    this.route.params.subscribe((params: Params) => {
-      this.id = params['id'];
-      this.editMode = params['id'] != null;
+    this.activatedRoute.data.subscribe((data: Data) => { 
+      this.recipeEdit = data[appResolvers.RECIPE_EDIT]; 
+      //console.log(this.recipeEdit?.editMode !== undefined);
     });
+
   }
 }

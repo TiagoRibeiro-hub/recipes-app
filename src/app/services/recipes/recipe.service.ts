@@ -8,10 +8,10 @@ import { ShoppingListService } from '../shopping-list/shopping-list.service';
 })
 export class RecipeService {
   private recipes: Recipe[] = [
-    new Recipe('0', 'Asian Bowl', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incid', '../../assets/imgs/anh-nguyen.png', [
+    new Recipe('2', 'Asian Bowl', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incid', '../../assets/imgs/anh-nguyen.png', [
       new Ingredient('Eggs', 3), new Ingredient('Salmon', 100), new Ingredient('Peas', 150)
     ]),
-    new Recipe('1', 'Açorda', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incid', '../../assets/imgs/anh-nguyen.png', [
+    new Recipe('11', 'Açorda', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incid', '../../assets/imgs/anh-nguyen.png', [
       new Ingredient('Bread', 500), new Ingredient('Egg Yolk', 2), new Ingredient('Seafood broth', 150)
     ]),
   ];

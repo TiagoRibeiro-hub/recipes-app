@@ -1,7 +1,8 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { ActivatedRoute, Params, Router } from '@angular/router';
-import { route } from 'src/app/constants/constants';
+import { ActivatedRoute, Data, Params } from '@angular/router';
+import { appResolvers, appRoute } from 'src/app/constants/constants';
 import { Recipe } from 'src/app/models/recipes/recipe.model';
+import { NavigationService } from 'src/app/services/navigation/navigation.service';
 import { RecipeService } from 'src/app/services/recipes/recipe.service';
 import { UtilitieService } from 'src/app/services/utilities/utilitie.service';
 
@@ -19,16 +20,13 @@ export class RecipeDetailComponent {
     private _recipeDetailCompRef: ElementRef,
     private utilitieService: UtilitieService,
     private recipeService: RecipeService,
-    private router: Router,
+    private navigationService: NavigationService,
     private activatedRoute: ActivatedRoute) {
 
   }
 
   ngOnInit() {
-    this.activatedRoute.params.subscribe((params: Params) => {
-      this.recipe = this.recipeService.getRecipeById(params['id']);
-    });
-    
+    this.activatedRoute.data.subscribe((data: Data) => { this.recipe = data[appResolvers.RECIPE_DETAIL]; });
     this.utilitieService.documentClickedTarget.subscribe(target => this.documentClickListener(target))
   }
 
@@ -41,7 +39,7 @@ export class RecipeDetailComponent {
   }
 
   onEditRecipe(): void {
-    this.router.navigate([route.EDIT], { relativeTo: this.activatedRoute });
+    this.navigationService.navigateRelativeTo(appRoute.EDIT, this.activatedRoute);
   }
 
   onDeleteRecipe(): void {
