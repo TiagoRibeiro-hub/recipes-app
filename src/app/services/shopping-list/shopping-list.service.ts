@@ -7,9 +7,9 @@ import { Ingredient } from 'src/app/models/recipes/ingredient.model';
 export class ShoppingListService {
 
   private ingredients: Ingredient[] = [
-    new Ingredient('tomato', 2),
-    new Ingredient('cucumber', 1),
-    new Ingredient('orange', 3)
+    new Ingredient('22', 'tomato', 2),
+    new Ingredient('23', 'cucumber', 1),
+    new Ingredient('24', 'orange', 3)
   ];
 
   ingredientsChanged = new EventEmitter<Ingredient[]>();

@@ -28,7 +28,7 @@ export class HeaderComponent {
   }
 
   toggleOpen() {
-    Util.toggleClass(this.burger, 'show');
+    Util.css.toggleClass(this.burger, 'show');
     this.setSpinarTop();
   }
 

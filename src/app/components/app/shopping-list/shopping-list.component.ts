@@ -9,8 +9,10 @@ import { ShoppingListService } from 'src/app/services/shopping-list/shopping-lis
 })
 export class ShoppingListComponent implements OnInit {
   ingredients: Ingredient[] = [];
+  selectedIngredients: Ingredient[] = [];
 
-  constructor(private shoppingListService: ShoppingListService) {
+  constructor(
+    private shoppingListService: ShoppingListService) {
 
   }
 
@@ -19,6 +21,10 @@ export class ShoppingListComponent implements OnInit {
     this.shoppingListService.ingredientsChanged.subscribe((ingredients: Ingredient[]) =>{
       this.ingredients = ingredients;
     });
+  }
+
+  onSelectedIngredients(ingredient: Ingredient): void {
+    this.selectedIngredients.push(ingredient);
   }
 
 }

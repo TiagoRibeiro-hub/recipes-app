@@ -17,6 +17,6 @@ export class ShoppingEditComponent {
   }
 
   onAddItem() {
-    this.shoppingListService.addIngredient(new Ingredient(this.nameInputRef.nativeElement.value, this.amountInputRef.nativeElement.value));
+    this.shoppingListService.addIngredient(new Ingredient(new Date().getMilliseconds().toString(), this.nameInputRef.nativeElement.value, this.amountInputRef.nativeElement.value));
   }
 }

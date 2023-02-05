@@ -5,7 +5,6 @@ import { AppComponent } from './app.component';
 import { ShoppingListComponent } from './components/app/shopping-list/shopping-list.component';
 import { ShoppingEditComponent } from './components/app/shopping-list/shopping-edit/shopping-edit.component';
 import { FormsModule } from '@angular/forms';
-import { IngredientsListComponent } from './shared/components/ingredients/ingredients-list/ingredients-list.component';
 import { ShellComponent } from './shell/shell.component';
 import { NotFoundComponent } from './components/auth/not-found/not-found.component';
 import { RecipesComponent } from './components/app/recipes/recipes.component';
@@ -18,6 +17,7 @@ import { RecipeStartComponent } from './components/app/recipes/recipe-start/reci
 import { RecipeEditComponent } from './components/app/recipes/recipe-edit/recipe-edit.component';
 import { HeaderComponent } from './shell/header/header.component';
 import { SpinnerComponent } from './shell/spinner/spinner.component';
+import { SharedIngredientsListComponent } from './shared/components/ingredients/ingredients-list/shared-ingredients-list.component';
 
 @NgModule({
     declarations: [
@@ -28,7 +28,7 @@ import { SpinnerComponent } from './shell/spinner/spinner.component';
         RecipeItemComponent,
         ShoppingListComponent,
         ShoppingEditComponent,
-        IngredientsListComponent,
+        SharedIngredientsListComponent,
         ShellComponent,
         NotFoundComponent,
         NotAuthorizedComponent,

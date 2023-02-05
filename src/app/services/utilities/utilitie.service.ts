@@ -16,7 +16,7 @@ export class UtilitieService {
       }
     }
     else if (target.classList.contains('dropdown-toggle')) {
-      Util.toggleClass(dropdownRef.nativeElement, 'show');
+      Util.css.toggleClass(dropdownRef.nativeElement, 'show');
     }
  }
 }

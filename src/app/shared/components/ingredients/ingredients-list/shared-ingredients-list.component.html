@@ -3,7 +3,7 @@
         {{ingredient.name}} 
         <div>
             <span class="badge rounded-pill text-bg-secondary fs-6">{{ingredient.amount}}</span>
-            <input class="form-check-input me-1 ms-2" type="checkbox" value="" id="{{ingredient.name}}">
+            <input class="form-check-input me-1 ms-2" type="checkbox" value="{{ingredient.id}}" (change)="onChanged($event)">
         </div>
     </a>
 </ul>
