@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
-import { Ingredient, MetricUnit } from 'src/app/models/recipes/ingredient.model';
+import { Ingredient, MetricUnit } from 'src/app/models/ingredients/ingredient.model';
 
 @Injectable({
   providedIn: 'root'
@@ -14,11 +14,16 @@ export class ShoppingListService {
   ];
 
   ingredientsChanged = new Subject<Ingredient[]>();
-  
+  ingredientEditing = new Subject<string>();
+
   constructor() { }
 
   getIngredients() : Ingredient[] {
     return this.ingredients.slice();
+  }
+
+  getIngredientById(id: string) : Ingredient {
+    return this.ingredients.find(ingredient => ingredient.id === id);
   }
 
   addIngredient(ingredient: Ingredient): void {
@@ -31,6 +36,11 @@ export class ShoppingListService {
     this.emitNewIngredientsList();
   }
 
+  updateIngredient(ingredient: Ingredient): void {
+    const index = this.ingredients.findIndex(ingr => ingr.id === ingredient.id);
+    this.ingredients[index] = ingredient;
+    this.emitNewIngredientsList();
+  }
   private emitNewIngredientsList(): void {
     this.ingredientsChanged.next(this.ingredients.slice());
   }

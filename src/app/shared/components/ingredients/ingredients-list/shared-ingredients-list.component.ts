@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Ingredient, MetricUnitMapping } from 'src/app/models/recipes/ingredient.model';
+import { Ingredient, MetricUnitMapping } from 'src/app/models/ingredients/ingredient.model';
 
 export interface AddIngredientToList {
   id: string;
@@ -14,6 +14,7 @@ export interface AddIngredientToList {
 export class SharedIngredientsListComponent {
   metricUnitMapping = MetricUnitMapping;
   
+  @Input() withCheckBoxes: boolean = true;
   @Input() ingredients: Ingredient[];
   @Output() selectedIngredients: EventEmitter<AddIngredientToList> = new EventEmitter<AddIngredientToList>();
 
@@ -23,6 +24,13 @@ export class SharedIngredientsListComponent {
     this.selectedIngredients.emit({
       id: event.target.value,
       add: event.target.checked
+    });
+  }
+
+  onClickIngredient(id: string): void {
+    this.selectedIngredients.emit({
+      id: id,
+      add: true
     });
   }
 }

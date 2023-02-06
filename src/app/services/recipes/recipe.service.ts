@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Ingredient, MetricUnit } from 'src/app/models/recipes/ingredient.model';
+import { Ingredient, MetricUnit } from 'src/app/models/ingredients/ingredient.model';
 import { Recipe } from 'src/app/models/recipes/recipe.model';
 import { ShoppingListService } from '../shopping-list/shopping-list.service';
 

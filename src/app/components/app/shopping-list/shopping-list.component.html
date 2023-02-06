@@ -2,6 +2,6 @@
     <div class="col-xs-10">
         <app-shopping-edit></app-shopping-edit>
         <hr>
-        <app-shared-ingredients-list [ingredients]="ingredients"  (selectedIngredients)="onSelectedIngredients($event)"></app-shared-ingredients-list>
+        <app-shared-ingredients-list [ingredients]="ingredients" [withCheckBoxes]="false"  (selectedIngredients)="onSelectedIngredient($event)"></app-shared-ingredients-list>
     </div>
 </div>

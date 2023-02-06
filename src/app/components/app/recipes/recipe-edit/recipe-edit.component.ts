@@ -19,7 +19,6 @@ export class RecipeEditComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.data.subscribe((data: Data) => { 
       this.recipeEdit = data[appResolvers.RECIPE_EDIT]; 
-      //console.log(this.recipeEdit?.editMode !== undefined);
     });
 
   }

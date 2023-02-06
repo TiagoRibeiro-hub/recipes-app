@@ -7,8 +7,8 @@ import { RecipeEditResolver } from '../components/app/recipes/recipe-edit/resolv
 import { RecipeStartComponent } from '../components/app/recipes/recipe-start/recipe-start.component';
 import { RecipesComponent } from '../components/app/recipes/recipes.component';
 import { ShoppingListComponent } from '../components/app/shopping-list/shopping-list.component';
-import { NotAuthorizedComponent } from '../components/auth/not-authorized/not-authorized.component';
-import { NotFoundComponent } from '../components/auth/not-found/not-found.component';
+import { NotAuthorizedComponent } from '../components/app/errors/not-authorized/not-authorized.component';
+import { NotFoundComponent } from '../components/app/errors/not-found/not-found.component';
 import { appRoute } from '../constants/constants';
 // RECIPES
 const recipeRoutes = {

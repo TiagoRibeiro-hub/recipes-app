@@ -8,6 +8,7 @@ export class Util {
 
     static arrays = class {
         static insertOrRemoveItem<T>(array: T[], predicate: any, condition: boolean, arrayOptional: T[] = undefined): T[] {
+            debugger // see predicate
             if(arrayOptional === undefined) {
                 arrayOptional = array;
             }

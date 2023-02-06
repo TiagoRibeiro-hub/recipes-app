@@ -2,7 +2,7 @@ import { Component, ElementRef, OnDestroy, ViewChild } from '@angular/core';
 import { ActivatedRoute, Data } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { appResolvers, appRoute } from 'src/app/constants/constants';
-import { Ingredient } from 'src/app/models/recipes/ingredient.model';
+import { Ingredient } from 'src/app/models/ingredients/ingredient.model';
 import { Recipe } from 'src/app/models/recipes/recipe.model';
 import { NavigationService } from 'src/app/services/navigation/navigation.service';
 import { RecipeService } from 'src/app/services/recipes/recipe.service';
@@ -39,7 +39,9 @@ export class RecipeDetailComponent implements OnDestroy {
 
   ngOnInit() {
     this.activatedRoute.data.subscribe((data: Data) => { this.recipe = data[appResolvers.RECIPE_DETAIL]; });
-    this.documentClickedTarget$ = this.utilitieService.documentClickedTarget.subscribe(target => this.documentClickListener(target))
+    this.documentClickedTarget$ = this.utilitieService.documentClickedTarget.subscribe((target: HTMLElement) => {
+      this.utilitieService.documentClickListener(this._recipeDetailCompRef, this.dropdownRef, target)
+    })
   }
 
   toggleOpen(): void {
@@ -62,7 +64,5 @@ export class RecipeDetailComponent implements OnDestroy {
 
   }
 
-  documentClickListener(target: any): void {
-    this.utilitieService.documentClickListener(this._recipeDetailCompRef, this.dropdownRef, target);
-  }
+
 }

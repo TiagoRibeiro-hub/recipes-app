@@ -1,7 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { Ingredient } from 'src/app/models/recipes/ingredient.model';
+import { Ingredient } from 'src/app/models/ingredients/ingredient.model';
 import { ShoppingListService } from 'src/app/services/shopping-list/shopping-list.service';
+import { AddIngredientToList } from 'src/app/shared/components/ingredients/ingredients-list/shared-ingredients-list.component';
 
 @Component({
   selector: 'app-shopping-list',
@@ -31,8 +32,7 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
     });
   }
 
-  onSelectedIngredients(ingredient: Ingredient): void {
-    this.selectedIngredients.push(ingredient);
+  onSelectedIngredient(ingredient: AddIngredientToList): void {
+    this.shoppingListService.ingredientEditing.next(ingredient.id);
   }
-
 }

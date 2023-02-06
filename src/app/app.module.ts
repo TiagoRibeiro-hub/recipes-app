@@ -6,12 +6,12 @@ import { ShoppingListComponent } from './components/app/shopping-list/shopping-l
 import { ShoppingEditComponent } from './components/app/shopping-list/shopping-edit/shopping-edit.component';
 import { FormsModule } from '@angular/forms';
 import { ShellComponent } from './shell/shell.component';
-import { NotFoundComponent } from './components/auth/not-found/not-found.component';
+import { NotFoundComponent } from './components/app/errors/not-found/not-found.component';
 import { RecipesComponent } from './components/app/recipes/recipes.component';
 import { RecipeListComponent } from './components/app/recipes/recipe-list/recipe-list.component';
 import { RecipeDetailComponent } from './components/app/recipes/recipe-detail/recipe-detail.component';
 import { RecipeItemComponent } from './components/app/recipes/recipe-list/recipe-item/recipe-item.component';
-import { NotAuthorizedComponent } from './components/auth/not-authorized/not-authorized.component';
+import { NotAuthorizedComponent } from './components/app/errors/not-authorized/not-authorized.component';
 import { RouteModule } from './routes/route.module';
 import { RecipeStartComponent } from './components/app/recipes/recipe-start/recipe-start.component';
 import { RecipeEditComponent } from './components/app/recipes/recipe-edit/recipe-edit.component';

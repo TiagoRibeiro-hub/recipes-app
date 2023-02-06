@@ -17,6 +17,7 @@ export class HeaderComponent implements OnDestroy {
   appRoute = appRoute;
   burger: HTMLInputElement;
   documentClickedTarget$: Subscription = undefined;
+  
   constructor(
     private _headerCompRef: ElementRef,
     private utilitieService: UtilitieService) { 
@@ -30,17 +31,15 @@ export class HeaderComponent implements OnDestroy {
   }
 
   ngOnInit() {
-      this.utilitieService.documentClickedTarget.subscribe(target => this.documentClickListener(target));
-      this.burger = (<HTMLInputElement>document.getElementById("burger"));
+    this.documentClickedTarget$ = this.utilitieService.documentClickedTarget.subscribe((target: HTMLElement) => {
+      this.utilitieService.documentClickListener(this._headerCompRef, this.dropdownRef, target);
+    });
+    this.burger = (<HTMLInputElement>document.getElementById("burger"));
   }
 
   toggleOpen() {
     Util.css.toggleClass(this.burger, 'show');
     this.setSpinarTop();
-  }
-
-  documentClickListener(target: any): void {
-    this.utilitieService.documentClickListener(this._headerCompRef, this.dropdownRef, target);
   }
 
   @HostListener('window:resize') onResize() {   
