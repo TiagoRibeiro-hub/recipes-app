@@ -24,8 +24,8 @@ export class RecipeEditResolver implements Resolve<RecipeEdit> {
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): RecipeEdit | Observable<RecipeEdit> | Promise<RecipeEdit> {
         const id = route.params['id'];
-        this.editMode = id !== null || id !== undefined;
-        if(this.editMode) {
+        this.editMode = id !== undefined;
+        if (this.editMode) {
             this.recipeToEdit = this.recipeService.getRecipeById(id);
         };
         return {
@@ -35,28 +35,15 @@ export class RecipeEditResolver implements Resolve<RecipeEdit> {
         };        
     }
 
-    private initForm(): FormGroup {
-
-        let recipeId = "";
-        let recipeName = "";
-        let recipeDescription = "";
-        let recipeImagePath = "";
-        let recipeingredients = [];
-    
-        if(this.editMode){
-          recipeId = this.recipeToEdit.id;
-          recipeName = this.recipeToEdit.name;
-          recipeDescription = this.recipeToEdit.description;
-          recipeImagePath = this.recipeToEdit.imagePath;
-          recipeingredients = this.recipeToEdit.ingredients;
-        }
-    
-        return new FormGroup({
-          'id': new FormControl(recipeId),
-          'name': new FormControl(recipeName),
-          'description': new FormControl(recipeDescription),
-          'imagePath': new FormControl(recipeImagePath) 
-        });
+    private initForm(): FormGroup {  
+      return this.editMode 
+        ? new FormGroup({
+            'id': new FormControl(this.recipeToEdit.id),
+            'name': new FormControl(this.recipeToEdit.name),
+            'description': new FormControl(this.recipeToEdit.description),
+            'imagePath': new FormControl(this.recipeToEdit.imagePath) 
+          })
+        : this.recipeService.getEmptyForm();
       }
 
 }

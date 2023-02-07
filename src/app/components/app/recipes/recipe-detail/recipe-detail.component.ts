@@ -57,7 +57,7 @@ export class RecipeDetailComponent implements OnDestroy {
   }
 
   onEditRecipe(): void {
-    this.navigationService.navigateRelativeTo(appRoute.EDIT, this.activatedRoute);
+    this.navigationService.navigateRelativeTo([appRoute.EDIT], this.activatedRoute);
   }
 
   onDeleteRecipe(): void {

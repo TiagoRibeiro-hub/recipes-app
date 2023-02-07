@@ -15,7 +15,7 @@ const recipeRoutes = {
     path: appRoute.RECIPES, component: RecipesComponent, 
     children: [
       {path: '', component: RecipeStartComponent},
-      {path: appRoute.NEW, component: RecipeEditComponent},
+      {path: appRoute.NEW, component: RecipeEditComponent, resolve: {recipeEdit: RecipeEditResolver}},
       {path: ':id', component: RecipeDetailComponent, resolve: {recipeDetail: RecipeDetailResolver}},
       {path: ':id/' + appRoute.EDIT, component: RecipeEditComponent, resolve: {recipeEdit: RecipeEditResolver}},
     ]

@@ -9,7 +9,7 @@ export class NavigationService {
   constructor(
     private router: Router) { }
 
-    navigateRelativeTo(path: string, relativeTo: ActivatedRoute): void {
-      this.router.navigate([path], { relativeTo: relativeTo });
+    navigateRelativeTo(path: any[], relativeTo: ActivatedRoute): void {
+      this.router.navigate(path, { relativeTo: relativeTo });
     }
 }

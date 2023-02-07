@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { Ingredient, MetricUnit } from 'src/app/models/ingredients/ingredient.model';
 import { Recipe } from 'src/app/models/recipes/recipe.model';
 import { ShoppingListService } from '../shopping-list/shopping-list.service';
@@ -29,5 +30,14 @@ export class RecipeService {
 
   addIngredientsToShoppingList(ingredients: Ingredient[]): void {
     this.shoppingListService.addList(ingredients);
+  }
+
+  getEmptyForm(): FormGroup {
+    return new FormGroup({
+      'id': new FormControl(null),
+      'name': new FormControl(null),
+      'description': new FormControl(null),
+      'imagePath': new FormControl(null) 
+    });
   }
 }

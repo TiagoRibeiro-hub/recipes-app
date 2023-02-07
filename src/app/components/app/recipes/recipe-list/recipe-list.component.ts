@@ -25,6 +25,6 @@ export class RecipeListComponent implements OnInit {
   }
 
   onNewRecipe(): void {
-    this.navigationService.navigateRelativeTo(appRoute.NEW, this.activatedRoute);
+    this.navigationService.navigateRelativeTo([appRoute.NEW], this.activatedRoute);
   }
 }
