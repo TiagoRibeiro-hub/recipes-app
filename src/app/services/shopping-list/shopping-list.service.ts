@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { Ingredient, MetricUnit } from 'src/app/models/ingredients/ingredient.model';
+import { Util } from 'src/app/shared/utils/util';
 
 @Injectable({
   providedIn: 'root'
@@ -41,6 +42,12 @@ export class ShoppingListService {
     this.ingredients[index] = ingredient;
     this.emitNewIngredientsList();
   }
+
+  deletIngredient(id: string): void {
+    this.ingredients = Util.arrays.removeItem<Ingredient>(this.ingredients, ingr => ingr.id !== id);
+    this.emitNewIngredientsList();
+  }
+
   private emitNewIngredientsList(): void {
     this.ingredientsChanged.next(this.ingredients.slice());
   }
