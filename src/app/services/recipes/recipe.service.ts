@@ -27,7 +27,7 @@ export class RecipeService {
     return this.recipes.slice().find(recipe => recipe.id === id);;
   }
 
-  onAddIngredientsToShoppingList(ingredients: Ingredient[]): void {
-    this.shoppingListService.addIngredients(ingredients);
+  addIngredientsToShoppingList(ingredients: Ingredient[]): void {
+    this.shoppingListService.addList(ingredients);
   }
 }

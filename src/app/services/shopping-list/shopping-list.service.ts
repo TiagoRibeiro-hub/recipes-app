@@ -19,31 +19,31 @@ export class ShoppingListService {
 
   constructor() { }
 
-  getIngredients() : Ingredient[] {
+  get() : Ingredient[] {
     return this.ingredients.slice();
   }
 
-  getIngredientById(id: string) : Ingredient {
+  getById(id: string) : Ingredient {
     return this.ingredients.find(ingredient => ingredient.id === id);
   }
 
-  addIngredient(ingredient: Ingredient): void {
+  add(ingredient: Ingredient): void {
     this.ingredients.push(ingredient);
     this.emitNewIngredientsList();
   }
 
-  addIngredients(ingredients: Ingredient[]): void {
+  addList(ingredients: Ingredient[]): void {
     this.ingredients.push(...ingredients);
     this.emitNewIngredientsList();
   }
 
-  updateIngredient(ingredient: Ingredient): void {
+  update(ingredient: Ingredient): void {
     const index = this.ingredients.findIndex(ingr => ingr.id === ingredient.id);
     this.ingredients[index] = ingredient;
     this.emitNewIngredientsList();
   }
 
-  deletIngredient(id: string): void {
+  delete(id: string): void {
     this.ingredients = Util.arrays.removeItem<Ingredient>(this.ingredients, ingr => ingr.id !== id);
     this.emitNewIngredientsList();
   }

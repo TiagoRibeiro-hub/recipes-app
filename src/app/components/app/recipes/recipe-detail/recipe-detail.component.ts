@@ -53,7 +53,7 @@ export class RecipeDetailComponent implements OnDestroy {
   }
 
   onAddToShoppingList(): void {
-    this.recipeService.onAddIngredientsToShoppingList(this.selectedIngredients);
+    this.recipeService.addIngredientsToShoppingList(this.selectedIngredients);
   }
 
   onEditRecipe(): void {

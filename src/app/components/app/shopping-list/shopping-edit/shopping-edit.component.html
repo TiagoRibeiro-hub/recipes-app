@@ -28,8 +28,8 @@
             <div class="row mt-2">
                 <div class="col-xs-12">
                     <button class="btn btn-success me-2" type="submit" [disabled]="!formRef.valid">{{ this.editMode ? 'Update' : 'Add' }}</button>
-                    <button class="btn btn-danger me-2" type="button" (click)="onDeleteIngredient()" [disabled]="!this.editMode">Delete</button>
-                    <button class="btn btn-primary" type="button" (click)="onClearIngredient()">Clear</button>
+                    <button class="btn btn-danger me-2" type="button" (click)="onDelete()" [disabled]="!this.editMode">Delete</button>
+                    <button class="btn btn-primary" type="button" (click)="onClear()">Clear</button>
                 </div>
             </div>
         </form>
