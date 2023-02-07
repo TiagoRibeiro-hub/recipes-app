@@ -8,3 +8,9 @@ export class Recipe {
         public imagePath: string,
         public ingredients: Ingredient[] = []) { }
 }
+
+export class EmptyRecipe {
+    static get(): Recipe {
+        return new Recipe("", "", "", "", [])
+    }
+}
