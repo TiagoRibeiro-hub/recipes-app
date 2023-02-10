@@ -38,8 +38,7 @@ export class ShoppingListService {
   }
 
   update(ingredient: Ingredient): void {
-    const index = this.ingredients.findIndex(ingr => ingr.id === ingredient.id);
-    this.ingredients[index] = ingredient;
+    Util.arrays.updateItem<Ingredient>(this.ingredients, ingr => ingr.id === ingredient.id, ingredient);  
     this.emitNewIngredientsList();
   }
 

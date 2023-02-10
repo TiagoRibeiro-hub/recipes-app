@@ -4,7 +4,7 @@
             <input id="recipe_id" hidden formControlName="id">
             <div class="row  mb-3">
                 <div class="col-xs-12 d-flex justify-content-end">
-                    <button type="submit" class="btn btn-success me-3" [disabled]="!this.recipeForm.valid">Save</button>
+                    <button type="submit" class="btn btn-success me-3" [disabled]="!this.recipeForm.valid">{{ !this.recipeEdit.editMode ? 'Save' : 'Update' }}</button>
                     <button  type="button" class="btn btn-danger">Cancel</button>
                 </div>
             </div>
@@ -12,8 +12,7 @@
                 <div class="col-xs-12">
                     <div class="form-group">
                         <label for="name">Name</label>
-                        <input type="text" id="name" class="form-control" 
-                            formControlName="name">
+                        <input type="text" id="name" class="form-control" formControlName="name">
                     </div>    
                 </div>
             </div>
@@ -21,12 +20,11 @@
                 <div class="col-xs-12">
                     <div class="form-group">
                         <label for="imagePath">Image Url</label>
-                        <input type="text" id="imagePath" class="form-control" 
-                            formControlName="imagePath">
+                        <input type="text" id="imagePath" class="form-control" formControlName="imagePath">
                     </div>    
                 </div>
             </div>
-            <div class="row mb-3">
+            <div class="row mb-3" *ngIf="this.srcImage !== ''">
                 <div class="col-xs-12 d-flex justify-content-center">
                     <img src="{{ this.srcImage }}" alt="image" class="img-fluid rounded" style="height: 250px">   
                 </div>
@@ -35,8 +33,7 @@
                 <div class="col-xs-12">
                     <div class="form-group">
                         <label for="description">Description</label>
-                        <textarea type="text" id="description" class="form-control" rows="4"
-                            formControlName="description">
+                        <textarea type="text" id="description" class="form-control" rows="4" formControlName="description">
                         </textarea>
                     </div>    
                 </div>
@@ -49,17 +46,17 @@
                         <div class="row mb-3">
                             <div class="col-12 form-group">
                                 <label for="name">Name</label>
-                                <input type="text" id="name" class="form-control" name="name" formControlName="name">
+                                <input type="text" id="name" class="form-control" formControlName="name">
                             </div>
                         </div>  
                         <div class="row mb-3">
                             <div class="col-5 form-group">
                                 <label for="amount">Amount</label>
-                                <input type="number" id="amount" class="form-control" name="amount" formControlName="amount">
+                                <input type="number" id="amount" class="form-control" formControlName="amount">
                             </div>
                             <div class="col-5 form-group">
                                 <label for="amount">Metric Unit</label>
-                                <select class="form-select" name="metricUnit" formControlName="metricUnit">
+                                <select class="form-select" formControlName="metricUnit">
                                     <option *ngFor="let _metricUnit of this.metricUnitEnums" [value]="_metricUnit">
                                     {{ this.metricUnitMapping[_metricUnit] }}
                                     </option>

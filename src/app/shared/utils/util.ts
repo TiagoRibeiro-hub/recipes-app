@@ -25,5 +25,11 @@ export class Util {
             return array.filter(predicate);
     
         }
+
+        static updateItem<T>(array: T[], predicate: any, item: T): void {
+            const index = array.findIndex(predicate);
+            array[index] = item;
+    
+        }
     };
 }

@@ -1,8 +1,8 @@
 import { Injectable } from "@angular/core";
-import { FormArray, FormControl, FormGroup } from "@angular/forms";
+import { FormArray, FormGroup } from "@angular/forms";
 import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from "@angular/router";
 import { Observable } from "rxjs";
-import { EmptyRecipe, Recipe } from "src/app/models/recipes/recipe.model";
+import { Recipe } from "src/app/models/recipes/recipe.model";
 import { IngredientsService } from "src/app/services/ingredients/ingredients.service";
 import { RecipeService } from "src/app/services/recipes/recipe.service";
 
@@ -24,7 +24,7 @@ export class RecipeEditResolver implements Resolve<RecipeEdit> {
         const id = route.params['id'];
         const editMode = id !== undefined;
 
-        let recipeToEdit = editMode ? this.recipeService.getRecipeById(id) : undefined;
+        let recipeToEdit = editMode ? this.recipeService.getById(id) : undefined;
         let form: FormGroup;
 
         if(recipeToEdit === undefined) {

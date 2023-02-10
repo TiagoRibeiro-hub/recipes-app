@@ -6,11 +6,12 @@ export class Recipe {
         public name: string, 
         public description: string, 
         public imagePath: string,
-        public ingredients: Ingredient[] = []) { }
-}
+        public ingredients: Ingredient[] = []
+        ) { }
 
-export class EmptyRecipe {
-    static get(): Recipe {
+    static emptyRecipe(): Recipe {
         return new Recipe("", "", "", "", [])
     }
+
 }
+

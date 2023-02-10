@@ -12,7 +12,7 @@ export class RecipeDetailResolver implements Resolve<Recipe> {
     constructor(private recipeService: RecipeService) { }
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Recipe | Observable<Recipe> | Promise<Recipe> {
-        return this.recipeService.getRecipeById(route.params['id']);
+        return this.recipeService.getById(route.params['id']);
     }
 
 }

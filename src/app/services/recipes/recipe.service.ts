@@ -1,7 +1,10 @@
 import { Injectable } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Subject } from 'rxjs';
 import { Ingredient, MetricUnit } from 'src/app/models/ingredients/ingredient.model';
 import { Recipe } from 'src/app/models/recipes/recipe.model';
+import { Util } from 'src/app/shared/utils/util';
+import { IngredientsService } from '../ingredients/ingredients.service';
 import { ShoppingListService } from '../shopping-list/shopping-list.service';
 
 @Injectable({
@@ -17,14 +20,17 @@ export class RecipeService {
     ]),
   ];
   
-  constructor(
-    private shoppingListService: ShoppingListService) { }
+  recipesChanged = new Subject<Recipe[]>();
 
-  getRecipes() : Recipe[]{
+  constructor(
+    private shoppingListService: ShoppingListService,
+    private ingredientsService: IngredientsService) { }
+
+  get() : Recipe[]{
     return this.recipes.slice();
   }
 
-  getRecipeById(id: string) : Recipe {
+  getById(id: string) : Recipe {
     return this.recipes.slice().find(recipe => recipe.id === id);;
   }
 
@@ -32,13 +38,23 @@ export class RecipeService {
     this.shoppingListService.addList(ingredients);
   }
 
+  add(recipe: Recipe): void {
+    this.recipes.push(recipe);
+    this.emitRecipesList();
+  } 
+
+  update(recipe: Recipe): void {
+    Util.arrays.updateItem<Recipe>(this.recipes, rec => rec.id === recipe.id, recipe); 
+    this.emitRecipesList(); 
+  }
+
   getEmptyForm(): FormGroup {
     return new FormGroup({
       'id': new FormControl(null),
       'name': new FormControl(null, Validators.required),
       'description': new FormControl(null, Validators.required),
-      'imagePath': new FormControl(null, Validators.required),
-      'ingredients': new FormArray([])
+      'imagePath': new FormControl(null),
+      'ingredients': new FormArray([this.ingredientsService.getEmptyForm()])
     });
   }
 
@@ -47,8 +63,12 @@ export class RecipeService {
       'id': new FormControl(recipe.id),
       'name': new FormControl(recipe.name, Validators.required),
       'description': new FormControl(recipe.description, Validators.required),
-      'imagePath': new FormControl(recipe.imagePath, Validators.required),
+      'imagePath': new FormControl(recipe.imagePath),
       'ingredients': ingredients
     })
+  }
+
+  private emitRecipesList(): void {
+    this.recipesChanged.next(this.recipes.slice());
   }
 }
