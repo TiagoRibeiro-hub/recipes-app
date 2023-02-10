@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Ingredient, MetricUnit } from 'src/app/models/ingredients/ingredient.model';
 import { Recipe } from 'src/app/models/recipes/recipe.model';
 import { ShoppingListService } from '../shopping-list/shopping-list.service';
@@ -35,9 +35,20 @@ export class RecipeService {
   getEmptyForm(): FormGroup {
     return new FormGroup({
       'id': new FormControl(null),
-      'name': new FormControl(null),
-      'description': new FormControl(null),
-      'imagePath': new FormControl(null) 
+      'name': new FormControl(null, Validators.required),
+      'description': new FormControl(null, Validators.required),
+      'imagePath': new FormControl(null, Validators.required),
+      'ingredients': new FormArray([])
     });
+  }
+
+  getForm(recipe: Recipe, ingredients: FormArray): FormGroup {
+    return new FormGroup({
+      'id': new FormControl(recipe.id),
+      'name': new FormControl(recipe.name, Validators.required),
+      'description': new FormControl(recipe.description, Validators.required),
+      'imagePath': new FormControl(recipe.imagePath, Validators.required),
+      'ingredients': ingredients
+    })
   }
 }

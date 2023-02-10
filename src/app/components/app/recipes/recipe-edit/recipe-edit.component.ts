@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormArray, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Data } from '@angular/router';
 import { appResolvers } from 'src/app/constants/constants';
 import { MetricUnitMapping, MetricUnitToDropDownForm } from 'src/app/models/ingredients/ingredient.model';
-import { RecipeService } from 'src/app/services/recipes/recipe.service';
+import { IngredientsService } from 'src/app/services/ingredients/ingredients.service';
 import { RecipeEdit } from './resolver/recipe-edit-resolver';
 
 @Component({
@@ -21,9 +21,15 @@ export class RecipeEditComponent implements OnInit {
   srcImage: string;
 
   constructor(
-    private activatedRoute: ActivatedRoute) {
+    private activatedRoute: ActivatedRoute,
+    private ingredientsService: IngredientsService) {
 
   }
+
+  get controls() { 
+    return (<FormArray>this.recipeForm.get('ingredients')).controls;  
+  }
+
   ngOnInit(): void {
     this.activatedRoute.data.subscribe((data: Data) => { 
       this.recipeEdit = data[appResolvers.RECIPE_EDIT];
@@ -38,9 +44,8 @@ export class RecipeEditComponent implements OnInit {
     console.log(this.recipeForm);
   }
 
-  // get controls() { // a getter!
-  //   return (<FormArray>this.recipeForm.get('ingredients')).controls;
-  //   *ngFor="let ingredientCtrl of controls; let i = index"
-  // }
+  onAddIngedient(): void {
+    this.controls.push(this.ingredientsService.getEmptyForm())
+  }
 
 }

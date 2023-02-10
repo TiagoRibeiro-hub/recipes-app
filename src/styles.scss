@@ -29,7 +29,9 @@ a, button, .form-select {
     }
 }
 
-.form-check-input,.form-select {
+.form-control,
+.form-check-input,
+.form-select {
     &:checked {
         background-color: var(--light-grey);
         border-color: var(--light-grey);
@@ -40,6 +42,12 @@ a, button, .form-select {
         outline-offset: 2px;
         outline: 1.5px solid black;
     }
+}
+
+.form-control.ng-invalid.ng-touched,
+select.ng-invalid.ng-touched {
+    border-color: red !important;
+    outline: 1.5px solid red;
 }
 
 :disabled {

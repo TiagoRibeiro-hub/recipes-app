@@ -1,8 +1,9 @@
 import { Injectable } from "@angular/core";
-import { FormControl, FormGroup } from "@angular/forms";
+import { FormArray, FormControl, FormGroup } from "@angular/forms";
 import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from "@angular/router";
 import { Observable } from "rxjs";
-import { Recipe } from "src/app/models/recipes/recipe.model";
+import { EmptyRecipe, Recipe } from "src/app/models/recipes/recipe.model";
+import { IngredientsService } from "src/app/services/ingredients/ingredients.service";
 import { RecipeService } from "src/app/services/recipes/recipe.service";
 
 export interface RecipeEdit {
@@ -15,35 +16,33 @@ export interface RecipeEdit {
     providedIn: 'root'
   })
 export class RecipeEditResolver implements Resolve<RecipeEdit> {
-    recipeToEdit: Recipe;
-    editMode: boolean = false;
-
-    constructor(
-        private recipeService: RecipeService
-    ) { }
+      constructor(
+        private recipeService: RecipeService,
+        private ingredientsService: IngredientsService) { }
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): RecipeEdit | Observable<RecipeEdit> | Promise<RecipeEdit> {
         const id = route.params['id'];
-        this.editMode = id !== undefined;
-        if (this.editMode) {
-            this.recipeToEdit = this.recipeService.getRecipeById(id);
-        };
+        const editMode = id !== undefined;
+
+        let recipeToEdit = editMode ? this.recipeService.getRecipeById(id) : undefined;
+        let form: FormGroup;
+
+        if(recipeToEdit === undefined) {
+            form = this.recipeService.getEmptyForm();
+        }
+        else {
+            let formArray = new FormArray([]);
+            if (recipeToEdit['ingredients']) {
+                formArray = this.ingredientsService.getFormArray(recipeToEdit.ingredients);
+            }
+            form = this.recipeService.getForm(recipeToEdit, formArray);
+        }
+
         return {
-            editMode: this.editMode,
-            get: this.recipeToEdit,
-            form: this.initForm()
+            editMode: editMode,
+            get: recipeToEdit,
+            form: form 
         };        
     }
-
-    private initForm(): FormGroup {  
-      return this.editMode 
-        ? new FormGroup({
-            'id': new FormControl(this.recipeToEdit.id),
-            'name': new FormControl(this.recipeToEdit.name),
-            'description': new FormControl(this.recipeToEdit.description),
-            'imagePath': new FormControl(this.recipeToEdit.imagePath) 
-          })
-        : this.recipeService.getEmptyForm();
-      }
 
 }
