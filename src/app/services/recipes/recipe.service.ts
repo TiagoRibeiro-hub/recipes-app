@@ -48,6 +48,11 @@ export class RecipeService {
     this.emitRecipesList(); 
   }
 
+  delete(recipe: Recipe): void {
+    this.recipes = Util.arrays.removeItem<Recipe>(this.recipes, rec => rec.id === recipe.id); 
+    this.emitRecipesList(); 
+  }
+
   getEmptyForm(): FormGroup {
     return new FormGroup({
       'id': new FormControl(null),

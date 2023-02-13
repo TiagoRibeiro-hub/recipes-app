@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { appRegex } from 'src/app/constants/constants';
 import { Ingredient } from 'src/app/models/ingredients/ingredient.model';
 
 @Injectable({
@@ -28,7 +29,7 @@ export class IngredientsService {
   private amountValidators() {
     return [
       Validators.required,
-      Validators.pattern(/^[+]?([.]\d+|\d+[.]?\d*)$/)
+      Validators.pattern(appRegex.POSITIVE_NR)
     ];
   }
 
