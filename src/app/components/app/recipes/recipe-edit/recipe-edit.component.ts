@@ -42,6 +42,8 @@ export class RecipeEditComponent implements OnInit {
   }
 
   onSubmit():void {
+
+    // ID TEMP
     if(this.controls.length > 0) {
       for(var i = 0; i < this.controls.length; i++) {
         (<FormControl>this.controls[i].get('id')).setValue(new Date().getMilliseconds().toString() + i);
