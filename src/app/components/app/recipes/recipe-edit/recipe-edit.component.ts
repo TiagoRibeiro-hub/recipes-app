@@ -51,7 +51,6 @@ export class RecipeEditComponent implements OnInit {
       }
     });
     this.onGroupFormValueChange();
-    console.log(this.controls);
   }
 
   onSubmit(): void {

@@ -46,7 +46,7 @@ export class FormGroupService {
         switch (formArray.name) {
           case key: {
             isFormArray = true;
-            this.formControlService.addControl(formGroup, key, formArray.array);
+            this.formControlService.addControlFormArray(formGroup, key, formArray.array);
             break;
           }
           default: break;

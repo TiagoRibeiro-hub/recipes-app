@@ -32,8 +32,8 @@ export class FormsService {
     return  this.formControlService.getFromFormArray(form, formControlName, index);
   }
   // FORM ARRAY
-  getFormArray(form: FormGroup): FormArray {
-    return this.formArrayService.getFormArray(form);
+  getFormArray(form: FormGroup, formArrayName: string): FormArray {
+    return this.formArrayService.getFormArray(form, formArrayName);
   }
 
   clearFormArray(form: FormGroup, formArrayName: string): void {

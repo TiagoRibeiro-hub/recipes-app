@@ -19,4 +19,8 @@ export class FormControlService {
   addControl(formGroup: FormGroup, key: string, value: any): void{
     formGroup.addControl(key, new FormControl(value));
   }
+
+  addControlFormArray(formGroup: FormGroup, key: string, value: FormArray): void{
+    formGroup.addControl(key, value);
+  }
 }

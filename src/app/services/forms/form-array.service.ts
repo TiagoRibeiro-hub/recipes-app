@@ -7,8 +7,8 @@ import { FormArray, FormGroup } from '@angular/forms';
 export class FormArrayService {
   constructor() {}
 
-  getFormArray(form: FormGroup): FormArray {
-    return <FormArray>form.get('ingredients');
+  getFormArray(form: FormGroup, formArrayName: string): FormArray {
+    return <FormArray>form.get(formArrayName);
   }
 
   clearFormArray(form: FormGroup, formArrayName: string): void {

@@ -71,7 +71,7 @@ export class RecipeService {
     //   'name': new FormControl(recipe.name, Validators.required),
     //   'description': new FormControl(recipe.description, Validators.required),
     //   'imagePath': new FormControl(recipe.imagePath),
-    //   'ingredients': ingredients
+    //   'ingredients': ingredients FomrArray
     // })
   }
 
