@@ -4,6 +4,8 @@ import { Subject } from 'rxjs';
 import { Ingredient, MetricUnit } from 'src/app/models/ingredients/ingredient.model';
 import { Recipe } from 'src/app/models/recipes/recipe.model';
 import { Util } from 'src/app/shared/utils/util';
+import { IFormArrays } from '../forms/form-group.service';
+import { FormsService } from '../forms/forms.service';
 import { IngredientsService } from '../ingredients/ingredients.service';
 import { ShoppingListService } from '../shopping-list/shopping-list.service';
 
@@ -24,7 +26,8 @@ export class RecipeService {
 
   constructor(
     private shoppingListService: ShoppingListService,
-    private ingredientsService: IngredientsService) { }
+    private ingredientsService: IngredientsService,
+    private formService: FormsService) { }
 
   get() : Recipe[]{
     return this.recipes.slice();
@@ -54,23 +57,22 @@ export class RecipeService {
   }
 
   getEmptyForm(): FormGroup {
-    return new FormGroup({
-      'id': new FormControl(null),
-      'name': new FormControl(null, Validators.required),
-      'description': new FormControl(null, Validators.required),
-      'imagePath': new FormControl(null),
-      'ingredients': new FormArray([this.ingredientsService.getEmptyForm()])
-    });
+    let array: IFormArrays[] = [
+      this.ingredientsService.getIFormArrays(undefined)
+    ]; 
+    return this.formService.getEmptyForm(Recipe.empty(), array);
   }
 
-  getForm(recipe: Recipe, ingredients: FormArray): FormGroup {
-    return new FormGroup({
-      'id': new FormControl(recipe.id),
-      'name': new FormControl(recipe.name, Validators.required),
-      'description': new FormControl(recipe.description, Validators.required),
-      'imagePath': new FormControl(recipe.imagePath),
-      'ingredients': ingredients
-    })
+  getForm(recipe: Recipe, iFormArrays: IFormArrays[]): FormGroup {
+    return this.formService.getForm(recipe, iFormArrays);
+
+    // return new FormGroup({
+    //   'id': new FormControl(recipe.id),
+    //   'name': new FormControl(recipe.name, Validators.required),
+    //   'description': new FormControl(recipe.description, Validators.required),
+    //   'imagePath': new FormControl(recipe.imagePath),
+    //   'ingredients': ingredients
+    // })
   }
 
   private emitRecipesList(): void {

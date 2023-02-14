@@ -3,6 +3,7 @@ import { FormArray, FormGroup } from "@angular/forms";
 import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from "@angular/router";
 import { Observable } from "rxjs";
 import { Recipe } from "src/app/models/recipes/recipe.model";
+import { IFormArrays } from "src/app/services/forms/form-group.service";
 import { IngredientsService } from "src/app/services/ingredients/ingredients.service";
 import { RecipeService } from "src/app/services/recipes/recipe.service";
 
@@ -22,7 +23,7 @@ export class RecipeEditResolver implements Resolve<RecipeEdit> {
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): RecipeEdit | Observable<RecipeEdit> | Promise<RecipeEdit> {
         const id = route.params['id'];
-        const editMode = id !== undefined;
+        const editMode = id != undefined;
 
         let recipeToEdit = editMode ? this.recipeService.getById(id) : undefined;
         let form: FormGroup;
@@ -31,9 +32,9 @@ export class RecipeEditResolver implements Resolve<RecipeEdit> {
             form = this.recipeService.getEmptyForm();
         }
         else {
-            let formArray = new FormArray([]);
+            let formArray: IFormArrays[] = [];
             if (recipeToEdit['ingredients']) {
-                formArray = this.ingredientsService.getFormArray(recipeToEdit.ingredients);
+                formArray.push(this.ingredientsService.getIFormArrays(recipeToEdit.ingredients));
             }
             form = this.recipeService.getForm(recipeToEdit, formArray);
         }

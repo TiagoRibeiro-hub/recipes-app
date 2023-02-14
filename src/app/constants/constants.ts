@@ -1,3 +1,7 @@
+export const appConstants = {
+    SRC_IMG_TEMP: '../../assets/imgs/food_template.png',
+}
+
 export const appRoute = {
     RECIPES: 'recipes',
     SHOPPING_LIST: 'shopping-list',
@@ -11,10 +15,6 @@ export const appRoute = {
 export const appResolvers = {
     RECIPE_DETAIL: 'recipeDetail',
     RECIPE_EDIT: 'recipeEdit',
-}
-
-export const appConstants = {
-    SRC_IMG_TEMP: '../../assets/imgs/food_template.png',
 }
 
 export const appRegex = {

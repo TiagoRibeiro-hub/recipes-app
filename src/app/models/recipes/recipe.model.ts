@@ -1,16 +1,19 @@
+import { BaseModel } from "../baseModel";
 import { Ingredient } from "../ingredients/ingredient.model";
 
-export class Recipe {
+export class Recipe extends BaseModel {
     constructor(
         public id: string,
-        public name: string, 
-        public description: string, 
+        public name: string,
+        public description: string,
         public imagePath: string,
         public ingredients: Ingredient[] = []
-        ) { }
+    ) {
+        super(id);
+    }
 
-    static emptyRecipe(): Recipe {
-        return new Recipe("", "", "", "", [])
+    static empty(): Recipe {
+        return new Recipe('', '', '', '', [])
     }
 
 }
