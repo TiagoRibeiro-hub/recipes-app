@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { FormArray, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { FormGroup, Validators } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { Ingredient, MetricUnit } from 'src/app/models/ingredients/ingredient.model';
 import { Recipe } from 'src/app/models/recipes/recipe.model';
@@ -62,14 +62,12 @@ export class RecipeService {
     ]; 
     let formGroup = this.formService.getEmptyForm(Recipe.empty(), array);
     this.setValidators(formGroup);
-    // formGroup.addValidators(this.allIngredientsValid);
     return formGroup;
   }
 
   getForm(recipe: Recipe, iFormArrays: IFormArrays[]): FormGroup {
     let formGroup = this.formService.getForm(recipe, iFormArrays);
     this.setValidators(formGroup);
-    // formGroup.addValidators(this.allIngredientsValid);
     return formGroup;
 
   }
@@ -87,16 +85,6 @@ export class RecipeService {
     });
   }
 
-  // private allIngredientsValid(controls: FormGroup): ValidationErrors | null {
-
-  //   if(controls.value != undefined){
-  //     console.log(controls);
-  //   }
-
-  //   return {
-  //     'allIngredientsValid': true
-  //   }
-  // }
 
   private emitRecipesList(): void {
     this.recipesChanged.next(this.recipes.slice());

@@ -95,7 +95,9 @@ export class RecipeEditComponent implements OnInit {
   }
 
   onClear(): void {
-    this.recipeForm.reset()
+    this.recipeForm.reset();
+    this.formArray.clear();
+    this.onAddIngedient();
   }
 
   onGroupFormValueChange(): void {

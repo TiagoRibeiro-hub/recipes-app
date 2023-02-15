@@ -4,11 +4,11 @@
             <input id="recipe_id" hidden formControlName="id">
             <div class="row  mb-3">
                 <div class="col-xs-12 d-flex justify-content-end">
-                    <button type="submit" class="btn btn-success me-3" 
-                        [disabled]="!this.recipeForm.valid">{{ !this.recipeEdit.editMode ? 'Save' : 'Update' }}
+                    <button type="submit" class="btn btn-success me-3" [disabled]="!this.recipeForm.valid">{{
+                        !this.recipeEdit.editMode ? 'Save' : 'Update' }}
                     </button>
-                    <button  type="button" class="btn btn-danger me-3" (click)="onCancel()">Cancel</button>
-                    <button  type="button" class="btn btn-primary" (click)="onClear()">Clear</button>
+                    <button type="button" class="btn btn-danger me-3" (click)="onCancel()">Cancel</button>
+                    <button type="button" class="btn btn-primary" (click)="onClear()">Clear</button>
                 </div>
             </div>
             <div class="row mb-3">
@@ -16,7 +16,7 @@
                     <div class="form-group">
                         <label for="name">Name</label>
                         <input type="text" id="name" class="form-control" formControlName="name">
-                    </div>    
+                    </div>
                 </div>
             </div>
             <div class="row mb-3">
@@ -24,21 +24,22 @@
                     <div class="form-group">
                         <label for="imagePath">Image Url</label>
                         <input type="text" id="imagePath" class="form-control" formControlName="imagePath">
-                    </div>    
+                    </div>
                 </div>
             </div>
             <div class="row mb-3" *ngIf="this.srcImage !== ''">
                 <div class="col-xs-12 d-flex justify-content-center">
-                    <img src="{{ this.srcImage }}" alt="image" class="img-fluid rounded" style="height: 250px">   
+                    <img src="{{ this.srcImage }}" alt="image" class="img-fluid rounded" style="height: 250px">
                 </div>
             </div>
             <div class="row  mb-3">
                 <div class="col-xs-12">
                     <div class="form-group">
                         <label for="description">Description</label>
-                        <textarea type="text" id="description" class="form-control" rows="4" formControlName="description">
+                        <textarea type="text" id="description" class="form-control" rows="4"
+                            formControlName="description">
                         </textarea>
-                    </div>    
+                    </div>
                 </div>
             </div>
             <!-- PASS TO COMPONENT -->
@@ -46,36 +47,43 @@
                 <h5>INGREDIENTS LIST:</h5>
                 <div class="col-xs-12 mt-2" formArrayName="ingredients">
                     <div *ngFor="let ingredientCtrl of this.controls; let i = index" [formGroupName]="i">
-                        <input id="ingredient_id" hidden formControlName="id">
-                        <div class="row mb-3">
-                            <div class="col-12 form-group">
-                                <label for="name">Name</label>
-                                <input type="text" id="name" class="form-control" formControlName="name">
+                        <ng-container>
+                            <input id="ingredient_id" hidden formControlName="id">
+                            <div class="row mb-3">
+                                <div class="col-12 form-group">
+                                    <label for="name">Name</label>
+                                    <input type="text" id="name" class="form-control" formControlName="name">
+                                </div>
                             </div>
-                        </div>  
-                        <div class="row mb-3">
-                            <div class="col-5 form-group">
-                                <label for="amount">Amount</label>
-                                <input type="number" id="amount" class="form-control" formControlName="amount">
+                            <div class="row mb-3">
+                                <div class="col-5 form-group">
+                                    <label for="amount">Amount</label>
+                                    <input type="number" id="amount" class="form-control" formControlName="amount">
+                                </div>
+                                <div class="col-5 form-group">
+                                    <label for="amount">Metric Unit</label>
+                                    <select class="form-select" formControlName="metricUnit">
+                                        <option *ngFor="let _metricUnit of this.metricUnitEnums" [value]="_metricUnit">
+                                            {{ this.metricUnitMapping[_metricUnit] }}
+                                        </option>
+                                    </select>
+                                </div>
+                                <ng-container>
+                                    <div class="col-2 form-group d-flex justify-content-center align-items-center"
+                                    *ngIf="i > 0">
+                                    <button type="button" class="btn btn-danger"
+                                        (click)="onDeleteIngredient(i)">X</button>
+                                </div>
+                                </ng-container>
                             </div>
-                            <div class="col-5 form-group">
-                                <label for="amount">Metric Unit</label>
-                                <select class="form-select" formControlName="metricUnit">
-                                    <option *ngFor="let _metricUnit of this.metricUnitEnums" [value]="_metricUnit">
-                                    {{ this.metricUnitMapping[_metricUnit] }}
-                                    </option>
-                                </select>
-                            </div>
-                            <div class="col-2 form-group d-flex justify-content-center align-items-center" *ngIf="i > 0">
-                                <button type="button" class="btn btn-danger" (click)="onDeleteIngredient(i)">X</button>
-                            </div>
-                        </div>  
+                        </ng-container>
                         <hr>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-xs-12">
-                        <button type="button" class="btn btn-success float-end" (click)="onAddIngedient()">Add Ingredient</button>
+                        <button type="button" class="btn btn-success float-end" (click)="onAddIngedient()">Add
+                            Ingredient</button>
                     </div>
                 </div>
             </div>

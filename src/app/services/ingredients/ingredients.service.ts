@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { FormArray, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { Observable } from 'rxjs';
 import { appRegex } from 'src/app/constants/constants';
 import { Ingredient } from 'src/app/models/ingredients/ingredient.model';
 import { IFormArrays } from '../forms/form-group.service';
@@ -34,6 +35,7 @@ export class IngredientsService {
     for (let ingredient of ingredients) {
       formArray.push(this.getForm(ingredient));
     };
+    formArray.addValidators(this.allIngredientsValid);
     return formArray;
   }
 
@@ -56,7 +58,7 @@ export class IngredientsService {
           formGroup.controls[key].addValidators(Validators.required);
           break;
         case 'amount': 
-        formGroup.controls[key].addValidators(this.amountValidators());
+        formGroup.controls[key].addValidators(this.amountValidators);
           break;
         case 'metricUnit': 
         formGroup.controls[key].addValidators(Validators.required);
@@ -65,11 +67,21 @@ export class IngredientsService {
     });
   }
 
-  private amountValidators() {
+  private amountValidators(): ValidatorFn[] {
     return [
       Validators.required,
       Validators.pattern(appRegex.POSITIVE_NR)
     ];
   }
 
+  private allIngredientsValid(controls: FormGroup): ValidationErrors | null {
+
+    if(controls.value != undefined){
+      console.log(controls);
+    }
+
+    return {
+      'allIngredientsValid': true
+    }
+  }
 }
