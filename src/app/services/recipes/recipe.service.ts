@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { Ingredient, MetricUnit } from 'src/app/models/ingredients/ingredient.model';
 import { Recipe } from 'src/app/models/recipes/recipe.model';
@@ -52,28 +52,51 @@ export class RecipeService {
   }
 
   delete(recipe: Recipe): void {
-    this.recipes = Util.arrays.removeItem<Recipe>(this.recipes, rec => rec.id === recipe.id); 
+    this.recipes = Util.arrays.removeItem<Recipe>(this.recipes, rec => rec.id !== recipe.id); 
     this.emitRecipesList(); 
   }
 
   getEmptyForm(): FormGroup {
     let array: IFormArrays[] = [
-      this.ingredientsService.getIFormArrays(undefined)
+      this.ingredientsService.getIFormArrays([])
     ]; 
-    return this.formService.getEmptyForm(Recipe.empty(), array);
+    let formGroup = this.formService.getEmptyForm(Recipe.empty(), array);
+    this.setValidators(formGroup);
+    // formGroup.addValidators(this.allIngredientsValid);
+    return formGroup;
   }
 
   getForm(recipe: Recipe, iFormArrays: IFormArrays[]): FormGroup {
-    return this.formService.getForm(recipe, iFormArrays);
+    let formGroup = this.formService.getForm(recipe, iFormArrays);
+    this.setValidators(formGroup);
+    // formGroup.addValidators(this.allIngredientsValid);
+    return formGroup;
 
-    // return new FormGroup({
-    //   'id': new FormControl(recipe.id),
-    //   'name': new FormControl(recipe.name, Validators.required),
-    //   'description': new FormControl(recipe.description, Validators.required),
-    //   'imagePath': new FormControl(recipe.imagePath),
-    //   'ingredients': ingredients FomrArray
-    // })
   }
+
+  private setValidators(formGroup: FormGroup): void {
+    Object.keys(formGroup.controls).forEach((key) => {
+      switch (key) {
+        case 'name': 
+          formGroup.controls[key].addValidators(Validators.required);
+          break;
+        case 'description': 
+        formGroup.controls[key].addValidators(Validators.required);
+          break;
+      }
+    });
+  }
+
+  // private allIngredientsValid(controls: FormGroup): ValidationErrors | null {
+
+  //   if(controls.value != undefined){
+  //     console.log(controls);
+  //   }
+
+  //   return {
+  //     'allIngredientsValid': true
+  //   }
+  // }
 
   private emitRecipesList(): void {
     this.recipesChanged.next(this.recipes.slice());

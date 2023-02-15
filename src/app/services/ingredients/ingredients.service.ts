@@ -21,12 +21,11 @@ export class IngredientsService {
 
   getForm(ingredient: Ingredient): FormGroup {
     let formGroup = this.formsService.getForm(ingredient);
-    // validators
+    this.setValidators(formGroup);
     return formGroup;
   }
 
   getEmptyFormArray(): FormArray {
-    //return new FormArray([this.getEmptyForm()], Validators.required)
     return new FormArray([this.getEmptyForm()])
   }
 
@@ -39,7 +38,7 @@ export class IngredientsService {
   }
 
   getIFormArrays(ingredients: Ingredient[]): IFormArrays {
-    return ingredients.length == 0
+    return ingredients.length == 0 
       ? {
         name: 'ingredients',
         array: this.getEmptyFormArray()

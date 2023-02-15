@@ -72,7 +72,7 @@ export class RecipeEditComponent implements OnInit {
       );
     }
     const image = <FormControl>this.recipeForm.get('imagePath');
-    if (image.value == '') {
+    if (image.value == '' || image.value == undefined) {
       image.setValue(appConstants.SRC_IMG_TEMP);
     }
     this.recipeEdit.editMode
@@ -87,14 +87,18 @@ export class RecipeEditComponent implements OnInit {
   }
 
   onDeleteIngredient(index: number): void {
-    this.formArray.removeAt(index);
+      this.formArray.removeAt(index);
   }
 
   onCancel(): void {
     this.navigationService.navigatePrevious(this.activatedRoute);
   }
 
-  onGroupFormValueChange() {
+  onClear(): void {
+    this.recipeForm.reset()
+  }
+
+  onGroupFormValueChange(): void {
     const initialValue = this.recipeForm.value;
     this.recipeForm.valueChanges.subscribe((form) => {
       Object.keys(initialValue).some((key) => {

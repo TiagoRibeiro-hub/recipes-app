@@ -8,28 +8,27 @@ export class Util {
 
     static arrays = class {
         static insertOrRemoveItem<T>(array: T[], predicate: any, condition: boolean, arrayOptional: T[] = undefined): T[] {
-            debugger // see predicate
-            if(arrayOptional === undefined) {
+            if (arrayOptional === undefined) {
                 arrayOptional = array;
             }
             const value = array.find(predicate);
-            if(condition) {
+            if (condition) {
                 arrayOptional.push(value);
             } else {
                 arrayOptional = this.removeItem(arrayOptional, obj => obj !== value);
             }
             return arrayOptional;
         }
-    
+
         static removeItem<T>(array: T[], predicate: any): T[] {
             return array.filter(predicate);
-    
+
         }
 
         static updateItem<T>(array: T[], predicate: any, item: T): void {
             const index = array.findIndex(predicate);
             array[index] = item;
-    
+
         }
     };
 }
