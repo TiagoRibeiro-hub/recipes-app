@@ -61,7 +61,7 @@
                             </div>
                             <div class="col-5 form-group">
                                 <label for="amount">Metric Unit</label>
-                                <select class="form-select" formControlName="metricUnit">
+                                <select class="form-select" id="metricUnit" formControlName="metricUnit">
                                     <option *ngFor="let _metricUnit of this.metricUnitEnums" [value]="_metricUnit">
                                         {{ this.metricUnitMapping[_metricUnit] }}
                                     </option>
