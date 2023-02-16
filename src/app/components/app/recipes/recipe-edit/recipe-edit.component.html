@@ -47,36 +47,33 @@
                 <h5>INGREDIENTS LIST:</h5>
                 <div class="col-xs-12 mt-2" formArrayName="ingredients">
                     <div *ngFor="let ingredientCtrl of this.controls; let i = index" [formGroupName]="i">
-                        <ng-container>
-                            <input id="ingredient_id" hidden formControlName="id">
-                            <div class="row mb-3">
-                                <div class="col-12 form-group">
-                                    <label for="name">Name</label>
-                                    <input type="text" id="name" class="form-control" formControlName="name">
-                                </div>
+                        <input id="ingredient_id" hidden formControlName="id" />
+                        <div class="row mb-3">
+                            <div class="col-12 form-group">
+                                <label for="name">Name</label>
+                                <input type="text" id="name" class="form-control" formControlName="name" />
                             </div>
-                            <div class="row mb-3">
-                                <div class="col-5 form-group">
-                                    <label for="amount">Amount</label>
-                                    <input type="number" id="amount" class="form-control" formControlName="amount">
-                                </div>
-                                <div class="col-5 form-group">
-                                    <label for="amount">Metric Unit</label>
-                                    <select class="form-select" formControlName="metricUnit">
-                                        <option *ngFor="let _metricUnit of this.metricUnitEnums" [value]="_metricUnit">
-                                            {{ this.metricUnitMapping[_metricUnit] }}
-                                        </option>
-                                    </select>
-                                </div>
-                                <ng-container>
-                                    <div class="col-2 form-group d-flex justify-content-center align-items-center"
-                                    *ngIf="i > 0">
-                                    <button type="button" class="btn btn-danger"
-                                        (click)="onDeleteIngredient(i)">X</button>
-                                </div>
-                                </ng-container>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-5 form-group">
+                                <label for="amount">Amount</label>
+                                <input type="number" id="amount" class="form-control" formControlName="amount" />
                             </div>
-                        </ng-container>
+                            <div class="col-5 form-group">
+                                <label for="amount">Metric Unit</label>
+                                <select class="form-select" formControlName="metricUnit">
+                                    <option *ngFor="let _metricUnit of this.metricUnitEnums" [value]="_metricUnit">
+                                        {{ this.metricUnitMapping[_metricUnit] }}
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="col-2 form-group d-flex justify-content-center align-items-center"
+                                *ngIf="i > 0">
+                                <button type="button" class="btn btn-danger" (click)="onDeleteIngredient(i)">
+                                    X
+                                </button>
+                            </div>
+                        </div>
                         <hr>
                     </div>
                 </div>

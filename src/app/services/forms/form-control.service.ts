@@ -8,7 +8,7 @@ export class FormControlService {
 
   constructor() { }
 
-  getFromFormGroup(form: FormGroup, formControlName: string): FormControl {
+  get(form: FormGroup, formControlName: string): FormControl {
     return  (<FormControl>form.get(formControlName));
   }
 
@@ -16,11 +16,15 @@ export class FormControlService {
     return  (<FormControl>form.controls[index].get(formControlName));
   }
 
-  addControl(formGroup: FormGroup, key: string, value: any): void{
+  addControl(formGroup: FormGroup, key: string, value: FormGroup): void{
     formGroup.addControl(key, new FormControl(value));
   }
 
   addControlFormArray(formGroup: FormGroup, key: string, value: FormGroup): void{
     formGroup.addControl(key, new FormArray([value]));
+  }
+
+  addControlToFormArray(formGroup: FormGroup, key: string, value: FormGroup): void{
+    (<FormArray>formGroup.get(key)).push(value);
   }
 }

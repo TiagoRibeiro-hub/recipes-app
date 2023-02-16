@@ -18,6 +18,7 @@ import { RecipeEditComponent } from './components/app/recipes/recipe-edit/recipe
 import { HeaderComponent } from './shell/header/header.component';
 import { SpinnerComponent } from './shell/spinner/spinner.component';
 import { SharedIngredientsListComponent } from './shared/components/ingredients/ingredients-list/shared-ingredients-list.component';
+import { IngredientsFormComponent } from './shared/components/ingredients/ingredients-form/ingredients-form.component';
 
 @NgModule({
     declarations: [
@@ -36,6 +37,7 @@ import { SharedIngredientsListComponent } from './shared/components/ingredients/
         RecipeEditComponent,
         SpinnerComponent,
         HeaderComponent,
+        IngredientsFormComponent
     ],
     providers: [],
     bootstrap: [AppComponent],

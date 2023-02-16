@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { BaseModel } from 'src/app/models/baseModel';
 import { FormControlService } from './form-control.service';
 
@@ -54,7 +54,12 @@ export class FormGroupService {
         switch (formGroupArray.name) {
           case key: {
             isFormArray = true;
-            this.formControlService.addControlFormArray(formGroup, key, formGroupArray.formGroup);
+            if(formGroup.contains(key)){
+              this.formControlService.addControlToFormArray(formGroup, key, formGroupArray.formGroup);
+            }
+            else {
+              this.formControlService.addControlFormArray(formGroup, key, formGroupArray.formGroup);
+            }
             break;
           }
           default: break;

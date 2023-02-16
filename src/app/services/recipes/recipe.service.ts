@@ -55,30 +55,3 @@ export class RecipeService {
     this.recipesChanged.next(this.recipes.slice());
   }
 }
-
-  // getEmptyForm(): FormGroup {
-  //   let array: IFormGroupArrays[] = [];
-  //   let formGroup = this.formService.getEmptyForm(Recipe.empty(), array);
-  //   this.setValidators(formGroup);
-  //   return formGroup;
-  // }
-
-  // getForm(recipe: Recipe, iFormArrays: IFormGroupArrays[]): FormGroup {
-  //   let formGroup = this.formService.getForm(recipe, iFormArrays);
-  //   this.setValidators(formGroup);
-  //   return formGroup;
-
-  // }
-
-  // private setValidators(formGroup: FormGroup): void {
-  //   Object.keys(formGroup.controls).forEach((key) => {
-  //     switch (key) {
-  //       case 'name':
-  //         formGroup.controls[key].addValidators(Validators.required);
-  //         break;
-  //       case 'description':
-  //       formGroup.controls[key].addValidators(Validators.required);
-  //         break;
-  //     }
-  //   });
-  // }

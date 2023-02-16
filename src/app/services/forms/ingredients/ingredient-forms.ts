@@ -28,7 +28,13 @@ export class IngredientForms {
   getFormArray(ingredients: Ingredient[] = undefined): IFormGroups[] {
     const formGroupsArray: IFormGroups[] = [];
 
-    if(ingredients === undefined) {
+    if(ingredients === undefined || ingredients.length === 0) {
+      formGroupsArray.push({
+        name: 'ingredients',
+        formGroup: this.getFormGroup()
+      });
+    }
+    else {
       for (let ingredient of ingredients) {
         let formArrayIngr = {
           name: 'ingredients',
@@ -36,12 +42,6 @@ export class IngredientForms {
         }
         formGroupsArray.push(formArrayIngr);
       };
-    }
-    else {
-      formGroupsArray.push({
-        name: 'ingredients',
-        formGroup: this.getFormGroup()
-      });
     }
 
     return formGroupsArray;

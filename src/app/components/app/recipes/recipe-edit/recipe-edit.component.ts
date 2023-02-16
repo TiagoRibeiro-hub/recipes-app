@@ -50,6 +50,7 @@ export class RecipeEditComponent implements OnInit {
             : this.recipeEdit.get.imagePath;
       }
     });
+    console.log(this.controls)
     this.onGroupFormValueChange();
   }
 

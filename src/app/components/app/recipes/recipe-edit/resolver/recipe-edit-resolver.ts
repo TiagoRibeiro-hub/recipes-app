@@ -3,7 +3,6 @@ import { FormGroup } from "@angular/forms";
 import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from "@angular/router";
 import { Observable } from "rxjs";
 import { Recipe } from "src/app/models/recipes/recipe.model";
-import { IFormGroups } from "src/app/services/forms/form-group.service";
 import { IngredientForms } from "src/app/services/forms/ingredients/ingredient-forms";
 import { IRecipeForms, RecipeForms } from "src/app/services/forms/recipes/recipe-forms";
 import { RecipeService } from "src/app/services/recipes/recipe.service";
@@ -36,9 +35,7 @@ export class RecipeEditResolver implements Resolve<RecipeEdit> {
         else {
             let iRecipeForms: IRecipeForms = {
                 recipes: recipeToEdit,
-                iFormGroupsArray: recipeToEdit['ingredients']
-                    ? this.ingredientForms.getFormArray(recipeToEdit.ingredients)
-                    : this.ingredientForms.getFormArray()
+                iFormGroupsArray: this.ingredientForms.getFormArray(recipeToEdit.ingredients)
             };
             form = this.recipeForms.getFormGroup(iRecipeForms);
         }
