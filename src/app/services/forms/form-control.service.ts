@@ -20,7 +20,7 @@ export class FormControlService {
     formGroup.addControl(key, new FormControl(value));
   }
 
-  addControlFormArray(formGroup: FormGroup, key: string, value: FormArray): void{
-    formGroup.addControl(key, value);
+  addControlFormArray(formGroup: FormGroup, key: string, value: FormGroup): void{
+    formGroup.addControl(key, new FormArray([value]));
   }
 }

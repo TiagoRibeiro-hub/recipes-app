@@ -4,9 +4,6 @@ import { Subject } from 'rxjs';
 import { Ingredient, MetricUnit } from 'src/app/models/ingredients/ingredient.model';
 import { Recipe } from 'src/app/models/recipes/recipe.model';
 import { Util } from 'src/app/shared/utils/util';
-import { IFormArrays } from '../forms/form-group.service';
-import { FormsService } from '../forms/forms.service';
-import { IngredientsService } from '../ingredients/ingredients.service';
 import { ShoppingListService } from '../shopping-list/shopping-list.service';
 
 @Injectable({
@@ -21,19 +18,17 @@ export class RecipeService {
       new Ingredient('2', 'Bread', 1, MetricUnit.KILOGRAM), new Ingredient('1', 'Egg Yolk', 2, MetricUnit.UNIT), new Ingredient('4', 'Seafood broth', 150, MetricUnit.LITER)
     ]),
   ];
-  
+
   recipesChanged = new Subject<Recipe[]>();
 
   constructor(
-    private shoppingListService: ShoppingListService,
-    private ingredientsService: IngredientsService,
-    private formService: FormsService) { }
+    private shoppingListService: ShoppingListService) { }
 
-  get() : Recipe[]{
+  get(): Recipe[] {
     return this.recipes.slice();
   }
 
-  getById(id: string) : Recipe {
+  getById(id: string): Recipe {
     return this.recipes.slice().find(recipe => recipe.id === id);;
   }
 
@@ -44,49 +39,46 @@ export class RecipeService {
   add(recipe: Recipe): void {
     this.recipes.push(recipe);
     this.emitRecipesList();
-  } 
+  }
 
   update(recipe: Recipe): void {
-    Util.arrays.updateItem<Recipe>(this.recipes, rec => rec.id === recipe.id, recipe); 
-    this.emitRecipesList(); 
+    Util.arrays.updateItem<Recipe>(this.recipes, rec => rec.id === recipe.id, recipe);
+    this.emitRecipesList();
   }
 
   delete(recipe: Recipe): void {
-    this.recipes = Util.arrays.removeItem<Recipe>(this.recipes, rec => rec.id !== recipe.id); 
-    this.emitRecipesList(); 
+    this.recipes = Util.arrays.removeItem<Recipe>(this.recipes, rec => rec.id !== recipe.id);
+    this.emitRecipesList();
   }
-
-  getEmptyForm(): FormGroup {
-    let array: IFormArrays[] = [
-      this.ingredientsService.getIFormArrays([])
-    ]; 
-    let formGroup = this.formService.getEmptyForm(Recipe.empty(), array);
-    this.setValidators(formGroup);
-    return formGroup;
-  }
-
-  getForm(recipe: Recipe, iFormArrays: IFormArrays[]): FormGroup {
-    let formGroup = this.formService.getForm(recipe, iFormArrays);
-    this.setValidators(formGroup);
-    return formGroup;
-
-  }
-
-  private setValidators(formGroup: FormGroup): void {
-    Object.keys(formGroup.controls).forEach((key) => {
-      switch (key) {
-        case 'name': 
-          formGroup.controls[key].addValidators(Validators.required);
-          break;
-        case 'description': 
-        formGroup.controls[key].addValidators(Validators.required);
-          break;
-      }
-    });
-  }
-
 
   private emitRecipesList(): void {
     this.recipesChanged.next(this.recipes.slice());
   }
 }
+
+  // getEmptyForm(): FormGroup {
+  //   let array: IFormGroupArrays[] = [];
+  //   let formGroup = this.formService.getEmptyForm(Recipe.empty(), array);
+  //   this.setValidators(formGroup);
+  //   return formGroup;
+  // }
+
+  // getForm(recipe: Recipe, iFormArrays: IFormGroupArrays[]): FormGroup {
+  //   let formGroup = this.formService.getForm(recipe, iFormArrays);
+  //   this.setValidators(formGroup);
+  //   return formGroup;
+
+  // }
+
+  // private setValidators(formGroup: FormGroup): void {
+  //   Object.keys(formGroup.controls).forEach((key) => {
+  //     switch (key) {
+  //       case 'name':
+  //         formGroup.controls[key].addValidators(Validators.required);
+  //         break;
+  //       case 'description':
+  //       formGroup.controls[key].addValidators(Validators.required);
+  //         break;
+  //     }
+  //   });
+  // }

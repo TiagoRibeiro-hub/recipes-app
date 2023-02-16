@@ -12,7 +12,7 @@ export class Ingredient extends BaseModel {
 
   static empty(): Ingredient {
     return new Ingredient('', '', 0, undefined)
-}
+  }
 
 }
 

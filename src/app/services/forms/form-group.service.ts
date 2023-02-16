@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { FormArray, FormGroup } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { BaseModel } from 'src/app/models/baseModel';
 import { FormControlService } from './form-control.service';
 
-export class IFormArrays {
+export class IFormGroupArrays {
   name: string;
-  array: FormArray;
+  formGroup: FormGroup;
 };
 
 @Injectable({
@@ -17,16 +17,24 @@ export class FormGroupService {
     private formControlService: FormControlService
   ) { }
 
-  getEmptyForm(model: BaseModel, formArrays: IFormArrays[] = undefined): FormGroup {
-    return !!formArrays
-      ? this.formWithFormArrays(model, formArrays, true)
-      : this.simpleForm(model, true)
+  getEmptyForm(model: BaseModel): FormGroup {
+    return this.simpleForm(model, true) 
   }
 
-  getForm(model: BaseModel, formArrays: IFormArrays[] = undefined): FormGroup {
-    return !!formArrays
-      ? this.formWithFormArrays(model, formArrays, false)
-      : this.simpleForm(model, false)
+  getForm(model: BaseModel): FormGroup {
+    return this.simpleForm(model, false)
+  }
+
+  getEmptyFormWithFormArrays(model: BaseModel, formGroupArrays: IFormGroupArrays[]): FormGroup {
+    if(formGroupArrays.length > 0) {
+      return this.formWithFormArrays(model, formGroupArrays, true);
+    }
+  }
+
+  getFormWithFormArrays(model: BaseModel, formGroupArrays: IFormGroupArrays[]): FormGroup {
+    if(formGroupArrays.length > 0) {
+      return this.formWithFormArrays(model, formGroupArrays, false);
+    }
   }
 
   private simpleForm(model: BaseModel, emptyModel: boolean): FormGroup {
@@ -38,15 +46,15 @@ export class FormGroupService {
     return formGroup;
   }
 
-  private formWithFormArrays(model: BaseModel, formArrays: IFormArrays[], emptyModel: boolean) {
+  private formWithFormArrays(model: BaseModel, formGroupArrays: IFormGroupArrays[], emptyModel: boolean) {
     let formGroup = new FormGroup({});
     let isFormArray = false;
     Object.keys(model).forEach((key) => {
-      formArrays.map((formArray) => {
-        switch (formArray.name) {
+      formGroupArrays.map((formGroupArray) => {
+        switch (formGroupArray.name) {
           case key: {
             isFormArray = true;
-            this.formControlService.addControlFormArray(formGroup, key, formArray.array);
+            this.formControlService.addControlFormArray(formGroup, key, formGroupArray.formGroup);
             break;
           }
           default: break;
