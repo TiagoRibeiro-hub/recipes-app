@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { FormGroup, Validators } from '@angular/forms';
 import { Recipe } from 'src/app/models/recipes/recipe.model';
-import { FormGroupService, IFormGroupArrays,  } from 'src/app/services/forms/form-group.service';
+import { FormGroupService, IFormGroups,  } from 'src/app/services/forms/form-group.service';
 import { IngredientForms } from '../ingredients/ingredient-forms';
 
-export interface RecipeForms {
+export interface IRecipeForms {
   recipes: Recipe;
-  iFormGroupArrays: IFormGroupArrays[];
+  iFormGroupsArray: IFormGroups[];
 }
 
 @Injectable({
@@ -19,20 +19,20 @@ export class RecipeForms {
     private ingredientForm: IngredientForms
   ) { }
 
-  getFormGroup(recipeForms: RecipeForms = undefined): FormGroup {
+  getFormGroup(recipeForms: IRecipeForms = undefined): FormGroup {
     let formGroup = new FormGroup({});
-    const formArrays: IFormGroupArrays[] = [];
+    const formGroupsArray: IFormGroups[] = [];
     let formArrayIngr = {
       name: 'ingredients',
       formGroup: undefined
     }
     if (recipeForms === undefined) {
       formArrayIngr.formGroup = this.ingredientForm.getFormGroup();
-      formArrays.push(formArrayIngr);
-      formGroup = this.formGroupService.getEmptyFormWithFormArrays(Recipe.empty(), formArrays);
+      formGroupsArray.push(formArrayIngr);
+      formGroup = this.formGroupService.getEmptyFormWithFormArrays(Recipe.empty(), formGroupsArray);
     }
     else {
-      formGroup = this.formGroupService.getFormWithFormArrays(recipeForms.recipes, recipeForms.iFormGroupArrays);
+      formGroup = this.formGroupService.getFormWithFormArrays(recipeForms.recipes, recipeForms.iFormGroupsArray);
     }
     this.setValidators(formGroup);
     return formGroup;

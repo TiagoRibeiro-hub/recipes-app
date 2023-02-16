@@ -3,7 +3,7 @@ import { FormGroup } from '@angular/forms';
 import { BaseModel } from 'src/app/models/baseModel';
 import { FormControlService } from './form-control.service';
 
-export class IFormGroupArrays {
+export class IFormGroups {
   name: string;
   formGroup: FormGroup;
 };
@@ -25,13 +25,13 @@ export class FormGroupService {
     return this.simpleForm(model, false)
   }
 
-  getEmptyFormWithFormArrays(model: BaseModel, formGroupArrays: IFormGroupArrays[]): FormGroup {
+  getEmptyFormWithFormArrays(model: BaseModel, formGroupArrays: IFormGroups[]): FormGroup {
     if(formGroupArrays.length > 0) {
       return this.formWithFormArrays(model, formGroupArrays, true);
     }
   }
 
-  getFormWithFormArrays(model: BaseModel, formGroupArrays: IFormGroupArrays[]): FormGroup {
+  getFormWithFormArrays(model: BaseModel, formGroupArrays: IFormGroups[]): FormGroup {
     if(formGroupArrays.length > 0) {
       return this.formWithFormArrays(model, formGroupArrays, false);
     }
@@ -46,7 +46,7 @@ export class FormGroupService {
     return formGroup;
   }
 
-  private formWithFormArrays(model: BaseModel, formGroupArrays: IFormGroupArrays[], emptyModel: boolean) {
+  private formWithFormArrays(model: BaseModel, formGroupArrays: IFormGroups[], emptyModel: boolean) {
     let formGroup = new FormGroup({});
     let isFormArray = false;
     Object.keys(model).forEach((key) => {

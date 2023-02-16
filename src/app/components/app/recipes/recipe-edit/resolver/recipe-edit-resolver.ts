@@ -3,8 +3,9 @@ import { FormGroup } from "@angular/forms";
 import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from "@angular/router";
 import { Observable } from "rxjs";
 import { Recipe } from "src/app/models/recipes/recipe.model";
-import { IFormArrays } from "src/app/services/forms/form-group.service";
-import { IngredientsService } from "src/app/services/ingredients/ingredients.service";
+import { IFormGroups } from "src/app/services/forms/form-group.service";
+import { IngredientForms } from "src/app/services/forms/ingredients/ingredient-forms";
+import { IRecipeForms, RecipeForms } from "src/app/services/forms/recipes/recipe-forms";
 import { RecipeService } from "src/app/services/recipes/recipe.service";
 
 export interface RecipeEdit {
@@ -15,11 +16,12 @@ export interface RecipeEdit {
 
 @Injectable({
     providedIn: 'root'
-  })
+})
 export class RecipeEditResolver implements Resolve<RecipeEdit> {
-      constructor(
+    constructor(
         private recipeService: RecipeService,
-        private ingredientsService: IngredientsService) { }
+        private recipeForms: RecipeForms,
+        private ingredientForms: IngredientForms) { }
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): RecipeEdit | Observable<RecipeEdit> | Promise<RecipeEdit> {
         const id = route.params['id'];
@@ -28,22 +30,24 @@ export class RecipeEditResolver implements Resolve<RecipeEdit> {
         let recipeToEdit = editMode ? this.recipeService.getById(id) : undefined;
         let form: FormGroup;
 
-        if(recipeToEdit === undefined) {
-            form = this.recipeService.getEmptyForm();
+        if (recipeToEdit === undefined) {
+            form = this.recipeForms.getFormGroup();
         }
         else {
-            let formArray: IFormArrays[] = [];
-            if (recipeToEdit['ingredients']) {
-                formArray.push(this.ingredientsService.getIFormArrays(recipeToEdit.ingredients));
-            }
-            form = this.recipeService.getForm(recipeToEdit, formArray);
+            let iRecipeForms: IRecipeForms = {
+                recipes: recipeToEdit,
+                iFormGroupsArray: recipeToEdit['ingredients']
+                    ? this.ingredientForms.getFormArray(recipeToEdit.ingredients)
+                    : this.ingredientForms.getFormArray()
+            };
+            form = this.recipeForms.getFormGroup(iRecipeForms);
         }
 
         return {
             editMode: editMode,
             get: recipeToEdit,
-            form: form 
-        };        
+            form: form
+        };
     }
 
 }

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { FormArray, FormGroup, Validators } from '@angular/forms';
 import { appRegex } from 'src/app/constants/constants';
-import { FormGroupService } from 'src/app/services/forms/form-group.service';
+import { FormGroupService, IFormGroups } from 'src/app/services/forms/form-group.service';
 import { Ingredient } from '../../../models/ingredients/ingredient.model';
 
 
@@ -25,12 +25,26 @@ export class IngredientForms {
     return formGroup;
   }
 
-  getFormArray(ingredients: Ingredient[]): FormArray {
-    let formArray = new FormArray([]);
-    for (let ingredient of ingredients) {
-      formArray.push(this.getFormGroup(ingredient));
-    };
-    return formArray;
+  getFormArray(ingredients: Ingredient[] = undefined): IFormGroups[] {
+    const formGroupsArray: IFormGroups[] = [];
+
+    if(ingredients === undefined) {
+      for (let ingredient of ingredients) {
+        let formArrayIngr = {
+          name: 'ingredients',
+          formGroup: this.getFormGroup(ingredient)
+        }
+        formGroupsArray.push(formArrayIngr);
+      };
+    }
+    else {
+      formGroupsArray.push({
+        name: 'ingredients',
+        formGroup: this.getFormGroup()
+      });
+    }
+
+    return formGroupsArray;
   }
   
   private setValidators(formGroup: FormGroup): void {
