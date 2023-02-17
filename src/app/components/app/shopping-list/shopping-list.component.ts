@@ -13,21 +13,21 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
   
   ingredients: Ingredient[] = [];
   selectedIngredients: Ingredient[] = [];
-  ingredientsChanged$: Subscription = undefined;
+  shoppingListChanged$: Subscription = undefined;
 
   constructor(
     private shoppingListService: ShoppingListService) {
 
   }
   ngOnDestroy(): void {
-    if(this.ingredientsChanged$ !== undefined) { 
-      this.ingredientsChanged$.unsubscribe();
+    if(this.shoppingListChanged$ !== undefined) { 
+      this.shoppingListChanged$.unsubscribe();
     }
   }
 
   ngOnInit(): void {
     this.ingredients = this.shoppingListService.get();
-    this.ingredientsChanged$ = this.shoppingListService.ingredientsChanged.subscribe((ingredients: Ingredient[]) => {
+    this.shoppingListChanged$ = this.shoppingListService.shoppingListChanged.subscribe((ingredients: Ingredient[]) => {
       this.ingredients = ingredients;
     });
   }

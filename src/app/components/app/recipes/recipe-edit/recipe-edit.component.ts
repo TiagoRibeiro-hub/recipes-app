@@ -55,9 +55,6 @@ export class RecipeEditComponent implements OnInit {
   }
 
   onSubmit(): void {
-    if (this.formArray.length > 0) {
-    }
-
     // ID TEMP
     if (this.controls.length > 0) {
       for (var i = 0; i < this.controls.length; i++) {
