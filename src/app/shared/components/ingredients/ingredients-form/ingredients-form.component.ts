@@ -5,7 +5,6 @@ import { Operation } from 'src/app/models/enums/operation';
 import { Ingredient, MetricUnitMapping, MetricUnitToDropDownForm } from 'src/app/models/ingredients/ingredient.model';
 import { IngredientForms } from 'src/app/services/forms/ingredients/ingredient-forms';
 import { IngredientsService } from 'src/app/services/ingredients/ingredients.service';
-import { ShoppingListService } from 'src/app/services/shopping-list/shopping-list.service';
 
 export interface IngredientFormEvent {
   ingredient: Ingredient,
@@ -24,8 +23,8 @@ export interface IngredientFormEvent {
 })
 export class IngredientsFormComponent implements OnInit {
 
-  @Input()
-
+  @Input() showAmount: boolean = true;
+  
   @Output('ingredientFormEvent') ingredientFormEvent: EventEmitter<IngredientFormEvent> = new EventEmitter<IngredientFormEvent>();
 
   metricUnitMapping = MetricUnitMapping;
@@ -37,6 +36,7 @@ export class IngredientsFormComponent implements OnInit {
   editedIngredient: Ingredient;
 
   private ingredientEditing$: Subscription = undefined;
+  
   constructor(
     private ingredientsService: IngredientsService,
     private ingredientForms: IngredientForms

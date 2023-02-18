@@ -11,7 +11,7 @@ export class ShoppingListService {
   private shoppingList: Ingredient[] = [];
 
   shoppingListChanged = new Subject<Ingredient[]>();
-  ingredientEditing = new Subject<string>();
+  ingredientEditingFromShoopingList = new Subject<string>();
   
   constructor() { }
 
@@ -20,7 +20,8 @@ export class ShoppingListService {
   }
 
   getById(id: string) : Ingredient {
-    return this.shoppingList.find(ingredient => ingredient.id === id);
+    var ss = this.get().find(ingredient => ingredient.id === id);
+    return ss;
   }
 
   add(ingredient: Ingredient): void {

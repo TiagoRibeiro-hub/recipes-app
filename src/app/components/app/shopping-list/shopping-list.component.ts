@@ -33,6 +33,6 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
   }
 
   onSelectedIngredient(ingredient: AddIngredientToList): void {
-    this.shoppingListService.ingredientEditing.next(ingredient.id);
+    this.shoppingListService.ingredientEditingFromShoopingList.next(ingredient.id);
   }
 }
