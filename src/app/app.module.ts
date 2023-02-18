@@ -20,6 +20,12 @@ import { SpinnerComponent } from './shell/spinner/spinner.component';
 import { SharedIngredientsListComponent } from './shared/components/ingredients/ingredients-list/shared-ingredients-list.component';
 import { IngredientsFormComponent } from './shared/components/ingredients/ingredients-form/ingredients-form.component';
 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
+import { appToastrConfig } from './constants/toastrConfig';
+
+
+
 @NgModule({
     declarations: [
         AppComponent,
@@ -46,6 +52,8 @@ import { IngredientsFormComponent } from './shared/components/ingredients/ingred
         FormsModule,
         ReactiveFormsModule,
         RouteModule,
+        BrowserAnimationsModule,
+        ToastrModule.forRoot(appToastrConfig), 
         // ShellModule
     ]
 })

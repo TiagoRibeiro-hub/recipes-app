@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnDestroy, ViewChild } from '@angular/core';
 import { ActivatedRoute, Data } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
 import { appResolvers, appRoute } from 'src/app/constants/constants';
 import { Ingredient } from 'src/app/models/ingredients/ingredient.model';
@@ -27,7 +28,8 @@ export class RecipeDetailComponent implements OnDestroy {
     private utilitieService: UtilitieService,
     private recipeService: RecipeService,
     private navigationService: NavigationService,
-    private activatedRoute: ActivatedRoute) {
+    private activatedRoute: ActivatedRoute,
+    private toastr: ToastrService) {
 
   }
   
@@ -54,6 +56,11 @@ export class RecipeDetailComponent implements OnDestroy {
 
   onAddToShoppingList(): void {
     this.recipeService.addIngredientsToShoppingList(this.selectedIngredients);
+    
+    if(this.selectedIngredients.length) {
+      this.toastr.success('Added to shopping list successfully');
+    }
+
   }
 
   onEditRecipe(): void {
