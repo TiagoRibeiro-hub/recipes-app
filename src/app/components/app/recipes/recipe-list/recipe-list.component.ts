@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { appRoute } from 'src/app/constants/constants';
+import { appRoute } from 'src/app/constants/routes';
 import { Recipe } from 'src/app/models/recipes/recipe.model';
 import { NavigationService } from 'src/app/services/navigation/navigation.service';
 import { RecipeService } from 'src/app/services/recipes/recipe.service';

@@ -1,5 +1,9 @@
 export class Util {
 
+    static generateUUID(): string{
+        return crypto.randomUUID();
+    }
+
     static css = class {
         static toggleClass(element: HTMLElement, className: string) {
             element.classList.contains(className) ? element.classList.remove(className) : element.classList.add(className);

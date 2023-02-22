@@ -9,7 +9,7 @@ import { RecipesComponent } from '../components/app/recipes/recipes.component';
 import { ShoppingListComponent } from '../components/app/shopping-list/shopping-list.component';
 import { NotAuthorizedComponent } from '../components/app/errors/not-authorized/not-authorized.component';
 import { NotFoundComponent } from '../components/app/errors/not-found/not-found.component';
-import { appRoute } from '../constants/constants';
+import { appRoute } from 'src/app/constants/routes';
 // RECIPES
 const recipeRoutes = {
     path: appRoute.RECIPES, component: RecipesComponent, 

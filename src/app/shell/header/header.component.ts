@@ -1,7 +1,8 @@
 import { Component, ElementRef, HostListener, OnDestroy, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { appRoute } from 'src/app/constants/constants';
+import { appRoute } from 'src/app/constants/routes';
 import { UtilitieService } from 'src/app/services/utilities/utilitie.service';
+import { DataStorageService } from 'src/app/shared/services/data-storage.service';
 import { Util } from 'src/app/shared/utils/util';
 
 
@@ -11,21 +12,22 @@ import { Util } from 'src/app/shared/utils/util';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnDestroy {
-  
-  @ViewChild('dropdownRef', {read: ElementRef}) dropdownRef: ElementRef;
+
+  @ViewChild('dropdownRef', { read: ElementRef }) dropdownRef: ElementRef;
 
   appRoute = appRoute;
   burger: HTMLInputElement;
   documentClickedTarget$: Subscription = undefined;
-  
+
   constructor(
     private _headerCompRef: ElementRef,
-    private utilitieService: UtilitieService) { 
+    private utilitieService: UtilitieService,
+    private dataStorageService: DataStorageService) {
 
-    }
+  }
 
   ngOnDestroy(): void {
-    if(this.documentClickedTarget$ !== undefined) {
+    if (this.documentClickedTarget$ !== undefined) {
       this.documentClickedTarget$.unsubscribe();
     }
   }
@@ -42,14 +44,22 @@ export class HeaderComponent implements OnDestroy {
     this.setSpinarTop();
   }
 
-  @HostListener('window:resize') onResize() {   
-    if(window.innerWidth >= 992) {
+  onSaveData() {
+    this.dataStorageService.storeRecipes();
+  }
+
+  onFetchData() {
+    this.dataStorageService.fetchRecipes();
+  }
+
+  @HostListener('window:resize') onResize() {
+    if (window.innerWidth >= 992) {
       this.burger.classList.remove("show");
     }
-    else if(window.innerWidth <= 992) {
+    else if (window.innerWidth <= 992) {
       this.setSpinarTop();
     }
-    
+
   }
 
   private setSpinarTop() {

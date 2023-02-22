@@ -2,6 +2,9 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouteModule } from './routes/route.module';
+import { HttpClientModule } from '@angular/common/http'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 
 import { AppComponent } from './app.component';
 import { ShoppingListComponent } from './components/app/shopping-list/shopping-list.component';
@@ -20,8 +23,6 @@ import { SpinnerComponent } from './shell/spinner/spinner.component';
 import { SharedIngredientsListComponent } from './shared/components/ingredients/ingredients-list/shared-ingredients-list.component';
 import { IngredientsFormComponent } from './shared/components/ingredients/ingredients-form/ingredients-form.component';
 
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ToastrModule } from 'ngx-toastr';
 import { appToastrConfig } from './constants/toastrConfig';
 
 
@@ -52,6 +53,7 @@ import { appToastrConfig } from './constants/toastrConfig';
         FormsModule,
         ReactiveFormsModule,
         RouteModule,
+        HttpClientModule,
         BrowserAnimationsModule,
         ToastrModule.forRoot(appToastrConfig), 
         // ShellModule

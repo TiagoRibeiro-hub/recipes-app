@@ -11,4 +11,7 @@ export const appRegex = {
     POSITIVE_NR: /^[+]?([.]\d+|\d+[.]?\d*)$/,
 }
 
-
+export const appUrlFirebase = {
+    PATH: 'https://recipes-app-98e7e-default-rtdb.europe-west1.firebasedatabase.app/',
+    RECIPES:  'recipes.json',
+}
