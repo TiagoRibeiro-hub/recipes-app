@@ -49,7 +49,7 @@ export class HeaderComponent implements OnDestroy {
   }
 
   onFetchData() {
-    this.dataStorageService.fetchRecipes();
+    this.dataStorageService.fetchRecipes().subscribe();
   }
 
   @HostListener('window:resize') onResize() {

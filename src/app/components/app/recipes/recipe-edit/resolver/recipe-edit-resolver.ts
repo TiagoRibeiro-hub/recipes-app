@@ -6,8 +6,9 @@ import { Recipe } from "src/app/models/recipes/recipe.model";
 import { IngredientForms } from "src/app/services/forms/ingredients/ingredient-forms";
 import { IRecipeForms, RecipeForms } from "src/app/services/forms/recipes/recipe-forms";
 import { RecipeService } from "src/app/services/recipes/recipe.service";
+import { DataStorageService } from "src/app/shared/services/data-storage.service";
 
-export interface RecipeEdit {
+export interface IRecipeEdit {
     editMode: boolean;
     get: Recipe,
     form: FormGroup
@@ -16,13 +17,14 @@ export interface RecipeEdit {
 @Injectable({
     providedIn: 'root'
 })
-export class RecipeEditResolver implements Resolve<RecipeEdit> {
+export class RecipeEditResolver implements Resolve<IRecipeEdit> {
     constructor(
         private recipeService: RecipeService,
         private recipeForms: RecipeForms,
         private ingredientForms: IngredientForms) { }
 
-    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): RecipeEdit | Observable<RecipeEdit> | Promise<RecipeEdit> {
+    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): IRecipeEdit | Observable<IRecipeEdit> | Promise<IRecipeEdit> {
+
         const id = route.params['id'];
         const editMode = id != undefined;
 

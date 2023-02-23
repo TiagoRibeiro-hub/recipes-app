@@ -10,18 +10,41 @@ import { ShoppingListComponent } from '../components/app/shopping-list/shopping-
 import { NotAuthorizedComponent } from '../components/app/errors/not-authorized/not-authorized.component';
 import { NotFoundComponent } from '../components/app/errors/not-found/not-found.component';
 import { appRoute } from 'src/app/constants/routes';
+import { recipesCanActivate } from '../components/app/recipes/recipe-edit/guard/recipes-can-activate.service';
+//https://itnext.io/everything-you-need-to-know-about-route-guard-in-angular-697a062d3198
 // RECIPES
 const recipeRoutes = {
-    path: appRoute.RECIPES, component: RecipesComponent, 
+    path: appRoute.RECIPES, component: RecipesComponent,
     children: [
-      {path: '', component: RecipeStartComponent},
-      {path: appRoute.NEW, component: RecipeEditComponent, resolve: {recipeEdit: RecipeEditResolver}},
-      {path: ':id', component: RecipeDetailComponent, resolve: {recipeDetail: RecipeDetailResolver}},
-      {path: ':id/' + appRoute.EDIT, component: RecipeEditComponent, resolve: {recipeEdit: RecipeEditResolver}},
+      {
+        path: '', component: RecipeStartComponent
+      },
+      {
+        path: appRoute.NEW, component: RecipeEditComponent, 
+        resolve: {
+          recipeEdit: RecipeEditResolver
+        }
+      },
+      {
+        path: ':id', component: RecipeDetailComponent, 
+        canActivate: [async () => await recipesCanActivate()],
+        resolve: {
+          recipeDetail: RecipeDetailResolver
+        }
+      },
+      {
+        path: ':id/' + appRoute.EDIT, component: RecipeEditComponent, 
+        canActivate: [async () => await recipesCanActivate()],
+        resolve: {
+          recipeEdit: RecipeEditResolver
+        }
+      },
     ]
   };
 // SHOPPING LIST
-const shoppingListRoutes = {path: appRoute.SHOPPING_LIST, component: ShoppingListComponent};
+const shoppingListRoutes = {
+  path: appRoute.SHOPPING_LIST, component: ShoppingListComponent
+};
 // APP ROUTES
 let appRoutes : Routes = [
   {path: '', redirectTo: '/' + appRoute.RECIPES, pathMatch: 'full'},

@@ -8,13 +8,14 @@ import { appRoute } from 'src/app/constants/routes';
 export class NavigationService {
 
   constructor(
-    private router: Router) { }
+    private router: Router
+  ) { }
 
-    navigateRelativeTo(path: any[], relativeTo: ActivatedRoute): void {
-      this.router.navigate(path, { relativeTo: relativeTo });
-    }
+  navigateRelativeTo(path: any[], relativeTo: ActivatedRoute): void {
+    this.router.navigate(path, { relativeTo: relativeTo });
+  }
 
-    navigatePrevious(relativeTo: ActivatedRoute): void {
-      this.router.navigate([appRoute.PREVIOUS], { relativeTo: relativeTo });
-    }
+  navigatePrevious(relativeTo: ActivatedRoute): void {
+    this.router.navigate([appRoute.PREVIOUS], { relativeTo: relativeTo });
+  }
 }

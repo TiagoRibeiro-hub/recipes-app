@@ -9,7 +9,8 @@ import {
 import { IngredientForms } from 'src/app/services/forms/ingredients/ingredient-forms';
 import { NavigationService } from 'src/app/services/navigation/navigation.service';
 import { RecipeService } from 'src/app/services/recipes/recipe.service';
-import { RecipeEdit } from './resolver/recipe-edit-resolver';
+import { IRecipeEdit } from './resolver/recipe-edit-resolver';
+
 
 @Component({
   selector: 'app-recipe-edit',
@@ -20,7 +21,7 @@ export class RecipeEditComponent implements OnInit {
   metricUnitMapping = MetricUnitMapping;
   metricUnitEnums = MetricUnitToDropDownForm;
 
-  recipeEdit: RecipeEdit;
+  recipeEdit: IRecipeEdit;
   recipeForm: FormGroup;
   srcImage: string = appConstants.SRC_IMG_TEMP;
 
