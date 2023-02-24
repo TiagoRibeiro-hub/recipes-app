@@ -1,14 +1,15 @@
 import { Injectable } from '@angular/core';
-import { FormArray, FormGroup, Validators } from '@angular/forms';
+import { FormGroup, Validators } from '@angular/forms';
 import { appRegex } from 'src/app/constants/constants';
-import { FormGroupService, IFormGroups } from 'src/app/services/forms/form-group.service';
+import { IFormArraysGroups, IFormGroups, IFormsGroups } from 'src/app/models/auth/interfaces';
+import { FormGroupService } from 'src/app/services/forms/form-group.service';
 import { Ingredient } from '../../../models/ingredients/ingredient.model';
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class IngredientForms {
+export class IngredientForms implements IFormsGroups<Ingredient>, IFormArraysGroups<Ingredient> {
 
   constructor(
     private formGroupService: FormGroupService
@@ -47,7 +48,7 @@ export class IngredientForms {
     return formGroupsArray;
   }
   
-  private setValidators(formGroup: FormGroup): void {
+  setValidators(formGroup: FormGroup): void {
     Object.keys(formGroup.controls).forEach((key) => {
       switch (key) {
         case 'name':

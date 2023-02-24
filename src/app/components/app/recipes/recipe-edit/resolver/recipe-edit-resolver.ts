@@ -3,10 +3,9 @@ import { FormGroup } from "@angular/forms";
 import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from "@angular/router";
 import { Observable } from "rxjs";
 import { Recipe } from "src/app/models/recipes/recipe.model";
-import { IngredientForms } from "src/app/services/forms/ingredients/ingredient-forms";
-import { IRecipeForms, RecipeForms } from "src/app/services/forms/recipes/recipe-forms";
+import { IngredientForms } from "src/app/services/forms/ingredients/ingredient-form";
+import { IRecipeForms, RecipeForms } from "src/app/services/forms/recipes/recipe-form";
 import { RecipeService } from "src/app/services/recipes/recipe.service";
-import { DataStorageService } from "src/app/shared/services/data-storage.service";
 
 export interface IRecipeEdit {
     editMode: boolean;

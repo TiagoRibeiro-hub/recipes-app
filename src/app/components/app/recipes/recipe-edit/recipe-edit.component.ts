@@ -6,7 +6,7 @@ import {
   MetricUnitMapping,
   MetricUnitToDropDownForm,
 } from 'src/app/models/ingredients/ingredient.model';
-import { IngredientForms } from 'src/app/services/forms/ingredients/ingredient-forms';
+import { IngredientForms } from 'src/app/services/forms/ingredients/ingredient-form';
 import { NavigationService } from 'src/app/services/navigation/navigation.service';
 import { RecipeService } from 'src/app/services/recipes/recipe.service';
 import { IRecipeEdit } from './resolver/recipe-edit-resolver';

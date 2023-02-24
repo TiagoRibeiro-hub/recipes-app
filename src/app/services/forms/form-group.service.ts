@@ -1,12 +1,9 @@
 import { Injectable } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
+import { IFormGroups } from 'src/app/models/auth/interfaces';
 import { BaseModel } from 'src/app/models/baseModel';
 import { FormControlService } from './form-control.service';
 
-export class IFormGroups {
-  name: string;
-  formGroup: FormGroup;
-};
 
 @Injectable({
   providedIn: 'root'

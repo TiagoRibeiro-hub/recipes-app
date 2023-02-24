@@ -3,7 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { Operation } from 'src/app/models/enums/operation';
 import { Ingredient, MetricUnitMapping, MetricUnitToDropDownForm } from 'src/app/models/ingredients/ingredient.model';
-import { IngredientForms } from 'src/app/services/forms/ingredients/ingredient-forms';
+import { IngredientForms } from 'src/app/services/forms/ingredients/ingredient-form';
 import { IngredientsService } from 'src/app/services/ingredients/ingredients.service';
 
 export interface IngredientFormEvent {

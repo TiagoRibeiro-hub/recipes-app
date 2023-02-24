@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 import { FormGroup, Validators } from '@angular/forms';
+import { IFormGroups, IFormsGroups } from 'src/app/models/auth/interfaces';
 import { Recipe } from 'src/app/models/recipes/recipe.model';
-import { FormGroupService, IFormGroups,  } from 'src/app/services/forms/form-group.service';
-import { IngredientForms } from '../ingredients/ingredient-forms';
+import { FormGroupService } from 'src/app/services/forms/form-group.service';
+import { IngredientForms } from '../ingredients/ingredient-form';
+
 
 export interface IRecipeForms {
   recipes: Recipe;
@@ -12,12 +14,14 @@ export interface IRecipeForms {
 @Injectable({
   providedIn: 'root'
 })
-export class RecipeForms {
+export class RecipeForms implements IFormsGroups<IRecipeForms> {
 
   constructor(
     private formGroupService: FormGroupService,
     private ingredientForm: IngredientForms
-  ) { }
+  ) { 
+
+  }
 
   getFormGroup(recipeForms: IRecipeForms = undefined): FormGroup {
     let formGroup = new FormGroup({});
@@ -39,7 +43,7 @@ export class RecipeForms {
   }
 
   
-  private setValidators(formGroup: FormGroup): void {
+  setValidators(formGroup: FormGroup): void {
     Object.keys(formGroup.controls).forEach((key) => {
       switch (key) {
         case 'name': 
