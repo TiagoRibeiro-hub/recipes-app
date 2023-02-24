@@ -1,0 +1,24 @@
+<div class="row d-flex justify-content-center mt-5">
+    <div class="col-xs-12 col-md-6">
+        <form [formGroup]="this.authForm" (ngSubmit)="onSubmit()">
+            <div class="form-group mb-2">
+                <label for="email">E-mail</label>
+                <input type="email" id="email" class="form-control" formControlName="email"/>
+            </div>
+            <div class="form-group mb-2">
+                <label for="password">Password</label>
+                <input type="password" id="password" class="form-control" formControlName="password"/>
+            </div>
+            <div class="form-group mb-2" *ngIf="!this.isLogin">
+                <label for="confirm-password">Confirm Password</label>
+                <input type="password" id="confirm-password" class="form-control" formControlName="confirm-password"/>
+            </div>
+            <div class="d-flex justify-content-center mt-3 mb-3">
+                <button type="submit" class="btn btn-success">{{ this.isLogin ? 'Login' : 'Sign Up' }}</button>
+            </div>
+            <div class="d-flex justify-content-center">
+                <a class="font-monospace text-decoration-underline text-primary" (click)="onSwitchMode()">{{ this.isLogin ? 'Switch to Sign Up' : 'Switch to Login' }}</a>
+            </div>
+        </form>
+    </div>
+</div>

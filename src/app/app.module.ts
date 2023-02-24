@@ -10,21 +10,21 @@ import { AppComponent } from './app.component';
 import { ShoppingListComponent } from './components/app/shopping-list/shopping-list.component';
 import { ShoppingEditComponent } from './components/app/shopping-list/shopping-edit/shopping-edit.component';
 import { ShellComponent } from './shell/shell.component';
-import { NotFoundComponent } from './components/app/errors/not-found/not-found.component';
+import { NotFoundComponent } from './components/status/not-found/not-found.component';
 import { RecipesComponent } from './components/app/recipes/recipes.component';
 import { RecipeListComponent } from './components/app/recipes/recipe-list/recipe-list.component';
 import { RecipeDetailComponent } from './components/app/recipes/recipe-detail/recipe-detail.component';
 import { RecipeItemComponent } from './components/app/recipes/recipe-list/recipe-item/recipe-item.component';
-import { NotAuthorizedComponent } from './components/app/errors/not-authorized/not-authorized.component';
 import { RecipeStartComponent } from './components/app/recipes/recipe-start/recipe-start.component';
 import { RecipeEditComponent } from './components/app/recipes/recipe-edit/recipe-edit.component';
 import { HeaderComponent } from './shell/header/header.component';
 import { SpinnerComponent } from './shell/spinner/spinner.component';
 import { SharedIngredientsListComponent } from './shared/components/ingredients/ingredients-list/shared-ingredients-list.component';
-import { IngredientsFormComponent } from './shared/components/ingredients/ingredients-form/ingredients-form.component';
+import { IngredientsFormComponent } from './shared/components/forms/ingredients-form/ingredients-form.component';
+import { AuthComponent } from './components/auth/auth.component';
+import { NotAuthorizedComponent } from './components/status/not-authorized/not-authorized.component';
 
 import { appToastrConfig } from './constants/toastrConfig';
-
 
 
 @NgModule({
@@ -44,7 +44,8 @@ import { appToastrConfig } from './constants/toastrConfig';
         RecipeEditComponent,
         SpinnerComponent,
         HeaderComponent,
-        IngredientsFormComponent
+        IngredientsFormComponent,
+        AuthComponent
     ],
     providers: [],
     bootstrap: [AppComponent],

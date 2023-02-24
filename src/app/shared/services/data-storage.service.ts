@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { RecipeService } from 'src/app/services/recipes/recipe.service';
-import { appUrlFirebase } from 'src/app/constants/constants';
+import { appFirebase } from 'src/app/constants/constants';
 import { Recipe } from 'src/app/models/recipes/recipe.model';
 import { map, Observable, tap } from 'rxjs';
 
@@ -21,17 +21,15 @@ export class DataStorageService {
     // firebase put overwritten all recipes
     this.http
       .put(
-        appUrlFirebase.PATH + appUrlFirebase.RECIPES, recipes
+        appFirebase.PATH + appFirebase.RECIPES, recipes
       )
-      .subscribe((response) => {
-        console.log(response);
-      });
+      .subscribe();
   }
 
   fetchRecipes(): Observable<Recipe[]> {
     return this.http
       .get<Recipe[]>(
-        appUrlFirebase.PATH + appUrlFirebase.RECIPES
+        appFirebase.PATH + appFirebase.RECIPES
       )
       .pipe(
         map(recipes => {

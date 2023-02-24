@@ -1,4 +1,5 @@
 export const appRoute = {
+    AUTH: 'auth',
     RECIPES: 'recipes',
     SHOPPING_LIST: 'shopping-list',
     NOT_FOUND: 'not-found',
