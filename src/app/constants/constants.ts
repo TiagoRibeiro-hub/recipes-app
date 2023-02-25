@@ -9,8 +9,8 @@ export const appResolvers = {
 
 export const appRegex = {
     POSITIVE_NR: /^[+]?([.]\d+|\d+[.]?\d*)$/,
-    USERNAME: /^$/,
-    PASSWORD: /^$/,
+    USERNAME: /^[a-zA-ZãáàéêíóõúçÃÁÀÉÊÍÓÕÚÇ1234567890._!-@\s].{5,19}$/,
+    PASSWORD: /^(?=.*\d{2})+(?=.*[\!@#$%|{[(=+\-)\]}_&*]{2})+(?=.*[a-z]{3})+(?=.*[A-Z]{3})+.{10,}$/,
 }
 
 export const appFirebase = {

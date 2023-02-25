@@ -9,7 +9,7 @@ import { Ingredient } from '../../../models/ingredients/ingredient.model';
 @Injectable({
   providedIn: 'root'
 })
-export class IngredientForms implements IFormsGroups<Ingredient>, IFormArraysGroups<Ingredient> {
+export class IngredientFormService implements IFormsGroups<Ingredient>, IFormArraysGroups<Ingredient> {
 
   constructor(
     private formGroupService: FormGroupService

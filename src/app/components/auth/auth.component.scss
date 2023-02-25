@@ -1,0 +1,12 @@
+.password-container {
+    position: relative;
+    #password {
+        padding-left: 1.4em;
+    }    
+    #showPasswordPattern {
+        position: absolute;
+        top: 1.2em;
+        left: 0.3em;
+    }
+}
+

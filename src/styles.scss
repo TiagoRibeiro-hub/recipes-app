@@ -5,10 +5,10 @@
 // https://www.freecodecamp.org/news/how-to-validate-angular-reactive-forms/
 :root {
     --spinner-top: 56px;
-    --light-grey: rgb(199, 199, 199)
+    --light-grey: rgb(199, 199, 199);
 }
 
-body{
+body {
     margin: 0;
     padding: 0;
 }
@@ -18,7 +18,9 @@ a {
     color: inherit !important;
 }
 
-a, button, .form-select {
+a,
+button,
+.form-select {
     cursor: pointer;
 }
 
@@ -54,4 +56,10 @@ select.ng-invalid.ng-touched {
 
 :disabled {
     cursor: not-allowed !important;
- }
+}
+
+// .ngx-toastr {
+//     width: auto;
+//     max-width: 800px;
+//     text-align: center;
+// }

@@ -10,38 +10,57 @@ import { FormGroupService } from '../form-group.service';
 })
 export class AuthFormService implements IFormsGroups<AuthModel> {
 
-  isLogin: boolean = false;
+  isLogin: boolean;
 
   constructor(
     private formGroupService: FormGroupService
   ) { }
 
   getFormGroup(authModel: AuthModel = undefined): FormGroup {
-    let formGroup = new FormGroup({});
-
-    formGroup = authModel === undefined
-      ? this.formGroupService.getEmptyForm(AuthModel.empty())
-      : this.formGroupService.getForm(authModel);
-
-    this.setValidators(formGroup);
+    this.isLogin = false;
+    let formGroup = this.getForm(authModel);
+    formGroup.setValidators(this.confirmPassword);
     return formGroup;
   }
 
   getFormGroupLogin(authModel: AuthModel = undefined): FormGroup {
+    this.isLogin = true;
+    const formGroup = this.getForm(authModel);
+    return formGroup;
+  }
+
+  private getForm(authModel: AuthModel) {
     let formGroup = new FormGroup({});
 
     formGroup = authModel === undefined
       ? this.formGroupService.getEmptyForm(AuthModel.empty())
       : this.formGroupService.getForm(authModel);
 
-    this.isLogin = true;
     this.setValidators(formGroup);
     return formGroup;
   }
 
+  private confirmPassword(formGroup: FormGroup): ValidatorFn | ValidatorFn[] {
+      const passwordControl = formGroup.controls['password'];
+      const confirmPasswordControl = formGroup.controls['confirmPassword'];
+
+      if (!passwordControl || !confirmPasswordControl) {
+        return null;
+      }
+
+      if (confirmPasswordControl.errors && !confirmPasswordControl.errors.passwordMismatch) {
+        return null;
+      }
+
+      if (passwordControl.value !== confirmPasswordControl.value) {
+        confirmPasswordControl.setErrors({ passwordMismatch: true });
+      } else {
+        confirmPasswordControl.setErrors(null);
+      }
+  }
+
+
   setValidators(formGroup: FormGroup): void {
-    let validators: ValidatorFn[];
-    
     Object.keys(formGroup.controls).forEach((key) => {
       switch (key) {
         case 'email':
@@ -51,31 +70,25 @@ export class AuthFormService implements IFormsGroups<AuthModel> {
           ]);
           break;
         case 'username':
-          validators = [];
-          if(!this.isLogin){
-            validators = [
-              Validators.required,
-              Validators.pattern(appRegex.USERNAME) // todo
-            ]
+          if (!this.isLogin) {
+            formGroup.controls[key].addValidators(regexValidators(appRegex.USERNAME));
           }
-          formGroup.controls[key].addValidators(validators);
           break;
         case 'password':
-          formGroup.controls[key].addValidators([
-            Validators.required,
-            Validators.pattern(appRegex.PASSWORD) // todo
-          ]);
+          formGroup.controls[key].addValidators(regexValidators(appRegex.PASSWORD));
           break;
         case 'confirmPassword':
-          validators = [];
           if (!this.isLogin) {
-            validators = [
-              Validators.required,
-              Validators.pattern(appRegex.PASSWORD) // todo
-            ]
+            formGroup.controls[key].addValidators(regexValidators(appRegex.PASSWORD));
           }
-          formGroup.controls[key].addValidators(validators);
           break;
+      };
+
+      function regexValidators(pattern: RegExp): ValidatorFn | ValidatorFn[] {
+        return [
+          Validators.required,
+          Validators.pattern(pattern)
+        ];
       }
     });
   }

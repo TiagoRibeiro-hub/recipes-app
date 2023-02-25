@@ -3,15 +3,10 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { Operation } from 'src/app/models/enums/operation';
 import { Ingredient, MetricUnitMapping, MetricUnitToDropDownForm } from 'src/app/models/ingredients/ingredient.model';
-import { IngredientForms } from 'src/app/services/forms/ingredients/ingredient-form';
+import { IngredientFormService } from 'src/app/services/forms/ingredients/ingredient-form.service';
 import { IngredientsService } from 'src/app/services/ingredients/ingredients.service';
 
-export interface IngredientFormEvent {
-  ingredient: Ingredient,
-  operation: Operation
-}
-
-export interface IngredientFormEvent {
+export interface IIngredientFormEvent {
   ingredient: Ingredient,
   operation: Operation
 }
@@ -25,7 +20,7 @@ export class IngredientsFormComponent implements OnInit {
 
   @Input() showAmount: boolean = true;
   
-  @Output('ingredientFormEvent') ingredientFormEvent: EventEmitter<IngredientFormEvent> = new EventEmitter<IngredientFormEvent>();
+  @Output('ingredientFormEvent') ingredientFormEvent: EventEmitter<IIngredientFormEvent> = new EventEmitter<IIngredientFormEvent>();
 
   metricUnitMapping = MetricUnitMapping;
   metricUnitEnums = MetricUnitToDropDownForm;
@@ -39,7 +34,7 @@ export class IngredientsFormComponent implements OnInit {
   
   constructor(
     private ingredientsService: IngredientsService,
-    private ingredientForms: IngredientForms
+    private ingredientFormService: IngredientFormService
   ) { }
 
   ngOnDestroy(): void {
@@ -51,9 +46,9 @@ export class IngredientsFormComponent implements OnInit {
   ngOnInit(): void {
     this.ingredientEditing$ = this.ingredientsService.ingredientEditing.subscribe((ingredient: Ingredient) => {
       this.editMode = true;
-      this.ingredientForm = this.ingredientForms.getFormGroup(ingredient);
+      this.ingredientForm = this.ingredientFormService.getFormGroup(ingredient);
     });
-    this.ingredientForm = this.ingredientForms.getFormGroup();
+    this.ingredientForm = this.ingredientFormService.getFormGroup();
   }
 
   onSubmit(): void {

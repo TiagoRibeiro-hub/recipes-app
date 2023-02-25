@@ -6,7 +6,7 @@ import {
   MetricUnitMapping,
   MetricUnitToDropDownForm,
 } from 'src/app/models/ingredients/ingredient.model';
-import { IngredientForms } from 'src/app/services/forms/ingredients/ingredient-form';
+import { IngredientFormService } from 'src/app/services/forms/ingredients/ingredient-form.service';
 import { NavigationService } from 'src/app/services/navigation/navigation.service';
 import { RecipeService } from 'src/app/services/recipes/recipe.service';
 import { IRecipeEdit } from './resolver/recipe-edit-resolver';
@@ -27,7 +27,7 @@ export class RecipeEditComponent implements OnInit {
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private ingredientsFroms: IngredientForms,
+    private ingredientsFromService: IngredientFormService,
     private navigationService: NavigationService,
     private recipeService: RecipeService
   ) {}
@@ -74,6 +74,7 @@ export class RecipeEditComponent implements OnInit {
     if (image.value == '' || image.value == undefined) {
       image.setValue(appConstants.SRC_IMG_TEMP);
     }
+    
     this.recipeEdit.editMode
       ? this.recipeService.update(this.recipeForm.value)
       : this.recipeService.add(this.recipeForm.value);
@@ -82,7 +83,7 @@ export class RecipeEditComponent implements OnInit {
   }
 
   onAddIngedient(): void {
-    this.controls.push(this.ingredientsFroms.getFormGroup());
+    this.controls.push(this.ingredientsFromService.getFormGroup());
   }
 
   onDeleteIngredient(index: number): void {

@@ -3,8 +3,8 @@ import { FormGroup } from "@angular/forms";
 import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from "@angular/router";
 import { Observable } from "rxjs";
 import { Recipe } from "src/app/models/recipes/recipe.model";
-import { IngredientForms } from "src/app/services/forms/ingredients/ingredient-form";
-import { IRecipeForms, RecipeForms } from "src/app/services/forms/recipes/recipe-form";
+import { IngredientFormService } from "src/app/services/forms/ingredients/ingredient-form.service";
+import { IRecipeForms, RecipeFormService } from "src/app/services/forms/recipes/recipe-form.service";
 import { RecipeService } from "src/app/services/recipes/recipe.service";
 
 export interface IRecipeEdit {
@@ -19,8 +19,8 @@ export interface IRecipeEdit {
 export class RecipeEditResolver implements Resolve<IRecipeEdit> {
     constructor(
         private recipeService: RecipeService,
-        private recipeForms: RecipeForms,
-        private ingredientForms: IngredientForms) { }
+        private recipeFormService: RecipeFormService,
+        private ingredientFormService: IngredientFormService) { }
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): IRecipeEdit | Observable<IRecipeEdit> | Promise<IRecipeEdit> {
 
@@ -31,14 +31,14 @@ export class RecipeEditResolver implements Resolve<IRecipeEdit> {
         let form: FormGroup;
 
         if (recipeToEdit === undefined) {
-            form = this.recipeForms.getFormGroup();
+            form = this.recipeFormService.getFormGroup();
         }
         else {
             let iRecipeForms: IRecipeForms = {
                 recipes: recipeToEdit,
-                iFormGroupsArray: this.ingredientForms.getFormArray(recipeToEdit.ingredients)
+                iFormGroupsArray: this.ingredientFormService.getFormArray(recipeToEdit.ingredients)
             };
-            form = this.recipeForms.getFormGroup(iRecipeForms);
+            form = this.recipeFormService.getFormGroup(iRecipeForms);
         }
 
         return {

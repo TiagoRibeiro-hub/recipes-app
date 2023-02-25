@@ -3,7 +3,8 @@ import { FormGroup, Validators } from '@angular/forms';
 import { IFormGroups, IFormsGroups } from 'src/app/models/auth/interfaces';
 import { Recipe } from 'src/app/models/recipes/recipe.model';
 import { FormGroupService } from 'src/app/services/forms/form-group.service';
-import { IngredientForms } from '../ingredients/ingredient-form';
+import { IngredientFormService } from '../ingredients/ingredient-form.service';
+
 
 
 export interface IRecipeForms {
@@ -14,11 +15,11 @@ export interface IRecipeForms {
 @Injectable({
   providedIn: 'root'
 })
-export class RecipeForms implements IFormsGroups<IRecipeForms> {
+export class RecipeFormService implements IFormsGroups<IRecipeForms> {
 
   constructor(
     private formGroupService: FormGroupService,
-    private ingredientForm: IngredientForms
+    private ingredientFormService: IngredientFormService
   ) { 
 
   }
@@ -31,7 +32,7 @@ export class RecipeForms implements IFormsGroups<IRecipeForms> {
       formGroup: undefined
     }
     if (recipeForms === undefined) {
-      formArrayIngr.formGroup = this.ingredientForm.getFormGroup();
+      formArrayIngr.formGroup = this.ingredientFormService.getFormGroup();
       formGroupsArray.push(formArrayIngr);
       formGroup = this.formGroupService.getEmptyFormWithFormArrays(Recipe.empty(), formGroupsArray);
     }

@@ -3,4 +3,5 @@ export const appToastrConfig = {
     closeButton: true,
     enableHtml: true,
     progressBar: true,
+    preventDuplicates: true,
 };
