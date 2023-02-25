@@ -43,6 +43,7 @@ Thumbs.db
 
 # Environment Variables
 .env
-
-.cache/*
 src/environments/*
+
+# Others
+.cache/*

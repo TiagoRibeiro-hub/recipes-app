@@ -9,8 +9,12 @@ export class LoaderService {
 
   constructor() { }
 
-  set(loading: boolean) {
-    this.loading = loading;
+  set() {
+    this.loading = true;
+  }
+
+  unSet() {
+    this.loading = false;
   }
 
   get(): boolean {

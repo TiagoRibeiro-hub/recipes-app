@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { Observable } from 'rxjs';
 import { AuthFirebaseResponse, AuthFirebaseService } from 'src/app/services/firebase/auth/auth.firebase.service';
 import { AuthFormService } from 'src/app/services/forms/auth/auth-form.service';
+import { LoaderService } from 'src/app/services/loader/loader.service';
 
 @Component({
   selector: 'app-auth',
@@ -17,7 +19,8 @@ export class AuthComponent implements OnInit {
   constructor(
     private authFormService: AuthFormService,
     private authFirebaseService: AuthFirebaseService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private loader: LoaderService
   ) { }
 
   ngOnInit(): void {
@@ -31,8 +34,18 @@ export class AuthComponent implements OnInit {
   }
 
   onSubmit(): void {
-    !this.isLogin ? this.signUp() : this.login();
+    this.loader.set();
 
+    let authObs: Observable<AuthFirebaseResponse> = !this.isLogin ? this.signUp() : this.login();
+
+    authObs.subscribe({
+      next: (response: AuthFirebaseResponse) => console.log(response),
+      error: (error: Error) => {
+        this.toastr.error(error.message, '', { positionClass: 'toast-top-center' });
+      },
+    })
+
+    this.loader.unSet();
     this.authForm.reset();
   }
 
@@ -53,16 +66,11 @@ export class AuthComponent implements OnInit {
       : this.authFormService.getFormGroupLogin();
   }
 
-  private signUp() {
-    this.authFirebaseService.signUp(this.authForm.value).subscribe((response: AuthFirebaseResponse) => {
-      console.log(response);
-    },
-      error => {
-        console.log(error);
-      });
+  private signUp(): Observable<AuthFirebaseResponse> {
+    return this.authFirebaseService.signUp(this.authForm.value);
   }
 
-  private login() {
-
+  private login(): Observable<AuthFirebaseResponse> {
+    return this.authFirebaseService.signIn(this.authForm.value);
   }
 }
