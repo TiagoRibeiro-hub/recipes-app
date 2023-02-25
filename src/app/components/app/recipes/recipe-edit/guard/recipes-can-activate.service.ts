@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
 import { appRoute } from 'src/app/constants/routes';
 import { RecipeService } from 'src/app/services/recipes/recipe.service';
-import { DataStorageService } from 'src/app/shared/services/data-storage.service';
+import { DataStorageService } from 'src/app/services/firebase/data-storage.service';
 
 @Injectable({
   providedIn: 'root'

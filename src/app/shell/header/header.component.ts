@@ -2,7 +2,7 @@ import { Component, ElementRef, HostListener, OnDestroy, ViewChild } from '@angu
 import { Subscription } from 'rxjs';
 import { appRoute } from 'src/app/constants/routes';
 import { UtilitieService } from 'src/app/services/utilities/utilitie.service';
-import { DataStorageService } from 'src/app/shared/services/data-storage.service';
+import { DataStorageService } from 'src/app/services/firebase/data-storage.service';
 import { Util } from 'src/app/shared/utils/util';
 
 

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { AuthFirebaseResponse, AuthFirebaseService } from 'src/app/services/firebase/auth/auth.firebase.service';
 import { AuthFormService } from 'src/app/services/forms/auth/auth-form.service';
 
 @Component({
@@ -15,8 +16,9 @@ export class AuthComponent implements OnInit {
 
   constructor(
     private authFormService: AuthFormService,
+    private authFirebaseService: AuthFirebaseService,
     private toastr: ToastrService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.getFormGroup();
@@ -29,7 +31,9 @@ export class AuthComponent implements OnInit {
   }
 
   onSubmit(): void {
-    throw new Error('Method not implemented.');
+    !this.isLogin ? this.signUp() : this.login();
+
+    this.authForm.reset();
   }
 
   showPattern(): void {
@@ -38,7 +42,7 @@ export class AuthComponent implements OnInit {
       '',
       {
         disableTimeOut: true,
-        positionClass: 'toast-top-center',
+        positionClass: 'toast-top-center'
       }
     )
   }
@@ -47,5 +51,18 @@ export class AuthComponent implements OnInit {
     this.authForm = !this.isLogin
       ? this.authFormService.getFormGroup()
       : this.authFormService.getFormGroupLogin();
+  }
+
+  private signUp() {
+    this.authFirebaseService.signUp(this.authForm.value).subscribe((response: AuthFirebaseResponse) => {
+      console.log(response);
+    },
+      error => {
+        console.log(error);
+      });
+  }
+
+  private login() {
+
   }
 }
