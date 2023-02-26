@@ -1,14 +1,14 @@
 <div class="row">
-    <div class="col-xs-12">
-        <button class="btn btn-success" (click)="onNewRecipe()">New Recipe</button>
-    </div>
+  <div class="col-xs-12  d-flex justify-content-between">
+    <button class="btn btn-success" (click)="onNewRecipe()">New Recipe</button>
+    <button class="btn btn-primary" (click)="onFetchRecipes()">Fetch Recipes</button>
+  </div>
 </div>
-<hr>
+<hr />
 <div class="row">
-    <div class="col-xs-12">
-      <ng-container  *ngFor="let _recipe of recipes">
-        <app-recipe-item [recipe]="_recipe"></app-recipe-item> 
-      </ng-container>
-    </div>
+  <div class="col-xs-12">
+    <ng-container *ngFor="let _recipe of recipes">
+      <app-recipe-item [recipe]="_recipe"></app-recipe-item>
+    </ng-container>
+  </div>
 </div>
-

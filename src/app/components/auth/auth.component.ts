@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
+import { appRoute } from 'src/app/constants/routes';
 import { AuthFirebaseResponse, AuthFirebaseService } from 'src/app/services/firebase/auth/auth.firebase.service';
 import { AuthFormService } from 'src/app/services/forms/auth/auth-form.service';
 import { LoaderService } from 'src/app/services/loader/loader.service';
@@ -20,7 +22,8 @@ export class AuthComponent implements OnInit {
     private authFormService: AuthFormService,
     private authFirebaseService: AuthFirebaseService,
     private toastr: ToastrService,
-    private loader: LoaderService
+    private loader: LoaderService,
+    private route: Router
   ) { }
 
   ngOnInit(): void {
@@ -39,7 +42,7 @@ export class AuthComponent implements OnInit {
     let authObs: Observable<AuthFirebaseResponse> = !this.isLogin ? this.signUp() : this.login();
 
     authObs.subscribe({
-      next: (response: AuthFirebaseResponse) => console.log(response),
+      next: () => this.route.navigate([appRoute.RECIPES]),
       error: (error: Error) => {
         this.toastr.error(error.message, '', { positionClass: 'toast-top-center' });
       },

@@ -1,8 +1,9 @@
 import { Component, ElementRef, HostListener, OnDestroy, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { appRoute } from 'src/app/constants/routes';
+import { User } from 'src/app/models/user/user.model';
+import { AuthFirebaseService } from 'src/app/services/firebase/auth/auth.firebase.service';
 import { UtilitieService } from 'src/app/services/utilities/utilitie.service';
-import { DataStorageService } from 'src/app/services/firebase/data-storage.service';
 import { Util } from 'src/app/shared/utils/util';
 
 
@@ -18,11 +19,14 @@ export class HeaderComponent implements OnDestroy {
   appRoute = appRoute;
   burger: HTMLInputElement;
   documentClickedTarget$: Subscription = undefined;
+  userSubject$: Subscription = undefined;
+
+  isAuth: boolean = false;
 
   constructor(
     private _headerCompRef: ElementRef,
     private utilitieService: UtilitieService,
-    private dataStorageService: DataStorageService) {
+    private authService: AuthFirebaseService) {
 
   }
 
@@ -30,9 +34,16 @@ export class HeaderComponent implements OnDestroy {
     if (this.documentClickedTarget$ !== undefined) {
       this.documentClickedTarget$.unsubscribe();
     }
+    if (this.userSubject$ !== undefined) {
+      this.userSubject$.unsubscribe();
+    }
   }
 
   ngOnInit() {
+    this.userSubject$ = this.authService.userSubject.subscribe((user: User) => {
+      this.isAuth = !!user;
+    });
+
     this.documentClickedTarget$ = this.utilitieService.documentClickedTarget.subscribe((target: HTMLElement) => {
       this.utilitieService.documentClickListener(this._headerCompRef, this.dropdownRef, target);
     });
@@ -42,14 +53,6 @@ export class HeaderComponent implements OnDestroy {
   toggleOpen() {
     Util.css.toggleClass(this.burger, 'show');
     this.setSpinarTop();
-  }
-
-  onSaveData() {
-    this.dataStorageService.storeRecipes();
-  }
-
-  onFetchData() {
-    this.dataStorageService.fetchRecipes().subscribe();
   }
 
   @HostListener('window:resize') onResize() {

@@ -6,6 +6,7 @@ import {
   MetricUnitMapping,
   MetricUnitToDropDownForm,
 } from 'src/app/models/ingredients/ingredient.model';
+import { DataStorageService } from 'src/app/services/firebase/data-storage.service';
 import { IngredientFormService } from 'src/app/services/forms/ingredients/ingredient-form.service';
 import { NavigationService } from 'src/app/services/navigation/navigation.service';
 import { RecipeService } from 'src/app/services/recipes/recipe.service';
@@ -29,7 +30,8 @@ export class RecipeEditComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private ingredientsFromService: IngredientFormService,
     private navigationService: NavigationService,
-    private recipeService: RecipeService
+    private recipeService: RecipeService,
+    private dataStorageService: DataStorageService
   ) {}
 
   get formArray() {
@@ -51,7 +53,6 @@ export class RecipeEditComponent implements OnInit {
             : this.recipeEdit.get.imagePath;
       }
     });
-    console.log(this.controls)
     this.onGroupFormValueChange();
   }
 
@@ -79,6 +80,7 @@ export class RecipeEditComponent implements OnInit {
       ? this.recipeService.update(this.recipeForm.value)
       : this.recipeService.add(this.recipeForm.value);
 
+    this.dataStorageService.storeRecipes();
     this.onCancel();
   }
 

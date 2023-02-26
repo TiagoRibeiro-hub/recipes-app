@@ -1,9 +1,11 @@
 export const appRoute = {
     AUTH: 'auth',
-    RECIPES: 'recipes',
-    SHOPPING_LIST: 'shopping-list',
     NOT_FOUND: 'not-found',
     NOT_AUTHORIZED: 'not-authorized',
+    MANAGE_ACCOUNT: 'manage-account',
+    RECIPES: 'recipes',
+    SHOPPING_LIST: 'shopping-list',
+    INGREDIENTS: 'ingredients',
     NEW: 'new',
     EDIT: 'edit',
     PREVIOUS: '..'

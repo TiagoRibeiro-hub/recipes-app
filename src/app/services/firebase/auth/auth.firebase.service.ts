@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, Subject, throwError } from 'rxjs';
-import { catchError, tap } from 'rxjs/operators';
+import { BehaviorSubject, Observable, throwError } from 'rxjs';
+import { catchError, take, tap } from 'rxjs/operators';
 import { appFirebase } from 'src/app/constants/constants';
 import { AuthModel } from 'src/app/models/auth/auth.model';
 import { User } from 'src/app/models/user/user.model';
@@ -21,8 +21,16 @@ export interface AuthFirebaseResponse {
 })
 export class AuthFirebaseService {
 
-  userSubject = new Subject<User>();
+  userSubject = new BehaviorSubject<User>(null);
   user: User;
+
+  private token: string;
+  get userToken(): string {
+    return this.token;
+  }
+  set userToken(token: string) {
+    this.token = token;
+  }
 
   constructor(private http: HttpClient) { }
 
@@ -78,7 +86,7 @@ export class AuthFirebaseService {
       response.idToken,
       new Date(new Date().getTime() + (+response.expiresIn * 1000))
     );
-
+    this.userToken = this.user.token;
     this.userSubject.next(this.user);
   }
 
