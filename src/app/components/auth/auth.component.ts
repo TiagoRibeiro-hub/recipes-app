@@ -4,9 +4,9 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 import { appRoute } from 'src/app/constants/routes';
-import { AuthFirebaseResponse, AuthFirebaseService } from 'src/app/services/firebase/auth/auth.firebase.service';
+import { AuthFirebaseResponse, AuthFirebaseService } from 'src/app/services/auth/firebase/auth.firebase.service';
 import { AuthFormService } from 'src/app/services/forms/auth/auth-form.service';
-import { LoaderService } from 'src/app/services/loader/loader.service';
+import { NavigationService } from 'src/app/services/navigation/navigation.service';
 
 @Component({
   selector: 'app-auth',
@@ -22,8 +22,7 @@ export class AuthComponent implements OnInit {
     private authFormService: AuthFormService,
     private authFirebaseService: AuthFirebaseService,
     private toastr: ToastrService,
-    private loader: LoaderService,
-    private route: Router
+    private navigation: NavigationService
   ) { }
 
   ngOnInit(): void {
@@ -37,18 +36,14 @@ export class AuthComponent implements OnInit {
   }
 
   onSubmit(): void {
-    this.loader.set();
-
     let authObs: Observable<AuthFirebaseResponse> = !this.isLogin ? this.signUp() : this.login();
 
     authObs.subscribe({
-      next: () => this.route.navigate([appRoute.RECIPES]),
+      next: () => this.navigation.toRecipes(),
       error: (error: Error) => {
         this.toastr.error(error.message, '', { positionClass: 'toast-top-center' });
       },
     })
-
-    this.loader.unSet();
     this.authForm.reset();
   }
 

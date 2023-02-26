@@ -22,7 +22,10 @@
             </a>
             <ul id="dropdown" class="dropdown-menu" #dropdownRef>
               <li><a class="dropdown-item" routerLink="/{{appRoute.MANAGE_ACCOUNT}}" *ngIf="this.isAuth">Manage Account</a></li>
-              <li><a class="dropdown-item" routerLink="/{{appRoute.AUTH}}">{{ !this.isAuth ? 'Login' : 'Logout'}}</a></li>
+              <li *ngIf="!this.isAuth, else elseLogout"><a class="dropdown-item" routerLink="/{{appRoute.AUTH}}">Login</a></li>
+              <ng-template #elseLogout>
+                <li><a class="dropdown-item" (click)="onLogout()">Logout</a></li>
+              </ng-template>
             </ul>
         </ul>
       </div>

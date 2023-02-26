@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { appRoute } from 'src/app/constants/routes';
 import { Recipe } from 'src/app/models/recipes/recipe.model';
-import { DataStorageService } from 'src/app/services/firebase/data-storage.service';
+import { DataStorageService } from 'src/app/services/auth/firebase/data-storage.service';
 import { NavigationService } from 'src/app/services/navigation/navigation.service';
 import { RecipeService } from 'src/app/services/recipes/recipe.service';
 

@@ -1,4 +1,5 @@
 import { Component, HostListener } from '@angular/core';
+import { LoaderService } from '../services/loader/loader.service';
 import { UtilitieService } from '../services/utilities/utilitie.service';
 
 @Component({
@@ -8,7 +9,11 @@ import { UtilitieService } from '../services/utilities/utilitie.service';
 })
 export class ShellComponent {
 
-  constructor(private utilitieService: UtilitieService) {}
+  showLoader$ = this.loader.get$;
+
+  constructor(
+    private utilitieService: UtilitieService,
+    private loader: LoaderService) {}
 
   @HostListener('document:click', ['$event']) documentClick(event: any): void {
     this.utilitieService.documentClickedTarget.next(event.target)

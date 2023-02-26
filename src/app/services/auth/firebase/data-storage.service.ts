@@ -3,9 +3,9 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { RecipeService } from 'src/app/services/recipes/recipe.service';
 import { appFirebase } from 'src/app/constants/constants';
 import { Recipe } from 'src/app/models/recipes/recipe.model';
-import { AuthFirebaseService } from './auth/auth.firebase.service';
+import { exhaustMap, map, Observable, take, tap } from 'rxjs';
 import { User } from 'src/app/models/user/user.model';
-import { exhaustMap, firstValueFrom, map, merge, Observable, take, tap } from 'rxjs';
+import { AuthFirebaseService } from './auth.firebase.service';
 
 
 @Injectable({
@@ -33,11 +33,7 @@ export class DataStorageService {
 
   fetchRecipes(): Observable<Recipe[]> {
     return this.http
-      .get<Recipe[]>(
-        appFirebase.PATH + appFirebase.RECIPES,
-        {
-          params: new HttpParams().set('auth', this.authServeice.userToken),
-        })
+      .get<Recipe[]>(appFirebase.PATH + appFirebase.RECIPES)
       .pipe(
         map(recipes => {
           return recipes.map(recipe => {

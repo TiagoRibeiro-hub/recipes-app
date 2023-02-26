@@ -1,9 +1,6 @@
 import { BaseModel } from "../baseModel";
 
 export class User extends BaseModel {
-    map(arg0: (recipe: any) => any): any {
-      throw new Error('Method not implemented.');
-    }
     constructor(
         public id: string,
         public email: string,

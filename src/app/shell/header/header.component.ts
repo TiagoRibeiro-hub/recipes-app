@@ -2,7 +2,8 @@ import { Component, ElementRef, HostListener, OnDestroy, ViewChild } from '@angu
 import { Subscription } from 'rxjs';
 import { appRoute } from 'src/app/constants/routes';
 import { User } from 'src/app/models/user/user.model';
-import { AuthFirebaseService } from 'src/app/services/firebase/auth/auth.firebase.service';
+import { AuthFirebaseService } from 'src/app/services/auth/firebase/auth.firebase.service';
+import { NavigationService } from 'src/app/services/navigation/navigation.service';
 import { UtilitieService } from 'src/app/services/utilities/utilitie.service';
 import { Util } from 'src/app/shared/utils/util';
 
@@ -26,7 +27,8 @@ export class HeaderComponent implements OnDestroy {
   constructor(
     private _headerCompRef: ElementRef,
     private utilitieService: UtilitieService,
-    private authService: AuthFirebaseService) {
+    private authService: AuthFirebaseService,
+    private navigation: NavigationService) {
 
   }
 
@@ -48,6 +50,11 @@ export class HeaderComponent implements OnDestroy {
       this.utilitieService.documentClickListener(this._headerCompRef, this.dropdownRef, target);
     });
     this.burger = (<HTMLInputElement>document.getElementById("burger"));
+  }
+
+  onLogout(){
+    this.authService.logout();
+    this.navigation.toAuthenticated();
   }
 
   toggleOpen() {

@@ -70,6 +70,10 @@ export class AuthFirebaseService {
       );
   }
 
+  logout(){
+    this.userSubject.next(null);
+  }
+  
   private setBody(authModel: AuthModel): any {
     return {
       email: authModel.email,

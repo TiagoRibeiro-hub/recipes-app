@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouteModule } from './routes/route.module';
-import { HttpClientModule } from '@angular/common/http'
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 
@@ -25,6 +25,8 @@ import { AuthComponent } from './components/auth/auth.component';
 import { NotAuthorizedComponent } from './components/status/not-authorized/not-authorized.component';
 
 import { appToastrConfig } from './constants/toastrConfig';
+import { AuthInterceptorService } from './services/auth/interceptors/auth-interceptor.service';
+import { LoaderInterceptorService } from './services/loader/interceptors/loader-interceptor.service';
 
 
 @NgModule({
@@ -47,7 +49,18 @@ import { appToastrConfig } from './constants/toastrConfig';
         IngredientsFormComponent,
         AuthComponent
     ],
-    providers: [],
+    providers: [
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: LoaderInterceptorService,
+            multi: true
+        },
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: AuthInterceptorService,
+            multi: true
+        }
+    ],
     bootstrap: [AppComponent],
     imports: [
         BrowserModule,
@@ -56,7 +69,7 @@ import { appToastrConfig } from './constants/toastrConfig';
         RouteModule,
         HttpClientModule,
         BrowserAnimationsModule,
-        ToastrModule.forRoot(appToastrConfig), 
+        ToastrModule.forRoot(appToastrConfig),
         // ShellModule
     ]
 })

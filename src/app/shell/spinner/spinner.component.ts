@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import { LoaderService } from 'src/app/services/loader/loader.service';
-
 
 @Component({
   selector: 'app-spinner',
@@ -8,5 +6,5 @@ import { LoaderService } from 'src/app/services/loader/loader.service';
   styleUrls: ['./spinner.component.scss']
 })
 export class SpinnerComponent {
-  constructor(public loader: LoaderService) { }
+
 }

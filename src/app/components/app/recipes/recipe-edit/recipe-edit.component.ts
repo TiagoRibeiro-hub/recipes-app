@@ -6,7 +6,7 @@ import {
   MetricUnitMapping,
   MetricUnitToDropDownForm,
 } from 'src/app/models/ingredients/ingredient.model';
-import { DataStorageService } from 'src/app/services/firebase/data-storage.service';
+import { DataStorageService } from 'src/app/services/auth/firebase/data-storage.service';
 import { IngredientFormService } from 'src/app/services/forms/ingredients/ingredient-form.service';
 import { NavigationService } from 'src/app/services/navigation/navigation.service';
 import { RecipeService } from 'src/app/services/recipes/recipe.service';

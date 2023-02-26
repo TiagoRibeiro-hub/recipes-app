@@ -18,4 +18,20 @@ export class NavigationService {
   navigatePrevious(relativeTo: ActivatedRoute): void {
     this.router.navigate([appRoute.PREVIOUS], { relativeTo: relativeTo });
   }
+
+  toAuthenticated(){
+    this.router.navigate([appRoute.AUTH]);
+  }
+
+  toRecipes(){
+    this.router.navigate([appRoute.RECIPES]);
+  }
+
+  toIngredients(){
+    this.router.navigate([appRoute.INGREDIENTS]);
+  }
+
+  toShoppingList(){
+    this.router.navigate([appRoute.SHOPPING_LIST]);
+  }
 }
