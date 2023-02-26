@@ -19,6 +19,10 @@ export class User extends BaseModel {
         return this._token.token;
     }
 
+    get tokenExpirationDate(): Date {
+        return this._token.tokenExpirationDate;
+    }
+
     static getUser(user: IUser): User {
         return new User(
             user.id,

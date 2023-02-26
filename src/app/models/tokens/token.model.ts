@@ -18,7 +18,7 @@ export class Token {
         return new Date(tokenExpirationDate).getTime() - new Date().getTime();
     }
 
-    static toRefreshToken(tokenExpirationDate: Date): boolean {
+    static needToRefreshToken(tokenExpirationDate: Date): boolean {
         return this.expiresIn(tokenExpirationDate) < 600000;
         // < 10min
     }

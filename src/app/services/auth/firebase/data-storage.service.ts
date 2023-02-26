@@ -5,6 +5,7 @@ import { appFirebase } from 'src/app/constants/constants';
 import { Recipe } from 'src/app/models/recipes/recipe.model';
 import { map, Observable, tap } from 'rxjs';
 import { AuthFirebaseService } from './auth.firebase.service';
+import { AuthHelper } from '../auth.helper';
 
 
 @Injectable({
@@ -14,8 +15,7 @@ export class DataStorageService {
 
   constructor(
     private http: HttpClient,
-    private recipeService: RecipeService,
-    private authService: AuthFirebaseService
+    private recipeService: RecipeService
   ) {
 
   }
@@ -27,7 +27,7 @@ export class DataStorageService {
       .put(
         appFirebase.PATH + appFirebase.RECIPES, recipes, 
         {
-          headers: this.authService.setHeader()  
+          headers: AuthHelper.setHeader()  
         }
       )
       .subscribe();
@@ -37,7 +37,7 @@ export class DataStorageService {
     return this.http
       .get<Recipe[]>(appFirebase.PATH + appFirebase.RECIPES,
       {
-        headers: this.authService.setHeader()  
+        headers: AuthHelper.setHeader()  
       })
       .pipe(
         map(recipes => {

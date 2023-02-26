@@ -8,7 +8,7 @@ import { DataStorageService } from 'src/app/services/auth/firebase/data-storage.
 @Injectable({
   providedIn: 'root'
 })
-export class RecipesCanActivateService {
+export class RecipesGuard {
 
   constructor(
     private recipesService: RecipeService,
@@ -28,5 +28,5 @@ export class RecipesCanActivateService {
   }
 }
 
-export const recipesCanActivate = (recipesCanActivateService = inject(RecipesCanActivateService)) => recipesCanActivateService.hasRecipes();
+export const recipesGuard = (recipesGuard = inject(RecipesGuard)) => recipesGuard.hasRecipes();
 

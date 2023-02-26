@@ -1,6 +1,7 @@
 import { HttpEvent, HttpEventType, HttpHandler, HttpInterceptor, HttpParams, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { exhaustMap, Observable, take } from 'rxjs';
+import { Token } from 'src/app/models/tokens/token.model';
 import { User } from 'src/app/models/user/user.model';
 import { AuthFirebaseService } from '../firebase/auth.firebase.service';
 
@@ -14,7 +15,6 @@ export class AuthInterceptorService implements HttpInterceptor {
   ) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-
     return this.authService.userSubject.pipe(
       take(1),
       exhaustMap((user: User) => {

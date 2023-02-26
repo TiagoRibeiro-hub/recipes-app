@@ -10,13 +10,16 @@ import { ShoppingListComponent } from '../components/app/shopping-list/shopping-
 import { NotAuthorizedComponent } from '../components/status/not-authorized/not-authorized.component';
 import { NotFoundComponent } from '../components/status/not-found/not-found.component';
 import { appRoute } from 'src/app/constants/routes';
-import { recipesCanActivate } from '../components/app/recipes/recipe-edit/guard/recipes-can-activate.service';
+import { recipesGuard } from '../components/app/recipes/guards/recipes.guard';
 import { AuthComponent } from '../components/auth/auth.component';
+import { authGuard } from '../components/auth/guards/auth.guard';
 
 //https://itnext.io/everything-you-need-to-know-about-route-guard-in-angular-697a062d3198
 // RECIPES
 const recipeRoutes = {
-    path: appRoute.RECIPES, component: RecipesComponent,
+    path: appRoute.RECIPES, 
+    component: RecipesComponent,
+    canActivate: [async () => await authGuard()],
     children: [
       {
         path: '', component: RecipeStartComponent
@@ -29,20 +32,26 @@ const recipeRoutes = {
       },
       {
         path: ':id', component: RecipeDetailComponent, 
-        canActivate: [async () => await recipesCanActivate()],
+        canActivate: [async () => await recipesGuard()],
         resolve: {
           recipeDetail: RecipeDetailResolver
         }
       },
       {
         path: ':id/' + appRoute.EDIT, component: RecipeEditComponent, 
-        canActivate: [async () => await recipesCanActivate()],
+        canActivate: [async () => await recipesGuard()],
         resolve: {
           recipeEdit: RecipeEditResolver
         }
       },
     ]
   };
+// // INGREDIENT LIST
+// const ingredientsRoutes = {
+//   path: appRoute.INGREDIENTS, 
+//   component: IngredientListComponent,
+//   canActivate: [async () => await authGuard()],
+// };
 // SHOPPING LIST
 const shoppingListRoutes = {
   path: appRoute.SHOPPING_LIST, component: ShoppingListComponent

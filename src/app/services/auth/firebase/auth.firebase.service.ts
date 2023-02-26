@@ -9,6 +9,7 @@ import { Token } from 'src/app/models/tokens/token.model';
 import { IUser } from 'src/app/models/user/user.interface';
 import { User } from 'src/app/models/user/user.model';
 import { NavigationService } from '../../navigation/navigation.service';
+import { AuthHelper } from '../auth.helper';
 
 export interface AuthFirebaseResponse {
   idToken: string;
@@ -45,9 +46,9 @@ export class AuthFirebaseService implements IAuthManager {
     return this.http
       .post<AuthFirebaseResponse>(
         appFirebase.SIGN_UP,
-        this.setBody(authModel),
+        AuthHelper.setBody(authModel),
         {
-          headers: this.setHeader()
+          headers: AuthHelper.setHeader()
         }
       )
       .pipe(
@@ -75,9 +76,9 @@ export class AuthFirebaseService implements IAuthManager {
     return this.http
       .post<AuthFirebaseResponse>(
         appFirebase.SIGN_IN,
-        this.setBody(authModel),
+        AuthHelper.setBody(authModel),
         {
-          headers: this.setHeader()
+          headers: AuthHelper.setHeader()
         })
       .pipe(
         catchError(this.handleError),
@@ -114,28 +115,8 @@ export class AuthFirebaseService implements IAuthManager {
     }, expirationDate);
   }
 
-  setHeader() {
-    return new HttpHeaders().set('firebase', 'true');
-  }
-
-  private setBody(authModel: AuthModel): any {
-    return {
-      email: authModel.email,
-      password: authModel.password,
-      returnSecureToken: true,
-    };
-  }
-
   private setUser(response: AuthFirebaseResponse, userName: string) {
-    const user = {
-      id: response.localId,
-      email: response.email,
-      userName: userName,
-      token: {
-        token: response.idToken,
-        tokenExpirationDate: Token.expirationDate(+response.expiresIn)
-      }
-    }
+    const user = AuthHelper.setUser(response, userName);
     this.userSubject.next(User.getUser(user));
     this.user = user;
   }
@@ -146,21 +127,11 @@ export class AuthFirebaseService implements IAuthManager {
     if (!errorResponse.error || !errorResponse.error.error) {
       error = throwError(() => new Error(errorMessage));
     } else {
-      switch (errorResponse.error.error.message) {
-        case 'EMAIL_EXISTS':
-          errorMessage = 'Email already exists';
-          break;
-        case 'EMAIL_NOT_FOUND':
-          errorMessage = 'Email not found';
-          break;
-        case 'INVALID_PASSWORD':
-          errorMessage = 'Invalid password';
-          break;
-        case 'USER_DISABLED':
-          errorMessage = 'User is disabled by an administrator';
-      }
+      errorMessage = AuthHelper.setErrorMessage(errorResponse, errorMessage);
       error = throwError(() => new Error(errorMessage));
     }
     return error;
   }
+
+
 }
