@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { RecipeService } from 'src/app/services/recipes/recipe.service';
 import { appFirebase } from 'src/app/constants/constants';
 import { Recipe } from 'src/app/models/recipes/recipe.model';
-import { exhaustMap, map, Observable, take, tap } from 'rxjs';
-import { User } from 'src/app/models/user/user.model';
+import { map, Observable, tap } from 'rxjs';
 import { AuthFirebaseService } from './auth.firebase.service';
 
 
@@ -16,7 +15,7 @@ export class DataStorageService {
   constructor(
     private http: HttpClient,
     private recipeService: RecipeService,
-    private authServeice: AuthFirebaseService
+    private authService: AuthFirebaseService
   ) {
 
   }
@@ -26,14 +25,20 @@ export class DataStorageService {
     // firebase put overwritten all recipes
     this.http
       .put(
-        appFirebase.PATH + appFirebase.RECIPES, recipes
+        appFirebase.PATH + appFirebase.RECIPES, recipes, 
+        {
+          headers: this.authService.setHeader()  
+        }
       )
       .subscribe();
   }
 
   fetchRecipes(): Observable<Recipe[]> {
     return this.http
-      .get<Recipe[]>(appFirebase.PATH + appFirebase.RECIPES)
+      .get<Recipe[]>(appFirebase.PATH + appFirebase.RECIPES,
+      {
+        headers: this.authService.setHeader()  
+      })
       .pipe(
         map(recipes => {
           return recipes.map(recipe => {

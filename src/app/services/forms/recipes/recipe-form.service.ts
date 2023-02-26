@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { FormGroup, Validators } from '@angular/forms';
-import { IFormGroups, IFormsGroups } from 'src/app/models/auth/interfaces';
+import { IFormGroups, IFormsGroups } from 'src/app/models/forms/forms.interface';
 import { Recipe } from 'src/app/models/recipes/recipe.model';
 import { FormGroupService } from 'src/app/services/forms/form-group.service';
 import { IngredientFormService } from '../ingredients/ingredient-form.service';

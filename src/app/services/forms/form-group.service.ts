@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { IFormGroups } from 'src/app/models/auth/interfaces';
+import { IFormGroups } from 'src/app/models/forms/forms.interface';
 import { BaseModel } from 'src/app/models/baseModel';
 import { FormControlService } from './form-control.service';
 

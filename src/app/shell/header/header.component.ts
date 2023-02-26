@@ -27,8 +27,7 @@ export class HeaderComponent implements OnDestroy {
   constructor(
     private _headerCompRef: ElementRef,
     private utilitieService: UtilitieService,
-    private authService: AuthFirebaseService,
-    private navigation: NavigationService) {
+    private authService: AuthFirebaseService) {
 
   }
 
@@ -53,8 +52,7 @@ export class HeaderComponent implements OnDestroy {
   }
 
   onLogout(){
-    this.authService.logout();
-    this.navigation.toAuthenticated();
+    this.authService.signOut();
   }
 
   toggleOpen() {

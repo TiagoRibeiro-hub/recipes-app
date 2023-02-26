@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { Operation } from 'src/app/models/enums/operation';
+import { Operation } from 'src/app/enums/operation';
 import { IngredientsService } from 'src/app/services/ingredients/ingredients.service';
 import { ShoppingListService } from 'src/app/services/shopping-list/shopping-list.service';
 

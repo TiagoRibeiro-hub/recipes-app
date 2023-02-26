@@ -1,10 +1,14 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
-import { catchError, take, tap } from 'rxjs/operators';
+import { catchError, tap } from 'rxjs/operators';
 import { appFirebase } from 'src/app/constants/constants';
+import { IAuthManager } from 'src/app/models/auth/auth.interface';
 import { AuthModel } from 'src/app/models/auth/auth.model';
+import { Token } from 'src/app/models/tokens/token.model';
+import { IUser } from 'src/app/models/user/user.interface';
 import { User } from 'src/app/models/user/user.model';
+import { NavigationService } from '../../navigation/navigation.service';
 
 export interface AuthFirebaseResponse {
   idToken: string;
@@ -19,25 +23,33 @@ export interface AuthFirebaseResponse {
 @Injectable({
   providedIn: 'root',
 })
-export class AuthFirebaseService {
+export class AuthFirebaseService implements IAuthManager {
 
   userSubject = new BehaviorSubject<User>(null);
-  user: User;
+  private tokenExpirationTimer: NodeJS.Timeout = undefined;
 
-  private token: string;
-  get userToken(): string {
-    return this.token;
+  get user(): IUser {
+    return JSON.parse(localStorage.getItem('userData'));
   }
-  set userToken(token: string) {
-    this.token = token;
+  set user(user: IUser) {
+    localStorage.setItem('userData', JSON.stringify(user));
+    this.autoSignOut(Token.expiresIn(user.token.tokenExpirationDate))
   }
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private navigation: NavigationService) { }
 
   signUp(authModel: AuthModel): Observable<AuthFirebaseResponse> {
 
     return this.http
-      .post<AuthFirebaseResponse>(appFirebase.SIGN_UP, this.setBody(authModel))
+      .post<AuthFirebaseResponse>(
+        appFirebase.SIGN_UP,
+        this.setBody(authModel),
+        {
+          headers: this.setHeader()
+        }
+      )
       .pipe(
         catchError(this.handleError),
         tap(response => {
@@ -61,7 +73,12 @@ export class AuthFirebaseService {
 
   signIn(authModel: AuthModel): Observable<AuthFirebaseResponse> {
     return this.http
-      .post<AuthFirebaseResponse>(appFirebase.SIGN_IN, this.setBody(authModel))
+      .post<AuthFirebaseResponse>(
+        appFirebase.SIGN_IN,
+        this.setBody(authModel),
+        {
+          headers: this.setHeader()
+        })
       .pipe(
         catchError(this.handleError),
         tap(response => {
@@ -70,10 +87,37 @@ export class AuthFirebaseService {
       );
   }
 
-  logout(){
-    this.userSubject.next(null);
+  autoSignIn() {
+    const userData = this.user;
+    if (!userData) {
+      return;
+    }
+    const loadedUser = User.getUser(userData);
+    if (loadedUser.token) {
+      this.userSubject.next(loadedUser);
+    }
   }
-  
+
+  signOut() {
+    this.userSubject.next(null);
+    this.navigation.toAuthenticated();
+    localStorage.removeItem('userData');
+    if (this.tokenExpirationTimer) {
+      clearTimeout(this.tokenExpirationTimer);
+    }
+    this.tokenExpirationTimer = undefined;
+  }
+
+  autoSignOut(expirationDate: number) {
+    this.tokenExpirationTimer = setTimeout(() => {
+      this.signOut();
+    }, expirationDate);
+  }
+
+  setHeader() {
+    return new HttpHeaders().set('firebase', 'true');
+  }
+
   private setBody(authModel: AuthModel): any {
     return {
       email: authModel.email,
@@ -83,15 +127,17 @@ export class AuthFirebaseService {
   }
 
   private setUser(response: AuthFirebaseResponse, userName: string) {
-    this.user = new User(
-      response.localId,
-      response.email,
-      userName,
-      response.idToken,
-      new Date(new Date().getTime() + (+response.expiresIn * 1000))
-    );
-    this.userToken = this.user.token;
-    this.userSubject.next(this.user);
+    const user = {
+      id: response.localId,
+      email: response.email,
+      userName: userName,
+      token: {
+        token: response.idToken,
+        tokenExpirationDate: Token.expirationDate(+response.expiresIn)
+      }
+    }
+    this.userSubject.next(User.getUser(user));
+    this.user = user;
   }
 
   private handleError(errorResponse: HttpErrorResponse): Observable<never> {

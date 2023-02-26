@@ -13,14 +13,25 @@ export class LoaderInterceptorService implements HttpInterceptor {
   ) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+
+    if(!req.headers.has('firebase')){
+      return next.handle(req);
+    }
+
     this.loader.set();
-    return next.handle(req)
-      .pipe(
-        tap(event => {
-          if (event.type === HttpEventType.Response) {
-            this.loader.unSet();
-          }
-        })
-      );
+    const modifiedReq = req.clone({
+      headers: req.headers.delete('firebase','true'),
+    });
+
+    return next.handle(modifiedReq)
+    .pipe(
+      tap(event => {
+        if (event.type === HttpEventType.Response) {
+          this.loader.unSet();
+        }
+      })
+    );
+
+   
   }
 }

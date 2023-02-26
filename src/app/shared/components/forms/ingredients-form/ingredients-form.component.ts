@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { Operation } from 'src/app/models/enums/operation';
+import { Operation } from 'src/app/enums/operation';
 import { Ingredient, MetricUnitMapping, MetricUnitToDropDownForm } from 'src/app/models/ingredients/ingredient.model';
 import { IngredientFormService } from 'src/app/services/forms/ingredients/ingredient-form.service';
 import { IngredientsService } from 'src/app/services/ingredients/ingredients.service';
