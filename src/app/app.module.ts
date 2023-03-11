@@ -7,8 +7,7 @@ import { appToastrConfig } from '@constants/toastrConfig';
 import { AppComponent } from './app.component';
 import { ShellModule } from '@app-modules/shell/shell.module';
 import { AppRoutingModule } from '@app-modules/routes/app-routing.module';
-import { CoreModule } from './core-module';
-import { SharedModule } from '@app-modules/shared/shared.module';
+import { CoreModule } from './app-modules/core/core-module';
 
 
 @NgModule({
@@ -22,9 +21,8 @@ import { SharedModule } from '@app-modules/shared/shared.module';
         HttpClientModule,
         BrowserAnimationsModule,
         ToastrModule.forRoot(appToastrConfig),
-        SharedModule,
         ShellModule,
-        AppRoutingModule // must be the last module
+        AppRoutingModule
     ]
 })
 export class AppModule { }
