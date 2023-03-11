@@ -16,7 +16,7 @@ import { IRecipeEdit } from "./resolver/recipe-edit-resolver";
 @Component({
   selector: 'app-recipe-edit',
   templateUrl: './recipe-edit.component.html',
-  styleUrls: ['./recipe-edit.component.scss'],
+  styles: []
 })
 export class RecipeEditComponent implements OnInit {
   metricUnitMapping = MetricUnitMapping;

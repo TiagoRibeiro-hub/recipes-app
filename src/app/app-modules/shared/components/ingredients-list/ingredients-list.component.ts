@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { SharedModule } from '@app-modules/shared/shared.module';
 import { Ingredient, MetricUnitMapping } from '@models/ingredients/ingredient.model';
 
 
@@ -8,9 +9,13 @@ export interface IAddIngredientToList {
 }
 
 @Component({
+  standalone: true,
   selector: 'app-ingredients-list',
   templateUrl: './ingredients-list.component.html',
-  styleUrls: ['./ingredients-list.component.scss']
+  styles: [],
+  imports: [
+    SharedModule
+  ]
 })
 export class IngredientsListComponent {
   metricUnitMapping = MetricUnitMapping;

@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnDestroy, ViewChild } from '@angular/core';
 import { ActivatedRoute, Data } from '@angular/router';
-import { IAddIngredientToList } from '@app-modules/shared/components/ingredients/ingredients-list/ingredients-list.component';
+import { IAddIngredientToList } from '@app-modules/shared/components/ingredients-list/ingredients-list.component';
 import { Util } from "src/app/utils/util";
 import { appResolvers } from '@constants/constants';
 import { appRoute } from '@constants/routes';
@@ -17,7 +17,7 @@ import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-recipe-detail',
   templateUrl: './recipe-detail.component.html',
-  styleUrls: ['./recipe-detail.component.scss']
+  styles: []
 })
 export class RecipeDetailComponent implements OnDestroy {
   recipe: Recipe

@@ -4,13 +4,17 @@ import { Operation } from '@enums/operation';
 import { IngredientsService } from '@services/ingredients/ingredients.service';
 import { ShoppingListService } from '@services/shopping-list/shopping-list.service';
 import { Subscription } from 'rxjs';
+import { IngredientsFormComponent } from "../../shared/components/ingredients-form/ingredients-form.component";
 
 @Component({
-  standalone: true,
-  imports: [SharedModule],
-  selector: 'app-shopping-edit',
-  templateUrl: './shopping-edit.component.html',
-  styleUrls: ['./shopping-edit.component.scss']
+    standalone: true,
+    selector: 'app-shopping-edit',
+    templateUrl: './shopping-edit.component.html',
+    styles: [],
+    imports: [
+      SharedModule, 
+      IngredientsFormComponent
+    ]
 })
 export class ShoppingEditComponent implements OnInit {
 

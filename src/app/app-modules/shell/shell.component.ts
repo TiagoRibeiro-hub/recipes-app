@@ -9,7 +9,7 @@ import { SpinnerComponent } from './spinner/spinner.component';
   standalone: true,
   selector: 'app-shell',
   templateUrl: './shell.component.html',
-  styleUrls: ['./shell.component.scss'],
+  styles: [],
   imports: [
     SharedModule,
     HeaderComponent,

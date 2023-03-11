@@ -12,6 +12,7 @@ import { appRoute } from "@constants/routes";
 import { recipesGuard } from "./guards/recipes.guard";
 import { RecipeDetailResolver } from "./recipe-detail/resolver/recipe-detail-resolver";
 import { RecipeEditResolver } from "./recipe-edit/resolver/recipe-edit-resolver";
+import { IngredientsListComponent } from "../shared/components/ingredients-list/ingredients-list.component";
 
 const recipeRoutes: Routes = [
     {
@@ -55,12 +56,13 @@ const recipeRoutes: Routes = [
         RecipeStartComponent,
         RecipeEditComponent
     ],
-    imports: [
-        RouterModule.forChild(recipeRoutes),
-        SharedModule
-    ],
     exports: [
         RouterModule
+    ],
+    imports: [
+        RouterModule.forChild(recipeRoutes),
+        SharedModule,
+        IngredientsListComponent
     ]
 })
 export class RecipesModule { }

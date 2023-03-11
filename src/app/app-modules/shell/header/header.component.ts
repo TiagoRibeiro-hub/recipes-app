@@ -7,9 +7,6 @@ import { UtilitieService } from '@services/utilities/utilitie.service';
 import { Subscription } from 'rxjs';
 import { SharedModule } from '@app-modules/shared/shared.module';
 
-
-
-
 @Component({
   standalone: true,
   selector: 'app-header',
