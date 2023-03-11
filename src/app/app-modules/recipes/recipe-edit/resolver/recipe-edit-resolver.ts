@@ -1,7 +1,6 @@
-import { Injectable } from "@angular/core";
+import { inject } from "@angular/core";
 import { FormGroup } from "@angular/forms";
-import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from "@angular/router";
-import { Observable } from "rxjs";
+import { ActivatedRouteSnapshot, ResolveFn, RouterStateSnapshot } from "@angular/router";
 import { Recipe } from "src/app/app-modules/recipes/recipe.model";
 import { IngredientFormService } from "src/app/services/forms/ingredients/ingredient-form.service";
 import { IRecipeForms, RecipeFormService } from "src/app/services/forms/recipes/recipe-form.service";
@@ -13,32 +12,61 @@ export interface IRecipeEdit {
     form: FormGroup
 }
 
-@Injectable({
-    providedIn: 'root'
-})
-export class RecipeEditResolver implements Resolve<IRecipeEdit> {
-    constructor(
-        private recipeService: RecipeService,
-        private recipeFormService: RecipeFormService,
-        private ingredientFormService: IngredientFormService) { }
+// @Injectable({
+//     providedIn: 'root'
+// })
+// export class RecipeEditResolver implements Resolve<IRecipeEdit> {
+//     constructor(
+//         private recipeService: RecipeService,
+//         private recipeFormService: RecipeFormService,
+//         private ingredientFormService: IngredientFormService) { }
 
-    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): IRecipeEdit | Observable<IRecipeEdit> | Promise<IRecipeEdit> {
+//     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): IRecipeEdit | Observable<IRecipeEdit> | Promise<IRecipeEdit> {
+
+//         const id = route.params['id'];
+//         const editMode = id != undefined;
+
+//         let recipeToEdit = editMode ? this.recipeService.getById(id) : undefined;
+//         let form: FormGroup;
+
+//         if (recipeToEdit === undefined) {
+//             form = this.recipeFormService.getFormGroup();
+//         }
+//         else {
+//             let iRecipeForms: IRecipeForms = {
+//                 recipes: recipeToEdit,
+//                 iFormGroupsArray: this.ingredientFormService.getFormArray(recipeToEdit.ingredients)
+//             };
+//             form = this.recipeFormService.getFormGroup(iRecipeForms);
+//         }
+
+//         return {
+//             editMode: editMode,
+//             get: recipeToEdit,
+//             form: form
+//         };
+//     }
+// }
+
+export const RecipeEditResolver: ResolveFn<IRecipeEdit> =
+    (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
 
         const id = route.params['id'];
         const editMode = id != undefined;
 
-        let recipeToEdit = editMode ? this.recipeService.getById(id) : undefined;
+        let recipeToEdit = editMode ? inject(RecipeService).getById(id) : undefined;
         let form: FormGroup;
 
+        const recipeFormService = inject(RecipeFormService);
         if (recipeToEdit === undefined) {
-            form = this.recipeFormService.getFormGroup();
+            form = recipeFormService.getFormGroup();
         }
         else {
             let iRecipeForms: IRecipeForms = {
                 recipes: recipeToEdit,
-                iFormGroupsArray: this.ingredientFormService.getFormArray(recipeToEdit.ingredients)
+                iFormGroupsArray: inject(IngredientFormService).getFormArray(recipeToEdit.ingredients)
             };
-            form = this.recipeFormService.getFormGroup(iRecipeForms);
+            form = recipeFormService.getFormGroup(iRecipeForms);
         }
 
         return {
@@ -47,5 +75,3 @@ export class RecipeEditResolver implements Resolve<IRecipeEdit> {
             form: form
         };
     }
-
-}

@@ -9,7 +9,7 @@ import { Recipe } from 'src/app/app-modules/recipes/recipe.model';
 import { NavigationService } from 'src/app/services/navigation/navigation.service';
 import { RecipeService } from 'src/app/services/recipes/recipe.service';
 import { UtilitieService } from 'src/app/services/utilities/utilitie.service';
-import { IAddIngredientToList } from '../../shared/components/ingredients/ingredients-list/shared-ingredients-list.component';
+import { IAddIngredientToList } from '../../shared/components/ingredients/ingredients-list/ingredients-list.component';
 import { Util } from '../../shared/utils/util';
 
 

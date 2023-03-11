@@ -7,11 +7,11 @@ export interface IAddIngredientToList {
 }
 
 @Component({
-  selector: 'app-shared-ingredients-list',
-  templateUrl: './shared-ingredients-list.component.html',
-  styleUrls: ['./shared-ingredients-list.component.scss']
+  selector: 'app-ingredients-list',
+  templateUrl: './ingredients-list.component.html',
+  styleUrls: ['./ingredients-list.component.scss']
 })
-export class SharedIngredientsListComponent {
+export class IngredientsListComponent {
   metricUnitMapping = MetricUnitMapping;
   
   @Input() withCheckBoxes: boolean = true;

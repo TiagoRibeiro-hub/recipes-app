@@ -20,7 +20,7 @@ import { RecipeStartComponent } from './app-modules/recipes/recipe-start/recipe-
 import { RecipesComponent } from './app-modules/recipes/recipes.component';
 import { RouteModule } from './app-modules/routes/route.module';
 import { IngredientsFormComponent } from './app-modules/shared/components/forms/ingredients-form/ingredients-form.component';
-import { SharedIngredientsListComponent } from './app-modules/shared/components/ingredients/ingredients-list/shared-ingredients-list.component';
+import { IngredientsListComponent } from './app-modules/shared/components/ingredients/ingredients-list/ingredients-list.component';
 import { HeaderComponent } from './app-modules/shell/header/header.component';
 import { ShellComponent } from './app-modules/shell/shell.component';
 import { SpinnerComponent } from './app-modules/shell/spinner/spinner.component';
@@ -36,14 +36,14 @@ import { AppComponent } from './app.component';
         RecipeListComponent,
         RecipeDetailComponent,
         RecipeItemComponent,
+        RecipeStartComponent,
+        RecipeEditComponent,
         ShoppingListComponent,
         ShoppingEditComponent,
-        SharedIngredientsListComponent,
+        IngredientsListComponent,
         ShellComponent,
         NotFoundComponent,
         NotAuthorizedComponent,
-        RecipeStartComponent,
-        RecipeEditComponent,
         SpinnerComponent,
         HeaderComponent,
         IngredientsFormComponent,
