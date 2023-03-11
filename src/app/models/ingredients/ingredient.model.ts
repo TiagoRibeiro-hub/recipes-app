@@ -1,8 +1,8 @@
-import { BaseModel } from '../baseModel';
+import { BaseModel } from "@models/baseModel";
 
 export class Ingredient extends BaseModel {
   constructor(
-    public id: string,
+    public override id: string,
     public name: string,
     public amount: number,
     public metricUnit: MetricUnit

@@ -12,7 +12,11 @@
     "importHelpers": true,
     "target": "ES2022",
     "module": "ES2022",
+    "forceConsistentCasingInFileNames": true,
     "useDefineForClassFields": false,
+    "noImplicitOverride": true,
+    // "noImplicitReturns": true,
+    "esModuleInterop": true,
     "lib": [
       "ES2022",
       "dom"
@@ -23,8 +27,21 @@
     "typeRoots": [
       "node_modules/@types"
     ],
+    "paths": {
+      "@app-modules/*": ["src/app/app-modules/*"],
+      "@services/*": ["src/app/services/*"],
+      "@constants/*": ["src/app/constants/*"],
+      "@enums/*": ["src/app/enums/*"],
+      "@models/*": ["src/app/models/*"],
+      "@env/*": ["src/environments/*"],
+      "@assets/*": ["src/assets/*"]
+    }
   },
   "angularCompilerOptions": {
-    "enableI18nLegacyMessageIdFormat": false
+    "enableI18nLegacyMessageIdFormat": false,
+    "fullTemplateTypeCheck": true,
+    "strictInjectionParameters": true,
+    "strictInputAccessModifiers": true,
+    "strictTemplates": true
   }
 }

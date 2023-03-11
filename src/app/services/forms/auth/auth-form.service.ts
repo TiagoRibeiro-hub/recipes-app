@@ -1,9 +1,9 @@
-import { Injectable } from '@angular/core';
-import { FormGroup, ValidatorFn, Validators } from '@angular/forms';
-import { AuthModel } from 'src/app/models/auth/auth.model';
-import { appRegex } from 'src/app/constants/constants';
-import { IFormsGroups } from 'src/app/models/forms/forms.interface';
-import { FormGroupService } from '../form-group.service';
+import { Injectable } from "@angular/core";
+import { FormGroup, ValidatorFn, Validators } from "@angular/forms";
+import { appRegex } from "@constants/constants";
+import { AuthModel } from "@models/auth/auth.model";
+import { IFormsGroups } from "@models/forms/forms.interface";
+import { FormGroupService } from "../form-group.service";
 
 @Injectable({
   providedIn: 'root'

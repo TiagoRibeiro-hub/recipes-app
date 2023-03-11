@@ -1,7 +1,7 @@
-import { HttpErrorResponse, HttpHeaders } from "@angular/common/http";
-import { AuthModel } from "src/app/models/auth/auth.model";
-import { Token } from "src/app/models/tokens/token.model";
-import { IUser } from "src/app/models/user/user.interface";
+import { HttpHeaders, HttpErrorResponse } from "@angular/common/http";
+import { AuthModel } from "@models/auth/auth.model";
+import { Token } from "@models/tokens/token.model";
+import { IUser } from "@models/user/user.interface";
 import { AuthFirebaseResponse } from "./firebase/auth.firebase.service";
 
 export class AuthHelper {

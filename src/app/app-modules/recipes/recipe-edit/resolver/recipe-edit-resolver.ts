@@ -1,10 +1,11 @@
 import { inject } from "@angular/core";
 import { FormGroup } from "@angular/forms";
 import { ActivatedRouteSnapshot, ResolveFn, RouterStateSnapshot } from "@angular/router";
-import { Recipe } from "src/app/app-modules/recipes/recipe.model";
-import { IngredientFormService } from "src/app/services/forms/ingredients/ingredient-form.service";
-import { IRecipeForms, RecipeFormService } from "src/app/services/forms/recipes/recipe-form.service";
-import { RecipeService } from "src/app/services/recipes/recipe.service";
+import { Recipe } from "@models/recipes/recipe.model";
+import { IngredientFormService } from "@services/forms/ingredients/ingredient-form.service";
+import { RecipeFormService, IRecipeForms } from "@services/forms/recipes/recipe-form.service";
+import { RecipeService } from "@services/recipes/recipe.service";
+
 
 export interface IRecipeEdit {
     editMode: boolean;

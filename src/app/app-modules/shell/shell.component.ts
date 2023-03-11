@@ -1,7 +1,6 @@
 import { Component, HostListener } from '@angular/core';
-import { LoaderService } from 'src/app/services/loader/loader.service';
-import { UtilitieService } from 'src/app/services/utilities/utilitie.service';
-
+import { LoaderService } from '@services/loader/loader.service';
+import { UtilitieService } from '@services/utilities/utilitie.service';
 
 @Component({
   selector: 'app-shell',

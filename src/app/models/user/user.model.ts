@@ -1,10 +1,10 @@
-import { BaseModel } from "../baseModel";
-import { Token } from "../tokens/token.model";
+import { BaseModel } from "@models/baseModel";
+import { Token } from "@models/tokens/token.model";
 import { IUser } from "./user.interface";
 
 export class User extends BaseModel {
     constructor(
-        public id: string,
+        public override id: string,
         public email: string,
         public userName: string,
         private _token: Token

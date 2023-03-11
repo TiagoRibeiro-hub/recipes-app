@@ -1,8 +1,10 @@
-import { inject, Injectable } from "@angular/core";
+import { Injectable, inject } from "@angular/core";
 import { Router } from "@angular/router";
-import { appRoute } from "src/app/constants/routes";
-import { Token } from "src/app/models/tokens/token.model";
-import { AuthFirebaseService } from "src/app/services/auth/firebase/auth.firebase.service";
+import { appRoute } from "@constants/routes";
+import { Token } from "@models/tokens/token.model";
+import { AuthFirebaseService } from "@services/auth/firebase/auth.firebase.service";
+
+
 
 @Injectable({
     providedIn: 'root'

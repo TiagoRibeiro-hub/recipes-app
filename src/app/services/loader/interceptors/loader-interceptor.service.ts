@@ -1,7 +1,7 @@
-import { HttpEvent, HttpEventType, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Observable, tap } from 'rxjs';
-import { LoaderService } from '../loader.service';
+import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpEventType } from "@angular/common/http";
+import { Injectable } from "@angular/core";
+import { Observable, tap } from "rxjs";
+import { LoaderService } from "../loader.service";
 
 @Injectable({
   providedIn: 'root'

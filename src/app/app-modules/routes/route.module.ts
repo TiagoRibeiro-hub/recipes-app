@@ -1,18 +1,19 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { appRoute } from 'src/app/constants/routes';
-import { AuthComponent } from '../auth/auth.component';
-import { authGuard } from '../auth/guards/auth.guard';
-import { NotAuthorizedComponent } from '../auth/status/not-authorized/not-authorized.component';
-import { NotFoundComponent } from '../auth/status/not-found/not-found.component';
-import { recipesGuard } from '../recipes/guards/recipes.guard';
-import { RecipeDetailComponent } from '../recipes/recipe-detail/recipe-detail.component';
-import { RecipeDetailResolver } from '../recipes/recipe-detail/resolver/recipe-detail-resolver';
-import { RecipeEditComponent } from '../recipes/recipe-edit/recipe-edit.component';
-import { RecipeEditResolver } from '../recipes/recipe-edit/resolver/recipe-edit-resolver';
-import { RecipeStartComponent } from '../recipes/recipe-start/recipe-start.component';
-import { RecipesComponent } from '../recipes/recipes.component';
-import { ShoppingListComponent } from '../shopping-list/shopping-list.component';
+import { AuthComponent } from '@app-modules/auth/auth.component';
+import { authGuard } from '@app-modules/auth/guards/auth.guard';
+import { NotAuthorizedComponent } from '@app-modules/auth/status/not-authorized/not-authorized.component';
+import { NotFoundComponent } from '@app-modules/auth/status/not-found/not-found.component';
+import { recipesGuard } from '@app-modules/recipes/guards/recipes.guard';
+import { RecipeDetailComponent } from '@app-modules/recipes/recipe-detail/recipe-detail.component';
+import { RecipeDetailResolver } from '@app-modules/recipes/recipe-detail/resolver/recipe-detail-resolver';
+import { RecipeEditComponent } from '@app-modules/recipes/recipe-edit/recipe-edit.component';
+import { RecipeEditResolver } from '@app-modules/recipes/recipe-edit/resolver/recipe-edit-resolver';
+import { RecipeStartComponent } from '@app-modules/recipes/recipe-start/recipe-start.component';
+import { RecipesComponent } from '@app-modules/recipes/recipes.component';
+import { ShoppingListComponent } from '@app-modules/shopping-list/shopping-list.component';
+import { appRoute } from '@constants/routes';
+
 
 
 //https://itnext.io/everything-you-need-to-know-about-route-guard-in-angular-697a062d3198

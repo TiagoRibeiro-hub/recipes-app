@@ -1,9 +1,10 @@
 import { inject, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { appRoute } from '@constants/routes';
+import { DataStorageService } from '@services/auth/firebase/data-storage.service';
+import { RecipeService } from '@services/recipes/recipe.service';
 import { firstValueFrom } from 'rxjs';
-import { appRoute } from 'src/app/constants/routes';
-import { RecipeService } from 'src/app/services/recipes/recipe.service';
-import { DataStorageService } from 'src/app/services/auth/firebase/data-storage.service';
+
 
 @Injectable({
   providedIn: 'root'

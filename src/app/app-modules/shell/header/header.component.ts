@@ -1,10 +1,11 @@
 import { Component, ElementRef, HostListener, OnDestroy, ViewChild } from '@angular/core';
+import { Util } from '@app-modules/shared/utils/util';
+import { appRoute } from '@constants/routes';
+import { User } from '@models/user/user.model';
+import { AuthFirebaseService } from '@services/auth/firebase/auth.firebase.service';
+import { UtilitieService } from '@services/utilities/utilitie.service';
 import { Subscription } from 'rxjs';
-import { appRoute } from 'src/app/constants/routes';
-import { User } from 'src/app/models/user/user.model';
-import { AuthFirebaseService } from 'src/app/services/auth/firebase/auth.firebase.service';
-import { UtilitieService } from 'src/app/services/utilities/utilitie.service';
-import { Util } from '../../shared/utils/util';
+
 
 
 

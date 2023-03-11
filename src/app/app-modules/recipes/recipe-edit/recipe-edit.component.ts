@@ -1,16 +1,15 @@
-import { Component, OnInit } from '@angular/core';
-import { FormArray, FormControl, FormGroup } from '@angular/forms';
-import { ActivatedRoute, Data } from '@angular/router';
-import { appConstants, appResolvers } from 'src/app/constants/constants';
-import {
-  MetricUnitMapping,
-  MetricUnitToDropDownForm,
-} from 'src/app/models/ingredients/ingredient.model';
-import { DataStorageService } from 'src/app/services/auth/firebase/data-storage.service';
-import { IngredientFormService } from 'src/app/services/forms/ingredients/ingredient-form.service';
-import { NavigationService } from 'src/app/services/navigation/navigation.service';
-import { RecipeService } from 'src/app/services/recipes/recipe.service';
-import { IRecipeEdit } from './resolver/recipe-edit-resolver';
+import { Component, OnInit } from "@angular/core";
+import { FormGroup, FormArray, FormControl } from "@angular/forms";
+import { ActivatedRoute, Data } from "@angular/router";
+import { appConstants, appResolvers } from "@constants/constants";
+import { MetricUnitMapping, MetricUnitToDropDownForm } from "@models/ingredients/ingredient.model";
+import { DataStorageService } from "@services/auth/firebase/data-storage.service";
+import { IngredientFormService } from "@services/forms/ingredients/ingredient-form.service";
+import { NavigationService } from "@services/navigation/navigation.service";
+import { RecipeService } from "@services/recipes/recipe.service";
+import { IRecipeEdit } from "./resolver/recipe-edit-resolver";
+
+
 
 
 

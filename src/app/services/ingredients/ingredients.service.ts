@@ -1,8 +1,7 @@
-import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
-import { Util } from 'src/app/app-modules/shared/utils/util';
-import { Ingredient, MetricUnit } from 'src/app/models/ingredients/ingredient.model';
-
+import { Injectable } from "@angular/core";
+import { Util } from "@app-modules/shared/utils/util";
+import { Ingredient, MetricUnit } from "@models/ingredients/ingredient.model";
+import { Subject } from "rxjs";
 
 @Injectable({
   providedIn: 'root'

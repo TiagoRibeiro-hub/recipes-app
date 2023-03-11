@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
-import { FormGroup } from '@angular/forms';
-import { IFormGroups } from 'src/app/models/forms/forms.interface';
-import { BaseModel } from 'src/app/models/baseModel';
-import { FormControlService } from './form-control.service';
+import { Injectable } from "@angular/core";
+import { FormGroup } from "@angular/forms";
+import { BaseModel } from "@models/baseModel";
+import { IFormGroups } from "@models/forms/forms.interface";
+import { FormControlService } from "./form-control.service";
 
 
 @Injectable({

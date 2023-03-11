@@ -1,15 +1,16 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { appFirebase } from '@constants/firebase';
+import { IAuthManager } from '@models/auth/auth.interface';
+import { AuthModel } from '@models/auth/auth.model';
+import { Token } from '@models/tokens/token.model';
+import { IUser } from '@models/user/user.interface';
+import { User } from '@models/user/user.model';
+import { NavigationService } from '@services/navigation/navigation.service';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
-import { IAuthManager } from 'src/app/app-modules/auth/auth.interface';
-import { AuthModel } from 'src/app/models/auth/auth.model';
-import { appFirebase } from 'src/app/constants/constants';
-import { Token } from 'src/app/models/tokens/token.model';
-import { IUser } from 'src/app/models/user/user.interface';
-import { User } from 'src/app/models/user/user.model';
-import { NavigationService } from '../../navigation/navigation.service';
 import { AuthHelper } from '../auth.helper';
+
 
 export interface AuthFirebaseResponse {
   idToken: string;

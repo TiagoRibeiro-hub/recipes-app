@@ -1,10 +1,9 @@
-import { Injectable } from '@angular/core';
-import { FormGroup, Validators } from '@angular/forms';
-import { appRegex } from 'src/app/constants/constants';
-import { IFormArraysGroups, IFormGroups, IFormsGroups } from 'src/app/models/forms/forms.interface';
-import { FormGroupService } from 'src/app/services/forms/form-group.service';
-import { Ingredient } from '../../../models/ingredients/ingredient.model';
-
+import { Injectable } from "@angular/core";
+import { FormGroup, Validators } from "@angular/forms";
+import { appRegex } from "@constants/constants";
+import { IFormsGroups, IFormArraysGroups, IFormGroups } from "@models/forms/forms.interface";
+import { Ingredient } from "@models/ingredients/ingredient.model";
+import { FormGroupService } from "../form-group.service";
 
 @Injectable({
   providedIn: 'root'

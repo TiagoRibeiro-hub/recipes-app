@@ -1,16 +1,17 @@
 import { Component, ElementRef, OnDestroy, ViewChild } from '@angular/core';
 import { ActivatedRoute, Data } from '@angular/router';
+import { IAddIngredientToList } from '@app-modules/shared/components/ingredients/ingredients-list/ingredients-list.component';
+import { Util } from '@app-modules/shared/utils/util';
+import { appResolvers } from '@constants/constants';
+import { appRoute } from '@constants/routes';
+import { Ingredient } from '@models/ingredients/ingredient.model';
+import { Recipe } from '@models/recipes/recipe.model';
+import { NavigationService } from '@services/navigation/navigation.service';
+import { RecipeService } from '@services/recipes/recipe.service';
+import { UtilitieService } from '@services/utilities/utilitie.service';
 import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
-import { appResolvers } from 'src/app/constants/constants';
-import { appRoute } from 'src/app/constants/routes';
-import { Ingredient } from 'src/app/models/ingredients/ingredient.model';
-import { Recipe } from 'src/app/app-modules/recipes/recipe.model';
-import { NavigationService } from 'src/app/services/navigation/navigation.service';
-import { RecipeService } from 'src/app/services/recipes/recipe.service';
-import { UtilitieService } from 'src/app/services/utilities/utilitie.service';
-import { IAddIngredientToList } from '../../shared/components/ingredients/ingredients-list/ingredients-list.component';
-import { Util } from '../../shared/utils/util';
+
 
 
 @Component({

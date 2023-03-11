@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
-import { ToastrService } from 'ngx-toastr';
-import { Observable } from 'rxjs';
-import { AuthFirebaseResponse, AuthFirebaseService } from 'src/app/services/auth/firebase/auth.firebase.service';
-import { AuthFormService } from 'src/app/services/forms/auth/auth-form.service';
-import { NavigationService } from 'src/app/services/navigation/navigation.service';
+import { Component, OnInit } from "@angular/core";
+import { FormGroup } from "@angular/forms";
+import { AuthFirebaseService, AuthFirebaseResponse } from "@services/auth/firebase/auth.firebase.service";
+import { AuthFormService } from "@services/forms/auth/auth-form.service";
+import { NavigationService } from "@services/navigation/navigation.service";
+import { ToastrService } from "ngx-toastr";
+import { Observable } from "rxjs";
+
 
 @Component({
   selector: 'app-auth',

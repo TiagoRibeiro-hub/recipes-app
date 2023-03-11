@@ -1,11 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { appRoute } from '@constants/routes';
+import { Recipe } from '@models/recipes/recipe.model';
+import { DataStorageService } from '@services/auth/firebase/data-storage.service';
+import { NavigationService } from '@services/navigation/navigation.service';
+import { RecipeService } from '@services/recipes/recipe.service';
 import { Subscription } from 'rxjs';
-import { appRoute } from 'src/app/constants/routes';
-import { Recipe } from 'src/app/app-modules/recipes/recipe.model';
-import { DataStorageService } from 'src/app/services/auth/firebase/data-storage.service';
-import { NavigationService } from 'src/app/services/navigation/navigation.service';
-import { RecipeService } from 'src/app/services/recipes/recipe.service';
+
 
 @Component({
   selector: 'app-recipe-list',

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Operation } from '@enums/operation';
+import { IngredientsService } from '@services/ingredients/ingredients.service';
+import { ShoppingListService } from '@services/shopping-list/shopping-list.service';
 import { Subscription } from 'rxjs';
-import { Operation } from 'src/app/enums/operation';
-import { IngredientsService } from 'src/app/services/ingredients/ingredients.service';
-import { ShoppingListService } from 'src/app/services/shopping-list/shopping-list.service';
 
 @Component({
   selector: 'app-shopping-edit',

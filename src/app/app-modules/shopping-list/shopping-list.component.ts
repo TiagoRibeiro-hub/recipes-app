@@ -1,9 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { IAddIngredientToList } from '@app-modules/shared/components/ingredients/ingredients-list/ingredients-list.component';
+import { Ingredient } from '@models/ingredients/ingredient.model';
+import { ShoppingListService } from '@services/shopping-list/shopping-list.service';
 import { Subscription } from 'rxjs';
-import { Ingredient } from 'src/app/models/ingredients/ingredient.model';
-import { ShoppingListService } from 'src/app/services/shopping-list/shopping-list.service';
-import { IAddIngredientToList } from '../shared/components/ingredients/ingredients-list/ingredients-list.component';
-
 
 
 @Component({

@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Ingredient, MetricUnitMapping } from 'src/app/models/ingredients/ingredient.model';
+import { Ingredient, MetricUnitMapping } from '@models/ingredients/ingredient.model';
+
 
 export interface IAddIngredientToList {
   id: string;

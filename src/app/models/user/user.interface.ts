@@ -1,4 +1,5 @@
-import { Token } from "../tokens/token.model";
+import { Token } from "@models/tokens/token.model";
+
 
 export interface IUser {
     id: string;

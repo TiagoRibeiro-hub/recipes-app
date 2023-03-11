@@ -1,8 +1,9 @@
-import { HttpEvent, HttpHandler, HttpInterceptor, HttpParams, HttpRequest } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { exhaustMap, Observable, take } from 'rxjs';
-import { User } from 'src/app/models/user/user.model';
-import { AuthFirebaseService } from '../firebase/auth.firebase.service';
+import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpParams } from "@angular/common/http";
+import { Injectable } from "@angular/core";
+import { User } from "@models/user/user.model";
+import { Observable, take, exhaustMap } from "rxjs";
+import { AuthFirebaseService } from "../firebase/auth.firebase.service";
+
 
 @Injectable({
   providedIn: 'root'

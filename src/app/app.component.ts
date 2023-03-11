@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthFirebaseService } from './services/auth/firebase/auth.firebase.service';
+import { AuthFirebaseService } from '@services/auth/firebase/auth.firebase.service';
 
 @Component({
   selector: 'app-root',
