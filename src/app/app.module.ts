@@ -7,9 +7,6 @@ import { appToastrConfig } from '@constants/toastrConfig';
 import { AppComponent } from './app.component';
 import { ShellModule } from '@app-modules/shell/shell.module';
 import { AppRoutingModule } from '@app-modules/routes/app-routing.module';
-import { AuthModule } from '@app-modules/auth/auth.module';
-import { RecipesModule } from '@app-modules/recipes/recipes.module';
-import { ShoppingListModule } from '@app-modules/shopping-list/shopping-list.module';
 import { CoreModule } from './core-module';
 import { SharedModule } from '@app-modules/shared/shared.module';
 
@@ -27,9 +24,6 @@ import { SharedModule } from '@app-modules/shared/shared.module';
         ToastrModule.forRoot(appToastrConfig),
         SharedModule,
         ShellModule,
-        AuthModule,
-        RecipesModule,
-        ShoppingListModule,
         AppRoutingModule // must be the last module
     ]
 })

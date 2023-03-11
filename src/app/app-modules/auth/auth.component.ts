@@ -51,8 +51,8 @@ export class AuthComponent implements OnInit {
       'At least 3 upper and 3 lower letters, 2 digits and 2 of \|!@#$%{[(=+-)]}_&*',
       '',
       {
-        disableTimeOut: true,
-        positionClass: 'toast-top-center'
+        positionClass: 'toast-top-center',
+        timeOut: 15000
       }
     )
   }

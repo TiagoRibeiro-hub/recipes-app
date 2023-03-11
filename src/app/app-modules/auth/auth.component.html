@@ -1,5 +1,7 @@
 <div class="row d-flex justify-content-center mt-5">
     <div class="col-xs-12 col-md-6">
+        <h2 class="text-center mb-2">{{ this.isLogin ? 'Sign In' : 'Sign Up' }}</h2>
+        <hr class="mb-4"/>
         <form [formGroup]="this.authForm" (ngSubmit)="onSubmit()">
             <div class="form-group mb-2">
                 <label for="email">E-mail</label>

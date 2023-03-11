@@ -1,19 +1,24 @@
 import { NgModule } from "@angular/core";
-import { AuthRoutingModule } from "@app-modules/routes/auth-routing.module";
 import { SharedModule } from "@app-modules/shared/shared.module";
 import { AuthComponent } from "./auth.component";
-import { NotAuthorizedComponent } from "./status/not-authorized/not-authorized.component";
-import { NotFoundComponent } from "./status/not-found/not-found.component";
+import { Routes, RouterModule } from "@angular/router";
+
+const authRoutes: Routes = [
+    {
+        path: '', component: AuthComponent,
+    }
+];
 
 @NgModule({
     declarations:[
         AuthComponent,
-        NotFoundComponent,
-        NotAuthorizedComponent
     ],
     imports:[
-        SharedModule,
-        AuthRoutingModule
+        RouterModule.forChild(authRoutes),
+        SharedModule
+    ],
+    exports: [
+        RouterModule
     ]
 })
 export class AuthModule { }

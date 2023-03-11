@@ -11,12 +11,10 @@ import { IngredientsListComponent } from "./components/ingredients/ingredients-l
         IngredientsFormComponent
     ],
     imports: [
-        RouterModule,
         CommonModule,
         ReactiveFormsModule,
     ],
     exports: [
-        RouterModule,
         CommonModule,
         ReactiveFormsModule,
         IngredientsListComponent,
