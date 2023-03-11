@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Util } from "@app-modules/shared/utils/util";
+import { Util } from "src/app/utils/util";
 import { Ingredient, MetricUnit } from "@models/ingredients/ingredient.model";
 import { Subject } from "rxjs";
 

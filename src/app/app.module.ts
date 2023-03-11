@@ -25,12 +25,12 @@ import { SharedModule } from '@app-modules/shared/shared.module';
         HttpClientModule,
         BrowserAnimationsModule,
         ToastrModule.forRoot(appToastrConfig),
-        AppRoutingModule,
         SharedModule,
         ShellModule,
         AuthModule,
         RecipesModule,
         ShoppingListModule,
+        AppRoutingModule // must be the last module
     ]
 })
 export class AppModule { }

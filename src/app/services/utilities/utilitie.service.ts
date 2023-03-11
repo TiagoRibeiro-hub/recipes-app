@@ -1,5 +1,5 @@
 import { Injectable, ElementRef } from "@angular/core";
-import { Util } from "@app-modules/shared/utils/util";
+import { Util } from "src/app/utils/util";
 import { Subject } from "rxjs";
 
 

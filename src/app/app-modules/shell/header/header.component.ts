@@ -1,5 +1,5 @@
 import { Component, ElementRef, HostListener, OnDestroy, ViewChild } from '@angular/core';
-import { Util } from "@app-modules/shared/utils/util";
+import { Util } from "src/app/utils/util";
 import { appRoute } from '@constants/routes';
 import { User } from '@models/user/user.model';
 import { AuthFirebaseService } from '@services/auth/firebase/auth.firebase.service';

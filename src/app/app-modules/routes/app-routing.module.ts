@@ -6,7 +6,7 @@ import { appRoute } from '@constants/routes';
 
 let appRoutes : Routes = [
   {path: '', redirectTo: '/' + appRoute.RECIPES, pathMatch: 'full'},
-  // {path: '**', redirectTo: '/' + appRoute.NOT_FOUND}
+  {path: '**', redirectTo: '/' + appRoute.NOT_FOUND}
 ];
 
 @NgModule({
