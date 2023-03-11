@@ -33,6 +33,7 @@
       "@constants/*": ["src/app/constants/*"],
       "@enums/*": ["src/app/enums/*"],
       "@models/*": ["src/app/models/*"],
+      "@shared/*": ["src/app/shared/*"],
       "@env/*": ["src/environments/*"],
       "@assets/*": ["src/assets/*"]
     }

@@ -1,20 +1,21 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { SpinnerComponent } from './spinner/spinner.component';
+import { SharedModule } from '@app-modules/shared/shared.module';
 import { HeaderComponent } from './header/header.component';
-
+import { ShellComponent } from './shell.component';
+import { SpinnerComponent } from './spinner/spinner.component';
 
 
 @NgModule({
   declarations: [
-    // SpinnerComponent,
-    // HeaderComponent,
+    ShellComponent,
+    SpinnerComponent,
+    HeaderComponent
   ],
   imports: [
-    // CommonModule
+    SharedModule
   ],
   exports: [
-    //ShellModule
+    ShellComponent
   ]
 })
 export class ShellModule { }
