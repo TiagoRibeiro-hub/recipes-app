@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { FormGroup } from "@angular/forms";
+import { SharedModule } from "@app-modules/shared/shared.module";
 import { AuthFirebaseService, AuthFirebaseResponse } from "@services/auth/firebase/auth.firebase.service";
 import { AuthFormService } from "@services/forms/auth/auth-form.service";
 import { NavigationService } from "@services/navigation/navigation.service";
@@ -8,9 +9,13 @@ import { Observable } from "rxjs";
 
 
 @Component({
+  standalone: true,
   selector: 'app-auth',
   templateUrl: './auth.component.html',
-  styleUrls: ['./auth.component.scss']
+  styleUrls: ['./auth.component.scss'],
+  imports: [
+    SharedModule
+  ]
 })
 export class AuthComponent implements OnInit {
 

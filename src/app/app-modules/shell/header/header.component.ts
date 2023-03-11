@@ -5,14 +5,19 @@ import { User } from '@models/user/user.model';
 import { AuthFirebaseService } from '@services/auth/firebase/auth.firebase.service';
 import { UtilitieService } from '@services/utilities/utilitie.service';
 import { Subscription } from 'rxjs';
+import { SharedModule } from '@app-modules/shared/shared.module';
 
 
 
 
 @Component({
+  standalone: true,
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+  styleUrls: ['./header.component.scss'],
+  imports: [
+    SharedModule
+  ]
 })
 export class HeaderComponent implements OnDestroy {
 

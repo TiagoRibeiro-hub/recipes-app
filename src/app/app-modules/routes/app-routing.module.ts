@@ -10,7 +10,11 @@ let appRoutes: Routes = [
   },
   {
     path: appRoute.AUTH,
-    loadChildren: () => import('../auth/auth.module').then(m => m.AuthModule)
+    loadComponent: () => import('../auth/auth.component').then(m => m.AuthComponent)
+  },
+  {
+    path: appRoute.HOME,
+    loadComponent: () => import('../home/home.component').then(m => m.HomeComponent)
   },
   {
     path: appRoute.RECIPES,
@@ -22,7 +26,7 @@ let appRoutes: Routes = [
   },
   {
     path: appRoute.SHOPPING_LIST,
-    loadChildren: () => import('../shopping-list/shopping-list.module').then(m => m.ShoppingListModule)
+    loadComponent: () => import('../shopping-list/shopping-list.component').then(m => m.ShoppingListComponent)
   },
   {
     path: appRoute.STATUS,

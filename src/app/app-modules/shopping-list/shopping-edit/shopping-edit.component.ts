@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
+import { SharedModule } from '@app-modules/shared/shared.module';
 import { Operation } from '@enums/operation';
 import { IngredientsService } from '@services/ingredients/ingredients.service';
 import { ShoppingListService } from '@services/shopping-list/shopping-list.service';
 import { Subscription } from 'rxjs';
 
 @Component({
+  standalone: true,
+  imports: [SharedModule],
   selector: 'app-shopping-edit',
   templateUrl: './shopping-edit.component.html',
   styleUrls: ['./shopping-edit.component.scss']

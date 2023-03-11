@@ -1,11 +1,20 @@
 import { Component, HostListener } from '@angular/core';
+import { SharedModule } from '@app-modules/shared/shared.module';
 import { LoaderService } from '@services/loader/loader.service';
 import { UtilitieService } from '@services/utilities/utilitie.service';
+import { HeaderComponent } from './header/header.component';
+import { SpinnerComponent } from './spinner/spinner.component';
 
 @Component({
+  standalone: true,
   selector: 'app-shell',
   templateUrl: './shell.component.html',
-  styleUrls: ['./shell.component.scss']
+  styleUrls: ['./shell.component.scss'],
+  imports: [
+    SharedModule,
+    HeaderComponent,
+    SpinnerComponent
+  ]
 })
 export class ShellComponent {
 

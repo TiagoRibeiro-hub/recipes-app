@@ -5,9 +5,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { appToastrConfig } from '@constants/toastrConfig';
 import { AppComponent } from './app.component';
-import { ShellModule } from '@app-modules/shell/shell.module';
 import { AppRoutingModule } from '@app-modules/routes/app-routing.module';
 import { CoreModule } from './app-modules/core/core-module';
+import { ShellComponent } from '@app-modules/shell/shell.component';
 
 
 @NgModule({
@@ -21,7 +21,7 @@ import { CoreModule } from './app-modules/core/core-module';
         HttpClientModule,
         BrowserAnimationsModule,
         ToastrModule.forRoot(appToastrConfig),
-        ShellModule,
+        ShellComponent,
         AppRoutingModule
     ]
 })
