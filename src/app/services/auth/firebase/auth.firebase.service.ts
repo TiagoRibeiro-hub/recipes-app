@@ -1,10 +1,10 @@
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
-import { appFirebase } from 'src/app/constants/constants';
-import { IAuthManager } from 'src/app/models/auth/auth.interface';
+import { IAuthManager } from 'src/app/app-modules/auth/auth.interface';
 import { AuthModel } from 'src/app/models/auth/auth.model';
+import { appFirebase } from 'src/app/constants/constants';
 import { Token } from 'src/app/models/tokens/token.model';
 import { IUser } from 'src/app/models/user/user.interface';
 import { User } from 'src/app/models/user/user.model';

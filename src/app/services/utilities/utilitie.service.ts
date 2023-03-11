@@ -1,6 +1,6 @@
 import { ElementRef, Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
-import { Util } from 'src/app/shared/utils/util';
+import { Util } from 'src/app/app-modules/shared/utils/util';
 
 @Injectable({
   providedIn: 'root'

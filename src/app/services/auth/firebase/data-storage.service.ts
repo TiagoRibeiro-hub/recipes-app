@@ -2,9 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { RecipeService } from 'src/app/services/recipes/recipe.service';
 import { appFirebase } from 'src/app/constants/constants';
-import { Recipe } from 'src/app/models/recipes/recipe.model';
+import { Recipe } from 'src/app/app-modules/recipes/recipe.model';
 import { map, Observable, tap } from 'rxjs';
-import { AuthFirebaseService } from './auth.firebase.service';
 import { AuthHelper } from '../auth.helper';
 
 

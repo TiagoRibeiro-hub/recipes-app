@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { FormGroup, ValidatorFn, Validators } from '@angular/forms';
-import { appRegex } from 'src/app/constants/constants';
 import { AuthModel } from 'src/app/models/auth/auth.model';
+import { appRegex } from 'src/app/constants/constants';
 import { IFormsGroups } from 'src/app/models/forms/forms.interface';
 import { FormGroupService } from '../form-group.service';
 
