@@ -12,31 +12,35 @@ import { RecipesComponent } from "../recipes/recipes.component";
 export const RECIPES_ROUTES: Routes = [
     {
         path: '',
-        component: RecipesComponent,
         canActivate: [async () => await authGuard()],
+        loadComponent: () => import('../recipes/recipes.component').then(c => c.RecipesComponent),
         children: [
             {
-                path: '', component: RecipeStartComponent
+                path: '', 
+                loadComponent: () => import('../recipes/recipe-start/recipe-start.component').then(c => c.RecipeStartComponent),
             },
             {
-                path: appRoute.NEW, component: RecipeEditComponent,
+                path: appRoute.NEW,
                 resolve: {
                     recipeEdit: RecipeEditResolver
-                }
+                },
+                loadComponent: () => import('../recipes/recipe-edit/recipe-edit.component').then(c => c.RecipeEditComponent)
             },
             {
                 path: ':id', component: RecipeDetailComponent,
                 canActivate: [async () => await recipesGuard()],
                 resolve: {
                     recipeDetail: RecipeDetailResolver
-                }
+                },
+                loadComponent: () => import('../recipes/recipe-detail/recipe-detail.component').then(c => c.RecipeDetailComponent)
             },
             {
-                path: ':id/' + appRoute.EDIT, component: RecipeEditComponent,
+                path: ':id/' + appRoute.EDIT,
                 canActivate: [async () => await recipesGuard()],
                 resolve: {
                     recipeEdit: RecipeEditResolver
-                }
+                },
+                loadComponent: () => import('../recipes/recipe-edit/recipe-edit.component').then(c => c.RecipeEditComponent)
             },
         ]
     }

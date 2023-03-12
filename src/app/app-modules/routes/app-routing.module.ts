@@ -20,7 +20,6 @@ let appRoutes: Routes = [
   {
     path: appRoute.RECIPES,
     loadChildren: () => import('./recipes.routes').then(r => r.RECIPES_ROUTES)
-    //loadChildren: () => import('../recipes/recipes.module').then(c => c.RecipesModule)
   },
   {
     path: appRoute.INGREDIENTS,
