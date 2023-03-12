@@ -3,7 +3,7 @@ import { Injectable } from "@angular/core";
 import { Token } from "@models/tokens/token.model";
 import { User } from "@models/user/user.model";
 import { Observable, take, exhaustMap, tap } from "rxjs";
-import { AuthFirebaseService } from "../firebase/auth.firebase.service";
+import { AuthFirebaseService } from "../auth/firebase/auth.firebase.service";
 
 @Injectable({
   providedIn: 'root'

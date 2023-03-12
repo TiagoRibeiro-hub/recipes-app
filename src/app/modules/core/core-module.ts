@@ -1,7 +1,7 @@
 import { HTTP_INTERCEPTORS } from "@angular/common/http";
 import { NgModule } from "@angular/core";
-import { AuthInterceptorService } from "@services/auth/interceptors/auth-interceptor.service";
-import { LoaderInterceptorService } from "@services/loader/interceptors/loader-interceptor.service";
+import { AuthInterceptorService } from "@services/interceptors/auth-interceptor.service";
+import { LoaderInterceptorService } from "@services/interceptors/loader-interceptor.service";
 
 @NgModule({
     providers: [
