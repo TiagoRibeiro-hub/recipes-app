@@ -39,6 +39,8 @@ export class AuthFirebaseService implements IAuthManager {
   userSubject = new BehaviorSubject<User>(null);
   private tokenExpirationTimer: NodeJS.Timeout = undefined;
 
+  private _isAuthenticated: boolean = false;
+
   get user(): IUser {
     return JSON.parse(localStorage.getItem('userData'));
   }
@@ -51,6 +53,19 @@ export class AuthFirebaseService implements IAuthManager {
   constructor(
     private http: HttpClient,
     private navigation: NavigationService) { }
+
+  isAuthenticated(): boolean {
+    if(!this._isAuthenticated) {
+      const user = this.user;
+      if (user) {
+        if (Token.needToRefreshToken(user.token.tokenExpirationDate)) {
+          this.refreshToken(user.token.refreshToken);
+        }
+        this._isAuthenticated = true;
+      }
+    }
+    return this._isAuthenticated;
+  }
 
   signUp(authModel: AuthModel): Observable<IAuthFirebaseResponse> {
     return this.http
@@ -99,11 +114,11 @@ export class AuthFirebaseService implements IAuthManager {
   }
 
   autoSignIn() {
-    const userData = this.user;
-    if (!userData) {
+    const user = this.user;
+    if (!user) {
       return;
     }
-    const loadedUser = User.getUser(userData);
+    const loadedUser = User.getUser(user);
     if (loadedUser.token) {
       this.userSubject.next(loadedUser);
     }
@@ -119,6 +134,12 @@ export class AuthFirebaseService implements IAuthManager {
     this.tokenExpirationTimer = undefined;
   }
 
+  needToRefreshToken(user: User) {
+    if(Token.needToRefreshToken(user.tokenExpirationDate)) {
+      this.refreshToken(user.refreshToken);
+    }
+  }
+  
   refreshToken(refreshToken: string = undefined): void {
     if (refreshToken != undefined) {
       return this.refresh(refreshToken);
@@ -126,7 +147,7 @@ export class AuthFirebaseService implements IAuthManager {
     const userData = this.user;
     if (userData) {
       const loadedUser = User.getUser(userData);
-      if (loadedUser.refrehToken != undefined) {
+      if (loadedUser.refreshToken != undefined) {
         return this.refresh(refreshToken);
       }
     }
@@ -143,13 +164,12 @@ export class AuthFirebaseService implements IAuthManager {
       .pipe(
         catchError(this.handleError),
         tap(response => {
-          const userData = this.user;
+          let userData = this.user;
           if (userData) {
-            const loadedUser = User.getUser(userData);
-            if (loadedUser.id === response.user_id) {
-              loadedUser.token = AuthHelper.setToken(response);
-              this.userSubject.next(loadedUser);
-              this.user = loadedUser;
+            if (userData.id === response.user_id) {
+              userData = AuthHelper.setRefreshToken(response, userData);
+              this.userSubject.next(User.getUser(userData));
+              this.user = userData;
             }
           }
         })
@@ -157,7 +177,7 @@ export class AuthFirebaseService implements IAuthManager {
       .subscribe({
         error: (error: Error) => console.error('Refresh Token Error: ' + error)
       });
-      return;
+    return;
   }
 
   private autoSignOut(expirationDate: number) {
@@ -167,7 +187,7 @@ export class AuthFirebaseService implements IAuthManager {
   }
 
   private setUser(response: IAuthFirebaseResponse, userName: string) {
-    const user = AuthHelper.setUser(response, userName);
+    const user = AuthHelper.setAuthUser(response, userName);
     this.userSubject.next(User.getUser(user));
     this.user = user;
   }

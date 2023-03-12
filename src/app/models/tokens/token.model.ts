@@ -7,7 +7,7 @@ export class Token {
     ) { }
 
     static isValid(expirationDate: Date): boolean {
-        return !expirationDate || new Date() > expirationDate;
+        return !(!expirationDate || new Date() > expirationDate);
     }
 
     static expirationDate(expiresIn: number): Date {

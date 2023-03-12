@@ -21,9 +21,7 @@ export class AuthInterceptorService implements HttpInterceptor {
         if (!user) {
           return next.handle(req);
         }
-        if(Token.needToRefreshToken(user.tokenExpirationDate)) {
-          this.authService.refreshToken(user.refrehToken);
-        }
+        this.authService.needToRefreshToken(user);
         const modifiedReq = req.clone({
           params: new HttpParams().set('auth', user.token.token)
         });

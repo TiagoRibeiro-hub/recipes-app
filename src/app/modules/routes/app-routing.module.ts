@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
-import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
+import { HomeComponent } from '@components/home/home.component';
 import { appRoute } from '@constants/routes';
 import { authGuard } from '@guards/auth/auth.guard';
 
@@ -14,8 +15,7 @@ let appRoutes: Routes = [
     loadComponent: () => import('@components/auth/auth.component').then(c => c.AuthComponent)
   },
   {
-    path: appRoute.HOME,
-    loadComponent: () => import('@components/home/home.component').then(c => c.HomeComponent)
+    path: appRoute.HOME, component: HomeComponent
   },
   {
     path: appRoute.RECIPES,
@@ -23,7 +23,7 @@ let appRoutes: Routes = [
   },
   {
     path: appRoute.INGREDIENTS,
-    canActivate: [async () => await authGuard()],
+    canMatch: [authGuard],
     loadComponent: () => import('@components/ingredients/ingredients.component').then(c => c.IngredientsComponent)
   },
   {
@@ -42,10 +42,7 @@ let appRoutes: Routes = [
 @NgModule({
   imports: [
     RouterModule.forRoot(
-      appRoutes,
-      {
-        preloadingStrategy: PreloadAllModules // TODO
-      }
+      appRoutes
     ),
   ],
   exports: [

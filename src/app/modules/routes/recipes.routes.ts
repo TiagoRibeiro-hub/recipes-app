@@ -8,7 +8,7 @@ import { RecipeEditResolver, RecipeDetailResolver } from '@resolvers/recipes-res
 export const RECIPES_ROUTES: Routes = [
     {
         path: '',
-        canActivate: [async () => await authGuard()],
+        canMatch: [authGuard],
         loadComponent: () => import('@components/recipes/recipes.component').then(c => c.RecipesComponent),
         children: [
             {
@@ -17,6 +17,7 @@ export const RECIPES_ROUTES: Routes = [
             },
             {
                 path: appRoute.NEW,
+                canMatch: [authGuard],
                 resolve: {
                     recipeEdit: RecipeEditResolver
                 },
@@ -24,6 +25,7 @@ export const RECIPES_ROUTES: Routes = [
             },
             {
                 path: ':id',
+                canMatch: [authGuard],
                 canActivate: [async () => await recipesGuard()],
                 resolve: {
                     recipeDetail: RecipeDetailResolver
@@ -32,6 +34,7 @@ export const RECIPES_ROUTES: Routes = [
             },
             {
                 path: ':id/' + appRoute.EDIT,
+                canMatch: [authGuard],
                 canActivate: [async () => await recipesGuard()],
                 resolve: {
                     recipeEdit: RecipeEditResolver

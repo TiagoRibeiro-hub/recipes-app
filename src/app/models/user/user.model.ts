@@ -1,5 +1,4 @@
 import { BaseModel } from "@models/baseModel";
-import { IToken } from "@models/tokens/token.interface";
 import { Token } from "@models/tokens/token.model";
 import { IUser } from "./user.interface";
 
@@ -13,26 +12,26 @@ export class User extends BaseModel {
         super(id);
     }
 
-    set token(token: IToken) {
-        this._token = {
-            token: token.token,
-            tokenExpirationDate: token.tokenExpirationDate,
-            refreshToken: token.refreshToken
-        }
+    set token(token: Token) {
+        this._token = token;
     }
 
-    get token(): IToken {
-        if (Token.isValid(this._token.tokenExpirationDate)) {
-            return null;
-        };
-        return this._token;
+    get token(): Token {
+        if(Token.isValid(this._token.tokenExpirationDate)){
+            return this._token; 
+        }
+        return null;
+    }
+
+    get tokenId(): string {
+        return this._token.token;
     }
 
     get tokenExpirationDate(): Date {
         return this._token.tokenExpirationDate;
     }
 
-    get refrehToken(): string {
+    get refreshToken(): string {
         return this._token.refreshToken;
     }
 
@@ -41,7 +40,20 @@ export class User extends BaseModel {
             user.id,
             user.email,
             user.userName,
-            user.token,
-        )
+            user.token
+        );
+    }
+
+    static setIUser(user: User): IUser {
+       return {
+            id: user.id,
+            email: user.email,
+            userName: user.userName,
+            token: {
+                token: user.tokenId,
+                tokenExpirationDate: Token.expirationDate(+user.tokenExpirationDate),
+                refreshToken: user.refreshToken
+            }
+       }
     }
 }

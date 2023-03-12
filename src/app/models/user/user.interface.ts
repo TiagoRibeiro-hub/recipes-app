@@ -6,6 +6,4 @@ export interface IUser {
     email: string;
     userName: string;
     token: Token
-    // token: string;
-    // tokenExpirationDate: Date;
 }

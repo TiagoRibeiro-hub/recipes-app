@@ -2,6 +2,7 @@ import { HttpHeaders, HttpErrorResponse } from "@angular/common/http";
 import { AuthModel } from "@models/auth/auth.model";
 import { Token } from "@models/tokens/token.model";
 import { IUser } from "@models/user/user.interface";
+import { User } from "@models/user/user.model";
 import { IAuthFirebaseResponse, IRefreshTokenFirebaseResponse } from "./firebase/auth.firebase.service";
 
 export class AuthHelper {
@@ -25,7 +26,7 @@ export class AuthHelper {
         };
     }
 
-    static setUser(response: IAuthFirebaseResponse, userName: string): IUser {
+    static setAuthUser(response: IAuthFirebaseResponse, userName: string): IUser {
         return {
             id: response.localId,
             email: response.email,
@@ -38,12 +39,17 @@ export class AuthHelper {
         }
     }
 
-    static setToken(response: IRefreshTokenFirebaseResponse): Token {
+    static setRefreshToken(response: IRefreshTokenFirebaseResponse, user: IUser): IUser {
         return {
-            token: response.id_token,
-            tokenExpirationDate: Token.expirationDate(+response.expires_in),
-            refreshToken: response.refresh_token
-        }
+            id: user.id,
+            email: user.email,
+            userName: user.userName,
+            token: {
+                token: response.id_token,
+                tokenExpirationDate: Token.expirationDate(+response.expires_in),
+                refreshToken: response.refresh_token
+            }
+        };
     }
 
     static setErrorMessage(errorResponse: HttpErrorResponse, errorMessage: string) {
