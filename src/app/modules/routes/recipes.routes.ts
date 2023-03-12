@@ -1,8 +1,8 @@
 import { Routes } from '@angular/router';
-import { authGuard } from '@components/auth/guards/auth.guard';
-import { recipesGuard } from '@components/recipes/guards/recipes.guard';
-import { RecipeDetailResolver } from '@components/recipes/recipe-detail/resolver/recipe-detail-resolver';
-import { RecipeEditResolver } from '@components/recipes/recipe-edit/resolver/recipe-edit-resolver';
+import { authGuard } from '@components/guards/auth/auth.guard';
+import { recipesGuard } from '@components/guards/recipes/recipes.guard';
+import { RecipeDetailResolver } from '@components/resolvers/recipes/recipe-detail-resolver';
+import { RecipeEditResolver } from '@components/resolvers/recipes/recipe-edit-resolver';
 import { appRoute } from '@constants/routes';
 
 export const RECIPES_ROUTES: Routes = [
