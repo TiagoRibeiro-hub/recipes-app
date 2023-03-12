@@ -28,12 +28,14 @@
       "node_modules/@types"
     ],
     "paths": {
-      "@app-modules/*": ["src/app/app-modules/*"],
+      "@components/*": ["src/app/components/*"],
+      "@modules/*": ["src/app/modules/*"],
       "@services/*": ["src/app/services/*"],
       "@constants/*": ["src/app/constants/*"],
       "@enums/*": ["src/app/enums/*"],
       "@models/*": ["src/app/models/*"],
       "@shared/*": ["src/app/shared/*"],
+      "@utils/*": ["src/app/utils/*"],
       "@env/*": ["src/environments/*"],
       "@assets/*": ["src/assets/*"]
     }

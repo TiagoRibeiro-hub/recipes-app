@@ -5,9 +5,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { appToastrConfig } from '@constants/toastrConfig';
 import { AppComponent } from './app.component';
-import { AppRoutingModule } from '@app-modules/routes/app-routing.module';
-import { CoreModule } from './app-modules/core/core-module';
-import { ShellComponent } from '@app-modules/shell/shell.component';
+import { ShellComponent } from '@components/shell/shell.component';
+import { CoreModule } from '@modules/core/core-module';
+import { AppRoutingModule } from '@modules/routes/app-routing.module';
+
 
 
 @NgModule({

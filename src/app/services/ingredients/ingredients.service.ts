@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
-import { Util } from "src/app/utils/util";
 import { Ingredient, MetricUnit } from "@models/ingredients/ingredient.model";
+import { Util } from "@utils/util";
 import { Subject } from "rxjs";
 
 @Injectable({
@@ -28,11 +28,17 @@ export class IngredientsService {
   }
 
   add(ingredient: Ingredient): void {
+    ingredient.id = Util.generateUUID();
     this.ingredients.push(ingredient);
     this.emitNewIngredientsList();
   }
 
   addList(ingredients: Ingredient[]): void {
+    for(let ingredient of ingredients) {
+      if(ingredient.id == undefined){
+        ingredient.id = Util.generateUUID();
+      }
+    }
     this.ingredients.push(...ingredients);
     this.emitNewIngredientsList();
   }

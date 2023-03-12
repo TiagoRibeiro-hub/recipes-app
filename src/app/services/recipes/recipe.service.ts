@@ -1,8 +1,8 @@
 import { Injectable } from "@angular/core";
-import { Util } from "src/app/utils/util";
 import { Ingredient } from "@models/ingredients/ingredient.model";
 import { Recipe } from "@models/recipes/recipe.model";
 import { ShoppingListService } from "@services/shopping-list/shopping-list.service";
+import { Util } from "@utils/util";
 import { Subject } from "rxjs";
 
 @Injectable({
@@ -41,6 +41,12 @@ export class RecipeService {
   }
 
   add(recipe: Recipe): void {
+    recipe.id  = Util.generateUUID(); 
+    for(let ingredient of recipe.ingredients){
+      if(ingredient.id == undefined){
+        ingredient.id = Util.generateUUID();
+      }
+    }
     this.recipes.push(recipe);
     this.emitRecipesList();
   }
