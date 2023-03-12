@@ -1,9 +1,9 @@
 import { Routes } from '@angular/router';
-import { authGuard } from '@components/guards/auth/auth.guard';
-import { recipesGuard } from '@components/guards/recipes/recipes.guard';
-import { RecipeDetailResolver } from '@components/resolvers/recipes/recipe-detail-resolver';
-import { RecipeEditResolver } from '@components/resolvers/recipes/recipe-edit-resolver';
 import { appRoute } from '@constants/routes';
+import { authGuard } from '@guards/auth/auth.guard';
+import { recipesGuard } from '@guards/recipes/recipes.guard';
+import { RecipeEditResolver, RecipeDetailResolver } from '@resolvers/recipes-resolvers';
+
 
 export const RECIPES_ROUTES: Routes = [
     {

@@ -31,6 +31,8 @@
       "@components/*": ["src/app/components/*"],
       "@modules/*": ["src/app/modules/*"],
       "@services/*": ["src/app/services/*"],
+      "@guards/*": ["src/app/guards/*"],
+      "@resolvers/*": ["src/app/resolvers/*"],
       "@constants/*": ["src/app/constants/*"],
       "@enums/*": ["src/app/enums/*"],
       "@models/*": ["src/app/models/*"],

@@ -1,10 +1,16 @@
 import { inject } from "@angular/core";
 import { FormGroup } from "@angular/forms";
-import { ActivatedRouteSnapshot, ResolveFn, RouterStateSnapshot } from "@angular/router";
+import { ResolveFn, ActivatedRouteSnapshot, RouterStateSnapshot } from "@angular/router";
+import { Recipe } from "@models/recipes/recipe.model";
 import { IRecipeEdit } from "@models/recipes/recipes.interface";
 import { IngredientFormService } from "@services/forms/ingredients/ingredient-form.service";
 import { RecipeFormService, IRecipeForms } from "@services/forms/recipes/recipe-form.service";
 import { RecipeService } from "@services/recipes/recipe.service";
+
+export const RecipeDetailResolver: ResolveFn<Recipe> =
+    (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
+        return inject(RecipeService).getById(route.params['id']);
+    }
 
 export const RecipeEditResolver: ResolveFn<IRecipeEdit> =
     (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {

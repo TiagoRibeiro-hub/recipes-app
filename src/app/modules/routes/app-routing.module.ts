@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import { authGuard } from '@components/guards/auth/auth.guard';
 import { appRoute } from '@constants/routes';
+import { authGuard } from '@guards/auth/auth.guard';
 
 //https://itnext.io/everything-you-need-to-know-about-route-guard-in-angular-697a062d3198
 
