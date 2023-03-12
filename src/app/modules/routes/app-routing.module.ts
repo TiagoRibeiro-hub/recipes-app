@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from '@components/home/home.component';
 import { appRoute } from '@constants/routes';
 import { authGuard } from '@guards/auth/auth.guard';
+import { PreloadingStrategyService } from '@services/preloading-strategy/preloading-strategy.service';
 
 //https://itnext.io/everything-you-need-to-know-about-route-guard-in-angular-697a062d3198
 
@@ -42,7 +43,10 @@ let appRoutes: Routes = [
 @NgModule({
   imports: [
     RouterModule.forRoot(
-      appRoutes
+      appRoutes,
+      {
+        preloadingStrategy: PreloadingStrategyService,
+      }
     ),
   ],
   exports: [
@@ -50,3 +54,4 @@ let appRoutes: Routes = [
   ]
 })
 export class AppRoutingModule { }
+
