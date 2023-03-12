@@ -5,8 +5,6 @@ import { RecipeDetailResolver } from '@components/recipes/recipe-detail/resolver
 import { RecipeEditResolver } from '@components/recipes/recipe-edit/resolver/recipe-edit-resolver';
 import { appRoute } from '@constants/routes';
 
-
-
 export const RECIPES_ROUTES: Routes = [
     {
         path: '',
