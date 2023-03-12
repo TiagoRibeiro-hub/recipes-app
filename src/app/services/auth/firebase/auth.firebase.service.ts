@@ -45,9 +45,6 @@ export class AuthFirebaseService implements IAuthManager {
 
   set user(user: IUser) {
     localStorage.setItem('userData', JSON.stringify(user));
-    if (Token.needToRefreshToken(user.token.tokenExpirationDate)) {
-      this.refreshToken(user.token.refreshToken);
-    }
     this.autoSignOut(Token.expiresIn(user.token.tokenExpirationDate))
   }
 
@@ -122,11 +119,22 @@ export class AuthFirebaseService implements IAuthManager {
     this.tokenExpirationTimer = undefined;
   }
 
-  refreshToken(refreshToken: string): void {
-    if(refreshToken == undefined) {
-      this.navigation.toAuthenticated();
-      return;
+  refreshToken(refreshToken: string = undefined): void {
+    if (refreshToken != undefined) {
+      return this.refresh(refreshToken);
     }
+    const userData = this.user;
+    if (userData) {
+      const loadedUser = User.getUser(userData);
+      if (loadedUser.refrehToken != undefined) {
+        return this.refresh(refreshToken);
+      }
+    }
+    this.navigation.toAuthenticated();
+    return;
+  }
+
+  private refresh(refreshToken: string): void {
     this.http
       .post<IRefreshTokenFirebaseResponse>(
         appFirebase.REFRESH_TOKEN,
@@ -149,6 +157,7 @@ export class AuthFirebaseService implements IAuthManager {
       .subscribe({
         error: (error: Error) => console.error('Refresh Token Error: ' + error)
       });
+      return;
   }
 
   private autoSignOut(expirationDate: number) {
