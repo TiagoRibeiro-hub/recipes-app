@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormArray, FormControl } from "@angular/forms";
 import { ActivatedRoute, Data } from "@angular/router";
+import { SharedModule } from "@app-modules/shared/shared.module";
 import { appConstants, appResolvers } from "@constants/constants";
 import { MetricUnitMapping, MetricUnitToDropDownForm } from "@models/ingredients/ingredient.model";
 import { DataStorageService } from "@services/auth/firebase/data-storage.service";
@@ -9,14 +10,14 @@ import { NavigationService } from "@services/navigation/navigation.service";
 import { RecipeService } from "@services/recipes/recipe.service";
 import { IRecipeEdit } from "./resolver/recipe-edit-resolver";
 
-
-
-
-
 @Component({
+  standalone: true,
   selector: 'app-recipe-edit',
   templateUrl: './recipe-edit.component.html',
-  styles: []
+  styles: [],
+  imports: [
+    SharedModule
+  ]
 })
 export class RecipeEditComponent implements OnInit {
   metricUnitMapping = MetricUnitMapping;

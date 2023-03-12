@@ -1,17 +1,24 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { SharedModule } from '@app-modules/shared/shared.module';
 import { appRoute } from '@constants/routes';
 import { Recipe } from '@models/recipes/recipe.model';
 import { DataStorageService } from '@services/auth/firebase/data-storage.service';
 import { NavigationService } from '@services/navigation/navigation.service';
 import { RecipeService } from '@services/recipes/recipe.service';
 import { Subscription } from 'rxjs';
+import { RecipeItemComponent } from './recipe-item/recipe-item.component';
 
 
 @Component({
+  standalone: true,
   selector: 'app-recipe-list',
   templateUrl: './recipe-list.component.html',
-  styles: []
+  styles: [],
+  imports: [
+    SharedModule,
+    RecipeItemComponent
+  ]
 })
 export class RecipeListComponent implements OnInit, OnDestroy {
   

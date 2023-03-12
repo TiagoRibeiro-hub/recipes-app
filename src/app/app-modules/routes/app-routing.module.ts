@@ -19,7 +19,8 @@ let appRoutes: Routes = [
   },
   {
     path: appRoute.RECIPES,
-    loadChildren: () => import('../recipes/recipes.module').then(c => c.RecipesModule)
+    loadChildren: () => import('./recipes.routes').then(r => r.RECIPES_ROUTES)
+    //loadChildren: () => import('../recipes/recipes.module').then(c => c.RecipesModule)
   },
   {
     path: appRoute.INGREDIENTS,
@@ -32,7 +33,7 @@ let appRoutes: Routes = [
   },
   {
     path: appRoute.STATUS,
-    loadChildren: () => import('../status/status.routes').then(r => r.STATUS_ROUTES)
+    loadChildren: () => import('./status.routes').then(r => r.STATUS_ROUTES)
   },
   {
     path: '**', redirectTo: '/' + appRoute.STATUS + '/' + appRoute.NOT_FOUND
