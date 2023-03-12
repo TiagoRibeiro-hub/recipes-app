@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { FormGroup } from "@angular/forms";
 import { SharedModule } from "@modules/shared/shared.module";
-import { AuthFirebaseService, AuthFirebaseResponse } from "@services/auth/firebase/auth.firebase.service";
+import { AuthFirebaseService, IAuthFirebaseResponse } from "@services/auth/firebase/auth.firebase.service";
 import { AuthFormService } from "@services/forms/auth/auth-form.service";
 import { NavigationService } from "@services/navigation/navigation.service";
 import { ToastrService } from "ngx-toastr";
@@ -40,7 +40,7 @@ export class AuthComponent implements OnInit {
   }
 
   onSubmit(): void {
-    let authObs: Observable<AuthFirebaseResponse> = !this.isLogin ? this.signUp() : this.login();
+    let authObs: Observable<IAuthFirebaseResponse> = !this.isLogin ? this.signUp() : this.login();
 
     authObs.subscribe({
       next: () => this.navigation.toRecipes(),
@@ -68,11 +68,11 @@ export class AuthComponent implements OnInit {
       : this.authFormService.getFormGroupLogin();
   }
 
-  private signUp(): Observable<AuthFirebaseResponse> {
+  private signUp(): Observable<IAuthFirebaseResponse> {
     return this.authFirebaseService.signUp(this.authForm.value);
   }
 
-  private login(): Observable<AuthFirebaseResponse> {
+  private login(): Observable<IAuthFirebaseResponse> {
     return this.authFirebaseService.signIn(this.authForm.value);
   }
 }

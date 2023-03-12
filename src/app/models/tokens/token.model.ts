@@ -2,7 +2,8 @@ export class Token {
 
     constructor(
         public token: string,
-        public tokenExpirationDate: Date
+        public tokenExpirationDate: Date,
+        public refreshToken: string
     ) { }
 
     static isValid(expirationDate: Date): boolean {
@@ -19,8 +20,8 @@ export class Token {
     }
 
     static needToRefreshToken(tokenExpirationDate: Date): boolean {
-        return this.expiresIn(tokenExpirationDate) < 600000;
-        // < 10min
+        return this.expiresIn(tokenExpirationDate) < 120000;
+        // < 2m
     }
 
 

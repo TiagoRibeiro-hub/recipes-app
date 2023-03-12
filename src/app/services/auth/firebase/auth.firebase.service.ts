@@ -11,8 +11,8 @@ import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { AuthHelper } from '../auth.helper';
 
-
-export interface AuthFirebaseResponse {
+// https://firebase.google.com/docs/reference/rest/auth#section-api-usage
+export interface IAuthFirebaseResponse {
   idToken: string;
   email: string;
   refreshToken: string;
@@ -20,6 +20,15 @@ export interface AuthFirebaseResponse {
   localId: string;
   registered?: boolean;
   displayName?: string;
+}
+
+export interface IRefreshTokenFirebaseResponse {
+  expires_in: string;
+  token_type: string;
+  refresh_token: string;
+  id_token: string;
+  localId: string;
+  user_id?: string;
 }
 
 @Injectable({
@@ -33,8 +42,12 @@ export class AuthFirebaseService implements IAuthManager {
   get user(): IUser {
     return JSON.parse(localStorage.getItem('userData'));
   }
+
   set user(user: IUser) {
     localStorage.setItem('userData', JSON.stringify(user));
+    if (Token.needToRefreshToken(user.token.tokenExpirationDate)) {
+      this.refreshToken(user.token.refreshToken);
+    }
     this.autoSignOut(Token.expiresIn(user.token.tokenExpirationDate))
   }
 
@@ -42,12 +55,11 @@ export class AuthFirebaseService implements IAuthManager {
     private http: HttpClient,
     private navigation: NavigationService) { }
 
-  signUp(authModel: AuthModel): Observable<AuthFirebaseResponse> {
-
+  signUp(authModel: AuthModel): Observable<IAuthFirebaseResponse> {
     return this.http
-      .post<AuthFirebaseResponse>(
+      .post<IAuthFirebaseResponse>(
         appFirebase.SIGN_UP,
-        AuthHelper.setBody(authModel),
+        AuthHelper.setAuthBody(authModel),
         {
           headers: AuthHelper.setHeader()
         }
@@ -64,20 +76,20 @@ export class AuthFirebaseService implements IAuthManager {
                 returnSecureToken: false,
               })
             .pipe(
-              catchError(error => throwError(() => new Error(error))),
+              catchError(this.handleError),
             )
             .subscribe({
-              error: (error: Error) => console.error(error)
+              error: (error: Error) => console.error('Sign Up Error: ' + error)
             });
         })
       );
   }
 
-  signIn(authModel: AuthModel): Observable<AuthFirebaseResponse> {
+  signIn(authModel: AuthModel): Observable<IAuthFirebaseResponse> {
     return this.http
-      .post<AuthFirebaseResponse>(
+      .post<IAuthFirebaseResponse>(
         appFirebase.SIGN_IN,
-        AuthHelper.setBody(authModel),
+        AuthHelper.setAuthBody(authModel),
         {
           headers: AuthHelper.setHeader()
         })
@@ -110,13 +122,42 @@ export class AuthFirebaseService implements IAuthManager {
     this.tokenExpirationTimer = undefined;
   }
 
-  autoSignOut(expirationDate: number) {
+  refreshToken(refreshToken: string): void {
+    if(refreshToken == undefined) {
+      this.navigation.toAuthenticated();
+      return;
+    }
+    this.http
+      .post<IRefreshTokenFirebaseResponse>(
+        appFirebase.REFRESH_TOKEN,
+        AuthHelper.setRefreshTokenBody(refreshToken)
+      )
+      .pipe(
+        catchError(this.handleError),
+        tap(response => {
+          const userData = this.user;
+          if (userData) {
+            const loadedUser = User.getUser(userData);
+            if (loadedUser.id === response.user_id) {
+              loadedUser.token = AuthHelper.setToken(response);
+              this.userSubject.next(loadedUser);
+              this.user = loadedUser;
+            }
+          }
+        })
+      )
+      .subscribe({
+        error: (error: Error) => console.error('Refresh Token Error: ' + error)
+      });
+  }
+
+  private autoSignOut(expirationDate: number) {
     this.tokenExpirationTimer = setTimeout(() => {
       this.signOut();
     }, expirationDate);
   }
 
-  private setUser(response: AuthFirebaseResponse, userName: string) {
+  private setUser(response: IAuthFirebaseResponse, userName: string) {
     const user = AuthHelper.setUser(response, userName);
     this.userSubject.next(User.getUser(user));
     this.user = user;

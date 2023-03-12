@@ -20,7 +20,7 @@ export class AuthGuard {
         const user = this.authService.user;
         if (user) {
             if(Token.needToRefreshToken(user.token.tokenExpirationDate)){
-                // refresh
+                this.authService.refreshToken(user.token.refreshToken);
             }
             return true;
         }

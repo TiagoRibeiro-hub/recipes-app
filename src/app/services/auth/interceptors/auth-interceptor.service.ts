@@ -1,9 +1,9 @@
-import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpParams } from "@angular/common/http";
+import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpParams, HttpEventType } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { Token } from "@models/tokens/token.model";
 import { User } from "@models/user/user.model";
-import { Observable, take, exhaustMap } from "rxjs";
+import { Observable, take, exhaustMap, tap } from "rxjs";
 import { AuthFirebaseService } from "../firebase/auth.firebase.service";
-
 
 @Injectable({
   providedIn: 'root'
@@ -21,8 +21,11 @@ export class AuthInterceptorService implements HttpInterceptor {
         if (!user) {
           return next.handle(req);
         }
+        if(Token.needToRefreshToken(user.tokenExpirationDate)) {
+          this.authService.refreshToken(user.refrehToken);
+        }
         const modifiedReq = req.clone({
-          params: new HttpParams().set('auth', user.token)
+          params: new HttpParams().set('auth', user.token.token)
         });
         return next.handle(modifiedReq);
       })
