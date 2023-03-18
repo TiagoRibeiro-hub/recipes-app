@@ -39,8 +39,6 @@ export class AuthFirebaseService implements IAuthManager {
   userSubject = new BehaviorSubject<User>(null);
   private tokenExpirationTimer: NodeJS.Timeout = undefined;
 
-  private _isAuthenticated: boolean = false;
-
   get user(): IUser {
     return JSON.parse(localStorage.getItem('userData'));
   }
@@ -50,12 +48,9 @@ export class AuthFirebaseService implements IAuthManager {
     this.autoSignOut(Token.expiresIn(user.token.tokenExpirationDate))
   }
 
-  constructor(
-    private http: HttpClient,
-    private navigation: NavigationService) { }
-
-  isAuthenticated(): boolean {
-    if(!this._isAuthenticated) {
+  get _isAuthenticated(): boolean {
+    let result = JSON.parse(localStorage.getItem('isAuthenticated'));
+    if(result) {
       const user = this.user;
       if (user) {
         if (Token.needToRefreshToken(user.token.tokenExpirationDate)) {
@@ -64,8 +59,17 @@ export class AuthFirebaseService implements IAuthManager {
         this._isAuthenticated = true;
       }
     }
-    return this._isAuthenticated;
+    return result;
   }
+
+  set _isAuthenticated(isAuthenticated: boolean) {
+    localStorage.setItem('isAuthenticated', JSON.stringify(isAuthenticated));
+  }
+
+  constructor(
+    private http: HttpClient,
+    private navigation: NavigationService) { }
+
 
   signUp(authModel: AuthModel): Observable<IAuthFirebaseResponse> {
     return this.http
@@ -115,12 +119,11 @@ export class AuthFirebaseService implements IAuthManager {
 
   autoSignIn() {
     const user = this.user;
-    if (!user) {
-      return;
-    }
-    const loadedUser = User.getUser(user);
-    if (loadedUser.token) {
-      this.userSubject.next(loadedUser);
+    if (user) {
+      const loadedUser = User.getUser(user);
+      if (loadedUser.token) {
+        this.userSubject.next(loadedUser);
+      }
     }
   }
 
@@ -128,6 +131,7 @@ export class AuthFirebaseService implements IAuthManager {
     this.userSubject.next(null);
     this.navigation.toAuthenticated();
     localStorage.removeItem('userData');
+    localStorage.removeItem('isAuthenticated');
     if (this.tokenExpirationTimer) {
       clearTimeout(this.tokenExpirationTimer);
     }
@@ -190,6 +194,7 @@ export class AuthFirebaseService implements IAuthManager {
     const user = AuthHelper.setAuthUser(response, userName);
     this.userSubject.next(User.getUser(user));
     this.user = user;
+    this._isAuthenticated = true;
   }
 
   private handleError(errorResponse: HttpErrorResponse): Observable<never> {

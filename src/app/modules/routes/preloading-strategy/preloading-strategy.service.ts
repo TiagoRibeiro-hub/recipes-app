@@ -14,16 +14,24 @@ export class PreloadingStrategyService implements PreloadingStrategy {
     ) { }
 
     preload(route: Route, load: () => Observable<any>): Observable<any> {
+        console.log(route);
         let loading = false;
         if (route.path) {
             switch (route.path) {
                 case appRoute.AUTH:
-                    if (!this.authService.isAuthenticated()) {
+                    if(!this.isAuthenticated()){
                         loading = true;
-                    };
+                    }
                     break;
             }
         }
         return loading ? load() : of(null);
+    }
+
+    private isAuthenticated() {
+        if (this.authService._isAuthenticated) {
+            return true;
+        };
+        return false;
     }
 }
