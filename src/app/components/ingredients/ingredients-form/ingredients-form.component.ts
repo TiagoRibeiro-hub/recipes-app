@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from "@modules/shared/shared.module";
 import { Operation } from '@enums/operation';
 import { Ingredient, MetricUnitMapping, MetricUnitToDropDownForm } from '@models/ingredients/ingredient.model';
@@ -19,7 +19,8 @@ export interface IIngredientFormEvent {
   templateUrl: './ingredients-form.component.html',
   styles: [],
   imports: [
-    SharedModule
+    SharedModule,
+    ReactiveFormsModule
   ]
 })
 export class IngredientsFormComponent implements OnInit {

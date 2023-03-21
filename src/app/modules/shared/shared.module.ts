@@ -7,12 +7,10 @@ import { RouterModule } from "@angular/router";
     imports: [
         RouterModule,
         CommonModule,
-        ReactiveFormsModule,
     ],
     exports: [
         RouterModule,
         CommonModule,
-        ReactiveFormsModule,
     ]
 })
 export class SharedModule { }

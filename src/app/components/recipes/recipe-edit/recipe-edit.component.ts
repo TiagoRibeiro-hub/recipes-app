@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { FormGroup, FormArray, FormControl } from "@angular/forms";
+import { FormGroup, FormArray, FormControl, ReactiveFormsModule } from "@angular/forms";
 import { ActivatedRoute, Data } from "@angular/router";
 import { appConstants, appResolvers } from "@constants/constants";
 import { MetricUnitMapping, MetricUnitToDropDownForm } from "@models/ingredients/ingredient.model";
@@ -16,7 +16,8 @@ import { RecipeService } from "@services/recipes/recipe.service";
   templateUrl: './recipe-edit.component.html',
   styles: [],
   imports: [
-    SharedModule
+    SharedModule,
+    ReactiveFormsModule
   ]
 })
 export class RecipeEditComponent implements OnInit {

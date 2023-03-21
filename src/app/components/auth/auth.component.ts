@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { FormGroup } from "@angular/forms";
+import { FormGroup, ReactiveFormsModule } from "@angular/forms";
 import { SharedModule } from "@modules/shared/shared.module";
 import { AuthFirebaseService, IAuthFirebaseResponse } from "@services/auth/firebase/auth.firebase.service";
 import { AuthFormService } from "@services/forms/auth/auth-form.service";
@@ -14,7 +14,8 @@ import { Observable } from "rxjs";
   templateUrl: './auth.component.html',
   styleUrls: ['./auth.component.scss'],
   imports: [
-    SharedModule
+    SharedModule,
+    ReactiveFormsModule
   ]
 })
 export class AuthComponent implements OnInit {
